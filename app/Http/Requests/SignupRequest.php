@@ -4,6 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest as FormRequest;
 use App\Rules\EmailAlreadyRegistered as EmailAlreadyRegistered;
+use App\Rules\ValidateEmailFormat as ValidateEmailFormat;
 
 class SignupRequest extends FormRequest {
 
@@ -16,7 +17,7 @@ class SignupRequest extends FormRequest {
     public function rules(): array {
 
         return [
-            'email' => [new EmailAlreadyRegistered(), 'bail', ],
+            'email' => [new EmailAlreadyRegistered(), 'bail', new ValidateEmailFormat()],
         ];
 
     }
@@ -24,7 +25,6 @@ class SignupRequest extends FormRequest {
     public function messages(): array {
 
         return [
-
         ];
 
     }
