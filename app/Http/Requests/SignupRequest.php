@@ -6,6 +6,7 @@ use Illuminate\Foundation\Http\FormRequest as FormRequest;
 use App\Rules\EmailAlreadyRegistered as EmailAlreadyRegistered;
 use App\Rules\ValidateEmailFormat as ValidateEmailFormat;
 use App\Rules\UsernameAlreadyRegistered as UsernameAlreadyRegistered;
+use App\Rules\ValidateUsernameFormat as ValidateUsernameFormat;
 
 class SignupRequest extends FormRequest {
 
@@ -21,7 +22,7 @@ class SignupRequest extends FormRequest {
 
         return [
             'email' => ['required', 'bail', new ValidateEmailFormat(), 'bail', new EmailAlreadyRegistered(), 'bail',],
-            'username' => [new UsernameAlreadyRegistered(), 'bail',],
+            'username' => [new ValidateUsernameFormat(), 'bail', new UsernameAlreadyRegistered(), 'bail',],
         ];
 
     }
