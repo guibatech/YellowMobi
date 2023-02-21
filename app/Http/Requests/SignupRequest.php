@@ -22,7 +22,7 @@ class SignupRequest extends FormRequest {
 
         return [
             'email' => ['required', 'bail', new ValidateEmailFormat(), 'bail', new EmailAlreadyRegistered(), 'bail',],
-            'username' => [new ValidateUsernameFormat(), 'bail', new UsernameAlreadyRegistered(), 'bail',],
+            'username' => ['required', 'bail', new ValidateUsernameFormat(), 'bail', new UsernameAlreadyRegistered(), 'bail',],
         ];
 
     }
@@ -31,6 +31,7 @@ class SignupRequest extends FormRequest {
 
         return [
             'email.required' => 'Enter your email.',
+            'username.required' => 'Choose a username.',
         ];
 
     }
