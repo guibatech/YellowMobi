@@ -15,6 +15,7 @@ use App\Rules\PasswordHasSpecialCharacters as PasswordHasSpecialCharacters;
 use App\Rules\ConfirmPassword as ConfirmPassword;
 use App\Rules\AgeGroup as AgeGroup;
 use App\Rules\FutureDate as FutureDate;
+use App\Rules\ValidateName as ValidateName;
 
 class SignupRequest extends FormRequest {
 
@@ -29,6 +30,7 @@ class SignupRequest extends FormRequest {
     public function rules(): array {
 
         return [
+            'name' => ['required', 'bail', new ValidateName(), 'bail',],
             'dateOfBirth' => ['required', 'bail', new FutureDate(), 'bail', new AgeGroup(18, 110), 'bail',],
             'email' => ['required', 'bail', new ValidateEmailFormat(), 'bail', new EmailAlreadyRegistered(), 'bail', ],
             'username' => ['required', 'bail', new ValidateUsernameFormat(), 'bail', new UsernameAlreadyRegistered(), 'bail', ],
@@ -41,6 +43,7 @@ class SignupRequest extends FormRequest {
     public function messages(): array {
 
         return [
+            'name.required' => 'Enter your name.',
             'dateOfBirth.required' => 'Enter your date of birth.',
             'email.required' => 'Enter your email.',
             'username.required' => 'Choose a username.',

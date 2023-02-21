@@ -18,6 +18,9 @@
             @csrf
             @method('POST')
 
+            <label for="name">Name</label>
+            <input type="text" name="name" id="name" value="{{old('name')}}">
+
             <label for="dateOfBirth">Date of birth</label>
             <input type="date" name="dateOfBirth" id="dateOfBirth" value="{{old('dateOfBirth')}}">
 

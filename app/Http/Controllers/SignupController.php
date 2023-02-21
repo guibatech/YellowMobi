@@ -32,6 +32,7 @@ class SignupController extends Controller {
         $userProfile = new UserProfile();
         $userProfile->date_of_birth = $request->dateOfBirth;
         $userProfile->user_id = $userAccount->id;
+        $userProfile->name = $request->name;
         $userProfile->save();
 
     }
