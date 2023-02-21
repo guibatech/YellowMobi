@@ -8,6 +8,10 @@ use App\Rules\ValidateEmailFormat as ValidateEmailFormat;
 use App\Rules\UsernameAlreadyRegistered as UsernameAlreadyRegistered;
 use App\Rules\ValidateUsernameFormat as ValidateUsernameFormat;
 use App\Rules\NumberCharactersPassword as NumberCharactersPassword;
+use App\Rules\PasswordHasUppercaseLetters as PasswordHasUppercaseLetters;
+use App\Rules\PasswordHasLowercaseLetters as PasswordHasLowercaseLetters;
+use App\Rules\PasswordHasNumbers as PasswordHasNumbers;
+use App\Rules\PasswordHasSpecialCharacters as PasswordHasSpecialCharacters;
 
 class SignupRequest extends FormRequest {
 
@@ -24,7 +28,7 @@ class SignupRequest extends FormRequest {
         return [
             'email' => ['required', 'bail', new ValidateEmailFormat(), 'bail', new EmailAlreadyRegistered(), 'bail',],
             'username' => ['required', 'bail', new ValidateUsernameFormat(), 'bail', new UsernameAlreadyRegistered(), 'bail',],
-            'password' => ['required', 'bail', new NumberCharactersPassword(), 'bail', ],
+            'password' => ['required', 'bail', new NumberCharactersPassword(), 'bail', new PasswordHasUppercaseLetters(), 'bail', new PasswordHasLowercaseLetters(), 'bail', new PasswordHasSpecialCharacters(), 'bail', new PasswordHasNumbers()],
         ];
 
     }
