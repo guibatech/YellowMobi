@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SignupController as SignupController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,3 +17,6 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::get('/accounts/signup', [SignupController::class, 'create'])->name('accounts.signup');
+Route::post('/accounts/signup/do', [SignupController::class, 'store'])->name('accounts.signup.do');
