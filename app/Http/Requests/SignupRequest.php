@@ -17,7 +17,7 @@ class SignupRequest extends FormRequest {
     public function rules(): array {
 
         return [
-            'email' => [new ValidateEmailFormat(), new EmailAlreadyRegistered(), 'bail',],
+            'email' => ['required', new ValidateEmailFormat(), new EmailAlreadyRegistered(), 'bail',],
         ];
 
     }
@@ -25,6 +25,7 @@ class SignupRequest extends FormRequest {
     public function messages(): array {
 
         return [
+            'email.required' => 'Enter your email.',
         ];
 
     }
