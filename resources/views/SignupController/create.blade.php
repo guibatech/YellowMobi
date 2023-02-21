@@ -27,6 +27,9 @@
             <label for="password">Password</label>
             <input type="password" name="password" id="password">
 
+            <label for="confirmPassword">Confirm password</label>
+            <input type="password" name="confirmPassword" id="confirmPassword">
+
             <div>
                 @foreach($errors->all() as $error)
                 <div>
