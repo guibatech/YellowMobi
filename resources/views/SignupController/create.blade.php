@@ -19,13 +19,21 @@
             @method('POST')
 
             <label for="email">Email</label>
-            <input type="email" name="email" id="email" placeholder="example@example.com">
+            <input type="email" name="email" id="email" placeholder="example@example.com" value="{{old('email')}}">
             
             <label for="username">Username</label>
-            <input type="text" name="username" id="username">
+            <input type="text" name="username" id="username" value="{{old('username')}}">
             
             <label for="password">Password</label>
             <input type="password" name="password" id="password">
+
+            <div>
+                @foreach($errors->all() as $error)
+                <div>
+                    <p>{{$error}}</p>
+                </div>
+                @endforeach
+            </div>
 
             <input type="submit" value="Signup">
 
