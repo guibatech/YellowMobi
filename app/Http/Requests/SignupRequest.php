@@ -13,6 +13,8 @@ use App\Rules\PasswordHasLowercaseLetters as PasswordHasLowercaseLetters;
 use App\Rules\PasswordHasNumbers as PasswordHasNumbers;
 use App\Rules\PasswordHasSpecialCharacters as PasswordHasSpecialCharacters;
 use App\Rules\ConfirmPassword as ConfirmPassword;
+use App\Rules\AgeGroup as AgeGroup;
+use App\Rules\FutureDate as FutureDate;
 
 class SignupRequest extends FormRequest {
 
@@ -27,6 +29,7 @@ class SignupRequest extends FormRequest {
     public function rules(): array {
 
         return [
+            'dateOfBirth' => ['required', 'bail', new FutureDate(), 'bail', new AgeGroup(18, 110), 'bail',],
             'email' => ['required', 'bail', new ValidateEmailFormat(), 'bail', new EmailAlreadyRegistered(), 'bail', ],
             'username' => ['required', 'bail', new ValidateUsernameFormat(), 'bail', new UsernameAlreadyRegistered(), 'bail', ],
             'password' => ['required', 'bail', new NumberCharactersPassword(), 'bail', new PasswordHasUppercaseLetters(), 'bail', new PasswordHasLowercaseLetters(), 'bail', new PasswordHasSpecialCharacters(), 'bail', new PasswordHasNumbers(), 'bail', ],
@@ -38,6 +41,7 @@ class SignupRequest extends FormRequest {
     public function messages(): array {
 
         return [
+            'dateOfBirth.required' => 'Enter your date of birth.',
             'email.required' => 'Enter your email.',
             'username.required' => 'Choose a username.',
             'password.required' => 'Choose a password.',
