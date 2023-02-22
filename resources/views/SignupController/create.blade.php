@@ -6,9 +6,9 @@ Signup
 
 @section('body')
 
-<div class="container">
+<div class="sign-container mt-4">
 
-    <div class="mb-3 mt-3 text-center">
+    <div class="mb-4 text-center">
         <hgroup>
             <h1 class="display-3 fw-bold mb-3">Signup</h1>
             <h2 class="display-6 lh-14">Get started by creating a <span class="fw-bold text-primary bg-black">{{config('app.name')}}</span> account.</h2>
@@ -82,6 +82,12 @@ Signup
 
             <div class="mt-3 text-center">
                 <input type="submit" value="Ready" class="btn btn-outline-primary">
+            </div>
+
+            <div class="mt-3">
+                @error('agree')
+                <div class="form-text text-danger text-center">{{$message}}</div>
+                @enderror
             </div>
 
             <div class="form-check form-switch mb-5 mt-4">

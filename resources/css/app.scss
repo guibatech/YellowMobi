@@ -1,13 +1,22 @@
 $primary: yellow;
 $danger: rgb(240, 128, 128);
-$input-group-addon-bg: white;
-$input-group-addon-color: rgb(200, 200, 200);
+$input-group-addon-bg: rgb(246, 246, 246);
+$input-group-addon-color: rgb(210, 210, 210);
 $input-focus-box-shadow: false;
-$form-label-color: rgb(200, 200, 200);
-$input-border-color: rgb(230, 230, 230);
+$form-label-color: rgb(210, 210, 210);
+$input-bg: rgb(246, 246, 246);
+$input-border-color: white;
+$input-border-width: 2px;
 $form-text-color: rgb(200, 200, 200);
 $form-feedback-icon-invalid: none;
 $form-check-input-focus-box-shadow: none;
+$form-check-input-border: 1px solid yellow;
+$form-check-input-bg: white;
+$form-switch-bg-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='yellow'/%3e%3c/svg%3e");
+$form-check-input-active-filter: brightness(100%);
+$input-border-radius: 12px;
+$btn-border-width: 2px;
+$btn-font-weight: bold;
 
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";
 
@@ -20,5 +29,42 @@ $form-check-input-focus-box-shadow: none;
 .form-control.is-invalid:focus {
 
     box-shadow: none;
+
+}
+
+.sign-container {
+
+    position: absolute;
+    width: 100%;
+    padding: 0px 15px;
+
+}
+
+@media(min-width: 490px) {
+    
+    .sign-container {
+
+        width: 490px;
+        position: absolute;
+        left: 50%;
+        transform: translateX(-50%);
+
+    }
+
+}
+
+.btn-check:checked + .btn, :not(.btn-check) + .btn:active, .btn:first-child:active, .btn.active, .btn.show {
+
+    color: white;
+    background-color: var(--bs-btn-active-bg);
+    border-color: var(--bs-btn-active-border-color);
+
+}
+
+.btn:hover {
+
+    color: white;
+    background-color: var(--bs-btn-active-bg);
+    border-color: var(--bs-btn-active-border-color);
 
 }
