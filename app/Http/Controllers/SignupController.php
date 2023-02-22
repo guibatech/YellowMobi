@@ -45,7 +45,7 @@ class SignupController extends Controller {
 
             }
 
-            UserActivity::quickActivity('Signin.', 'Signin.', Auth::user()->id);
+            UserActivity::quickActivity('Logged in.', 'Logged in.', Auth::user()->id);
             
             return redirect()->route('explore');
 
