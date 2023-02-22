@@ -68,3 +68,11 @@ $btn-font-weight: bold;
     border-color: var(--bs-btn-active-border-color);
 
 }
+
+.btn:focus-visible {
+    color: white;
+    background-color: var(--bs-btn-hover-bg);
+    border-color: var(--bs-btn-hover-border-color);
+    outline: 0;
+    box-shadow: none;
+  }
