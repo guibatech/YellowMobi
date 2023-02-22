@@ -23,11 +23,11 @@ class MinimumNumberCharacters implements ValidationRule {
 
             if ($this->fantasyName != null) {
 
-                $fail("The chosen {$this->fantasyName} must have at least {$this->minimumLength} characteres.");
+                $fail("The {$this->fantasyName} field value must have at least {$this->minimumLength} characteres.");
             
             } else {
                 
-                $fail("The chosen {$attribute} must have at least {$this->minimumLength} characteres.");
+                $fail("The {$attribute} field value must have at least {$this->minimumLength} characteres.");
 
             }
 

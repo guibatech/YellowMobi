@@ -38,6 +38,7 @@ class SignupRequest extends FormRequest {
             'username' => ['required', 'bail', new MinimumNumberCharacters(3, null), 'bail', new DatabaseSizeExplosionProtection(255, null), 'bail', new ValidateUsernameFormat(), 'bail', new UsernameAlreadyRegistered(), 'bail', ],
             'password' => ['required', 'bail', new MinimumNumberCharacters(8, null), 'bail', new DatabaseSizeExplosionProtection(255, null), 'bail', new PasswordHasUppercaseLetters(), 'bail', new PasswordHasLowercaseLetters(), 'bail', new PasswordHasSpecialCharacters(), 'bail', new PasswordHasNumbers(), 'bail', ],
             'confirmPassword' => ['required', 'bail', new DatabaseSizeExplosionProtection(255, null), 'bail', new ConfirmPassword($this->password), 'bail', ],
+            'agree' => ['required', 'bail', ],
         ];
 
     }
@@ -51,6 +52,7 @@ class SignupRequest extends FormRequest {
             'username.required' => 'Choose a username.',
             'password.required' => 'Choose a password.',
             'confirmPassword.required' => 'Confirm the chosen password.',
+            'agree.required' => 'Before continuing, you must accept the Community Rules and Privacy Policy.',
         ];
 
     }

@@ -46,6 +46,13 @@
 
             <input type="submit" value="Signup">
 
+            <input type="checkbox" name="agree" id="agree">
+            <label for="agree">
+                By creating my account, I accept the 
+                <a href="#">Community Rules</a> and
+                <a href="#">Privacy Policy</a>.
+            </label>
+
         </form>
 
     </body>
