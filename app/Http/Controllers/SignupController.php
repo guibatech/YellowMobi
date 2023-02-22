@@ -7,6 +7,7 @@ use App\Models\UserAccount as UserAccount;
 use App\Http\Requests\SignupRequest as SignupRequest;
 use App\Models\UserProfile as UserProfile;
 use \Exception as Exception;
+use App\Models\UserActivity as UserActivity;
 
 class SignupController extends Controller {
 
@@ -31,6 +32,8 @@ class SignupController extends Controller {
             $userProfile->user_id = $userAccount->id;
             $userProfile->name = $request->name;
             $userProfile->save();
+
+            UserActivity::quickActivity("Account created.", "Account created.", $userAccount->id);
 
         } catch (Exception $e) {
 
