@@ -1,60 +1,89 @@
-<!DOCTYPE HTML>
+@extends('template')
 
-<html lang="{{config('app.locale')}}">
+@section('title')
+Signup
+@endsection
 
-    <head>
+@section('body')
 
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+<div class="container">
 
-        <title>Signup - {{config('app.name')}}</title>
+    <div class="mb-4 mt-3 text-center">
+        <hgroup>
+            <h1 class="display-3 fw-bold">Signup</h1>
+            <h2 class="display-6">Get started by creating a <span class="fw-bold text-primary">{{config('app.name')}}</span> account.</h2>
+        </hgroup>
+    </div>
 
-    </head>
-
-    <body>
-
+    <div>
         <form action="{{route('accounts.signup.do')}}" method="POST">
-
+            
             @csrf
             @method('POST')
 
-            <label for="name">Name</label>
-            <input type="text" name="name" id="name" value="{{old('name')}}">
+            <div class="form-floating mb-3">
+                <input type="text" class="form-control" name="name" id="name" value="{{old('name')}}" placeholder=" ">
+                <label for="name">Name</label>
+            </div>
 
-            <label for="dateOfBirth">Date of birth</label>
-            <input type="date" name="dateOfBirth" id="dateOfBirth" value="{{old('dateOfBirth')}}">
+            <div class="mb-3">
+                <div class="form-floating">
+                    <input type="date" class="form-control" name="dateOfBirth" id="dateOfBirth" value="{{old('dateOfBirth')}}" placeholder=" ">
+                    <label for="dateOfBirth">Date of birth</label>
+                </div>
+                <span class="form-text">You must be at least 18 years old.</span>
+            </div>
 
-            <label for="email">Email</label>
-            <input type="email" name="email" id="email" placeholder="example@example.com" value="{{old('email')}}">
-            
-            <label for="username">Username</label>
-            <input type="text" name="username" id="username" value="{{old('username')}}">
-            
-            <label for="password">Password</label>
-            <input type="password" name="password" id="password">
+            <div class="mb-3">
+                <div class="form-floating">
+                    <input type="email" class="form-control" name="email" id="email" placeholder="example@example.com" value="{{old('email')}}">
+                    <label for="email">Email</label>
+                </div>
+                <span class="form-text">We'll never share your email with anyone else.</span>
+            </div>
 
-            <label for="confirmPassword">Confirm password</label>
-            <input type="password" name="confirmPassword" id="confirmPassword">
+            <div class="input-group mb-3">
+                <span class="input-group-text">@</span>
+                <div class="form-floating">
+                    <input type="text" class="form-control" name="username" id="username" value="{{old('username')}}" placeholder="@example">
+                    <label for="username">Username</label>
+                </div>
+            </div>
 
-            <div>
+            <div class="form-floating mb-3">
+                <input type="password" class="form-control" name="password" id="password" placeholder=" ">
+                <label for="password">Password</label>
+            </div>
+
+            <div class="form-floating mb-3">
+                <input type="password" class="form-control" name="confirmPassword" id="confirmPassword" placeholder=" ">
+                <label for="confirmPassword">Confirm password</label>
+            </div>
+
+            <div class="mb-2 mt-2">
                 @foreach($errors->all() as $error)
-                <div>
-                    <p>{{$error}}</p>
+                <div class="alert alert-danger">
+                    {{$error}}
                 </div>
                 @endforeach
             </div>
 
-            <input type="submit" value="Signup">
+            <div class="mt-3 text-center">
+                <input type="submit" value="Ready" class="btn btn-outline-primary">
+            </div>
 
-            <input type="checkbox" name="agree" id="agree">
-            <label for="agree">
-                By creating my account, I accept the 
-                <a href="#">Community Rules</a> and
-                <a href="#">Privacy Policy</a>.
-            </label>
+            <div class="form-check form-switch mb-5 mt-4">
+                <input type="checkbox" class="form-check-input" role="switch" name="agree" id="agree">
+                <label for="agree" class="form-check-label">
+                    By creating my account, I accept the 
+                    <a href="#1" title="Access the Community Rules.">Community Rules</a> and
+                    <a href="#2" title="Access the Privacy Policy.">Privacy Policy</a>.
+                </label>
+            </div>
 
         </form>
+    </div>
 
-    </body>
+</div>
 
-</html>
+@endsection
