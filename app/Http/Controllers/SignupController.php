@@ -34,7 +34,7 @@ class SignupController extends Controller {
             $userProfile->name = $request->name;
             $userProfile->save();
 
-            UserActivity::quickActivity("Account created.", "Account created.", $userAccount->id);
+            UserActivity::quickActivity("Created.", "Created.", $userAccount->id);
 
             if (!Auth::attempt([
                 'username' => $request->username,
@@ -45,7 +45,7 @@ class SignupController extends Controller {
 
             }
 
-            UserActivity::quickActivity('User signin.', 'User signin.', Auth::user()->id);
+            UserActivity::quickActivity('Signin.', 'Signin.', Auth::user()->id);
             
             return redirect()->route('timeline');
 
