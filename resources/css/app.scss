@@ -1,4 +1,24 @@
 $primary: yellow;
+$danger: rgb(240, 128, 128);
 $input-group-addon-bg: white;
+$input-group-addon-color: rgb(200, 200, 200);
+$input-focus-box-shadow: false;
+$form-label-color: rgb(200, 200, 200);
+$input-border-color: rgb(230, 230, 230);
+$form-text-color: rgb(200, 200, 200);
+$form-feedback-icon-invalid: none;
+$form-check-input-focus-box-shadow: none;
 
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";
+
+.lh-14 {
+
+    line-height: 1.4;
+
+}
+
+.form-control.is-invalid:focus {
+
+    box-shadow: none;
+
+}
