@@ -7,7 +7,7 @@ use App\Rules\EmailAlreadyRegistered as EmailAlreadyRegistered;
 use App\Rules\ValidateEmailFormat as ValidateEmailFormat;
 use App\Rules\UsernameAlreadyRegistered as UsernameAlreadyRegistered;
 use App\Rules\ValidateUsernameFormat as ValidateUsernameFormat;
-use App\Rules\NumberCharactersPassword as NumberCharactersPassword;
+use App\Rules\MinimumNumberCharacters as MinimumNumberCharacters;
 use App\Rules\PasswordHasUppercaseLetters as PasswordHasUppercaseLetters;
 use App\Rules\PasswordHasLowercaseLetters as PasswordHasLowercaseLetters;
 use App\Rules\PasswordHasNumbers as PasswordHasNumbers;
@@ -33,10 +33,10 @@ class SignupRequest extends FormRequest {
 
         return [
             'name' => ['required', 'bail', new DatabaseSizeExplosionProtection(255, null), 'bail', new ValidateName(), 'bail',],
-            'dateOfBirth' => ['required', 'bail', new DatabaseSizeExplosionProtection(10, 'date of birth'), 'bail', new CheckIntegrityDateTime("date of birth"), 'bail', new FutureDate(), 'bail', new AgeGroup(18, 110), 'bail',],
+            'dateOfBirth' => ['required', 'bail', new MinimumNumberCharacters(10, 'date of birth'), 'bail', new DatabaseSizeExplosionProtection(10, 'date of birth'), 'bail', new CheckIntegrityDateTime("date of birth"), 'bail', new FutureDate(), 'bail', new AgeGroup(18, 110), 'bail',],
             'email' => ['required', 'bail', new DatabaseSizeExplosionProtection(255, null), 'bail', new ValidateEmailFormat(), 'bail', new EmailAlreadyRegistered(), 'bail', ],
-            'username' => ['required', 'bail', new DatabaseSizeExplosionProtection(255, null), 'bail', new ValidateUsernameFormat(), 'bail', new UsernameAlreadyRegistered(), 'bail', ],
-            'password' => ['required', 'bail', new DatabaseSizeExplosionProtection(255, null), 'bail', new NumberCharactersPassword(), 'bail', new PasswordHasUppercaseLetters(), 'bail', new PasswordHasLowercaseLetters(), 'bail', new PasswordHasSpecialCharacters(), 'bail', new PasswordHasNumbers(), 'bail', ],
+            'username' => ['required', 'bail', new MinimumNumberCharacters(3, null), 'bail', new DatabaseSizeExplosionProtection(255, null), 'bail', new ValidateUsernameFormat(), 'bail', new UsernameAlreadyRegistered(), 'bail', ],
+            'password' => ['required', 'bail', new MinimumNumberCharacters(8, null), 'bail', new DatabaseSizeExplosionProtection(255, null), 'bail', new PasswordHasUppercaseLetters(), 'bail', new PasswordHasLowercaseLetters(), 'bail', new PasswordHasSpecialCharacters(), 'bail', new PasswordHasNumbers(), 'bail', ],
             'confirmPassword' => ['required', 'bail', new DatabaseSizeExplosionProtection(255, null), 'bail', new ConfirmPassword($this->password), 'bail', ],
         ];
 
