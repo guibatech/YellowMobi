@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller as Controller;
 use App\Models\UserAccount as UserAccount;
 use App\Http\Requests\SignupRequest as SignupRequest;
 use App\Models\UserProfile as UserProfile;
+use \Exception as Exception;
 
 class SignupController extends Controller {
 
@@ -17,23 +18,25 @@ class SignupController extends Controller {
 
     public function store(SignupRequest $request) {
 
-        $userAccount = new UserAccount();
-        $userAccount->email = $request->email;
-        $userAccount->username = $request->username;
-        $userAccount->password = $request->password;
-        $userAccount->save();
+        try {
+            
+            $userAccount = new UserAccount();
+            $userAccount->email = $request->email;
+            $userAccount->username = $request->username;
+            $userAccount->password = $request->password;
+            $userAccount->save();
 
-        if ($userAccount->id == null) {
+            $userProfile = new UserProfile();
+            $userProfile->date_of_birth = $request->dateOfBirth;
+            $userProfile->user_id = $userAccount->id;
+            $userProfile->name = $request->name;
+            $userProfile->save();
+
+        } catch (Exception $e) {
 
             return redirect()->back()->withInput()->withErrors(["There was some problem. Try again later."]);
 
         }
-
-        $userProfile = new UserProfile();
-        $userProfile->date_of_birth = $request->dateOfBirth;
-        $userProfile->user_id = $userAccount->id;
-        $userProfile->name = $request->name;
-        $userProfile->save();
 
     }
 
