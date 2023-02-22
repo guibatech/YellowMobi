@@ -9,11 +9,20 @@
         
         <title>@yield('title') - {{config('app.name')}}</title>
 
+        @vite('resources/css/app.scss')
+
+        @yield('styles')
+
     </head>
 
     <body>
 
         @yield('body')
+
+        @vite('node_modules/bootstrap/dist/js/bootstrap.bundle.js')
+        @vite('resources/js/app.js')
+
+        @yield('scripts')
 
     </body>
 
