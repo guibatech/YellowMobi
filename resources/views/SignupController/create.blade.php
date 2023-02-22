@@ -11,7 +11,7 @@ Signup
     <div class="mb-4 text-center">
         <hgroup>
             <h1 class="display-3 fw-bold mb-3">Signup</h1>
-            <h2 class="display-6 lh-14">Get started by creating a <span class="fw-bold text-primary bg-black">{{config('app.name')}}</span> account.</h2>
+            <h2 class="display-6 lh-14">Get started by creating a <span class="fw-bold text-primary">{{config('app.name')}}</span> account.</h2>
         </hgroup>
     </div>
 
