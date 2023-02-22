@@ -18,4 +18,6 @@ use App\Http\Controllers\TimelineController as TimelineController;
 Route::get('/accounts/signup', [SignupController::class, 'create'])->name('accounts.signup');
 Route::post('/accounts/signup/do', [SignupController::class, 'store'])->name('accounts.signup.do');
 
-Route::get('/', [TimelineController::class, 'timeline'])->name('timeline');
+Route::get('/', [TimelineController::class, 'timeline'])->name('timeline')->middleware([
+    'just.authenticated',
+]);
