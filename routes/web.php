@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SignupController as SignupController;
+use App\Http\Controllers\TimelineController as TimelineController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,9 +15,7 @@ use App\Http\Controllers\SignupController as SignupController;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Route::get('/accounts/signup', [SignupController::class, 'create'])->name('accounts.signup');
 Route::post('/accounts/signup/do', [SignupController::class, 'store'])->name('accounts.signup.do');
+
+Route::get('/', [TimelineController::class, 'timeline'])->name('timeline');
