@@ -17,6 +17,7 @@ use App\Rules\AgeGroup as AgeGroup;
 use App\Rules\FutureDate as FutureDate;
 use App\Rules\ValidateName as ValidateName;
 use App\Rules\DatabaseSizeExplosionProtection as DatabaseSizeExplosionProtection;
+use App\Rules\CheckIntegrityDateTime as CheckIntegrityDateTime;
 
 class SignupRequest extends FormRequest {
 
@@ -32,7 +33,7 @@ class SignupRequest extends FormRequest {
 
         return [
             'name' => ['required', 'bail', new DatabaseSizeExplosionProtection(255, null), 'bail', new ValidateName(), 'bail',],
-            'dateOfBirth' => ['required', 'bail', new DatabaseSizeExplosionProtection(10, 'date of birth'), 'bail', new FutureDate(), 'bail', new AgeGroup(18, 110), 'bail',],
+            'dateOfBirth' => ['required', 'bail', new DatabaseSizeExplosionProtection(10, 'date of birth'), 'bail', new CheckIntegrityDateTime("date of birth"), 'bail', new FutureDate(), 'bail', new AgeGroup(18, 110), 'bail',],
             'email' => ['required', 'bail', new DatabaseSizeExplosionProtection(255, null), 'bail', new ValidateEmailFormat(), 'bail', new EmailAlreadyRegistered(), 'bail', ],
             'username' => ['required', 'bail', new DatabaseSizeExplosionProtection(255, null), 'bail', new ValidateUsernameFormat(), 'bail', new UsernameAlreadyRegistered(), 'bail', ],
             'password' => ['required', 'bail', new DatabaseSizeExplosionProtection(255, null), 'bail', new NumberCharactersPassword(), 'bail', new PasswordHasUppercaseLetters(), 'bail', new PasswordHasLowercaseLetters(), 'bail', new PasswordHasSpecialCharacters(), 'bail', new PasswordHasNumbers(), 'bail', ],
