@@ -12,7 +12,7 @@ class JustUnauthenticated {
 
         if (Auth::check()) {
 
-            return redirect()->route('timeline');
+            return redirect()->route('explore');
 
         }
 

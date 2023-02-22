@@ -2,7 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SignupController as SignupController;
-use App\Http\Controllers\TimelineController as TimelineController;
+use App\Http\Controllers\ExploreController as ExploreController;
 
 /*
 |--------------------------------------------------------------------------
@@ -22,6 +22,6 @@ Route::post('/accounts/signup/do', [SignupController::class, 'store'])->name('ac
     'just.unauthenticated',
 ]);
 
-Route::get('/', [TimelineController::class, 'timeline'])->name('timeline')->middleware([
+Route::get('/', [ExploreController::class, 'explore'])->name('explore')->middleware([
     'just.authenticated',
 ]);

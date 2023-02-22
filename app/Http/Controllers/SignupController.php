@@ -47,7 +47,7 @@ class SignupController extends Controller {
 
             UserActivity::quickActivity('Signin.', 'Signin.', Auth::user()->id);
             
-            return redirect()->route('timeline');
+            return redirect()->route('explore');
 
         } catch (Exception $e) {
 
