@@ -85,9 +85,13 @@ Signup
             </div>
 
             <div class="mt-3">
-                @error('agree')
-                <div class="form-text text-danger text-center">{{$message}}</div>
-                @enderror
+
+                @if($errors->has('system') || $errors->has('agree'))
+                    @foreach($errors->all() as $error)
+                    <div class="form-text text-danger text-center">{{$error}}</div>
+                    @endforeach
+                @endif
+           
             </div>
 
             <div class="form-check form-switch mb-5 mt-4">

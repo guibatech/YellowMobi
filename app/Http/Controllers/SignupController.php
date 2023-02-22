@@ -8,6 +8,7 @@ use App\Http\Requests\SignupRequest as SignupRequest;
 use App\Models\UserProfile as UserProfile;
 use \Exception as Exception;
 use App\Models\UserActivity as UserActivity;
+use Illuminate\Support\Facades\Auth as Auth;
 
 class SignupController extends Controller {
 
@@ -35,9 +36,20 @@ class SignupController extends Controller {
 
             UserActivity::quickActivity("Account created.", "Account created.", $userAccount->id);
 
+            if (!Auth::attempt([
+                'username' => $request->username,
+                'password' => $request->password,
+            ])) {
+
+                return redirect()->back()->withInput()->withErrors(['system' => 'Unable to signin.']);
+
+            }
+
+            UserActivity::quickActivity('User signin.', 'User signin.', Auth::user()->id);
+
         } catch (Exception $e) {
 
-            return redirect()->back()->withInput()->withErrors(["There was some problem. Try again later."]);
+            return redirect()->back()->withInput()->withErrors(['system' => "There was some problem. Try again later."]);
 
         }
 
