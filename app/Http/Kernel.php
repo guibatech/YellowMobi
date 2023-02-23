@@ -63,5 +63,7 @@ class Kernel extends HttpKernel
         'verified' => \Illuminate\Auth\Middleware\EnsureEmailIsVerified::class,
         'just.authenticated' => \App\Http\Middleware\JustAuthenticated::class,
         'just.unauthenticated' => \App\Http\Middleware\JustUnauthenticated::class,
+        'only.activated.accounts' => \App\Http\Middleware\OnlyActivatedAccounts::class,
+        'only.non.activated.accounts' => \App\Http\Middleware\OnlyNonActivatedAccounts::class,
     ];
 }

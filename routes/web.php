@@ -27,15 +27,15 @@ Route::post('/accounts/signup/do', [SignupController::class, 'store'])->name('ac
 ]);
 
 Route::get('/accounts/activate', [ActivateUserAccount::class, 'edit'])->name('accounts.activate')->middleware([
-    'just.authenticated',
+    'just.authenticated', 'only.non.activated.accounts',
 ]);
 
 Route::put('/accounts/activate/do', [ActivateUserAccount::class, 'update'])->name('accounts.activate.do')->middleware([
-    'just.authenticated',
+    'just.authenticated', 'only.non.activated.accounts',
 ]);
 
 Route::get('/accounts/activate/resend', [ActivateUserAccount::class, 'resendActivationToken'])->name('accounts.activate.resend')->middleware([
-    'just.authenticated',
+    'just.authenticated', 'only.non.activated.accounts',
 ]);
 
 Route::get('/accounts/signin', [SigninController::class, 'create'])->name('accounts.signin')->middleware([
@@ -51,5 +51,5 @@ Route::delete('/accounts/signout/do', [SignoutController::class, 'destroy'])->na
 ]);
 
 Route::get('/', [ExploreController::class, 'show'])->name('explore')->middleware([
-    'just.authenticated',
+    'just.authenticated', 'only.activated.accounts',
 ]);
