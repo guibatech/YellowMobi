@@ -12,7 +12,7 @@ class JustAuthenticated {
 
         if (!Auth::check()) {
 
-            dd('You are not logged in.');
+            return redirect()->route('accounts.signin');
 
         }
 
