@@ -97,7 +97,7 @@ Sign up
             </div>
 
             <div class="form-check form-switch mb-5 mt-4">
-                <input type="checkbox" class="form-check-input" role="switch" name="agree" id="agree">
+                <input type="checkbox" class="form-check-input" role="switch" name="agree" id="agree" @error('agree') autofocus @enderror>
                 <label for="agree" class="form-check-label">
                     By creating my account, I accept the 
                     <a href="#1" title="Access the Community Rules.">Community Rules</a> and
