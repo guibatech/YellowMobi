@@ -24,11 +24,11 @@ Route::post('/accounts/signup/do', [SignupController::class, 'store'])->name('ac
     'just.unauthenticated',
 ]);
 
-Route::get('/accounts/signin', [SigninController::class, 'signin'])->name('accounts.signin')->middleware([
+Route::get('/accounts/signin', [SigninController::class, 'create'])->name('accounts.signin')->middleware([
     'just.unauthenticated',
 ]);
 
-Route::post('/accounts/signin', [SigninController::class, 'doSignin'])->name('accounts.signin.do')->middleware([
+Route::post('/accounts/signin/do', [SigninController::class, 'store'])->name('accounts.signin.do')->middleware([
     'just.unauthenticated',
 ]);
 

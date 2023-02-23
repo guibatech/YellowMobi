@@ -7,13 +7,13 @@ use Illuminate\Http\Request as Request;
 
 class SigninController extends Controller {
 
-    public function signin() {
+    public function create() {
 
         dd('sign in form.');
 
     }
 
-    public function doSignin(Request $request) {
+    public function store(Request $request) {
 
         dd('do sign in', $request);
 
