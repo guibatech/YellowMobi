@@ -6,6 +6,8 @@ Signup
 
 @section('body')
 
+@include('Components.navbar')
+
 <div class="sign-container mt-4">
 
     <div class="mb-4 text-center">

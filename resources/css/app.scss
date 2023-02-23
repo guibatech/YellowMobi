@@ -17,6 +17,12 @@ $form-check-input-active-filter: brightness(100%);
 $input-border-radius: 12px;
 $btn-border-width: 2px;
 $btn-font-weight: bold;
+$link-hover-color: yellow;
+$dropdown-link-active-color: black;
+$dropdown-link-active-bg: yellow;
+$dropdown-link-hover-color: black;
+$dropdown-link-hover-bg: yellow;
+$dropdown-border-radius: 12px;
 
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";
 
@@ -75,4 +81,11 @@ $btn-font-weight: bold;
     border-color: var(--bs-btn-hover-border-color);
     outline: 0;
     box-shadow: none;
-  }
+}
+
+.photo-profile {
+    
+    width: 38px;
+    height: 38px;
+
+}
