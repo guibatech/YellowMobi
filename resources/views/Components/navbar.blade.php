@@ -17,7 +17,7 @@
                 <li><a class="dropdown-item" href="#" target="_SELF" title="Explore">Explore</a></li>
                 <li><a class="dropdown-item" href="#" target="_SELF" title="Settings">Settings</a></li>
                 <li><hr class="dropdown-divider"></li>
-                <li><a class="dropdown-item" href="#" target="_SELF" title="Sign out">Sign out</a></li>
+                <li><a class="dropdown-item" target="_SELF" title="Sign out" id="btnSignin">Sign out</a></li>
             </ul>
 
         @else

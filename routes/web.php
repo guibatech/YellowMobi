@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SignupController as SignupController;
 use App\Http\Controllers\ExploreController as ExploreController;
 use App\Http\Controllers\SigninController as SigninController;
+use App\Http\Controllers\SignoutController as SignoutController;
 
 /*
 |--------------------------------------------------------------------------
@@ -32,6 +33,10 @@ Route::post('/accounts/signin/do', [SigninController::class, 'store'])->name('ac
     'just.unauthenticated',
 ]);
 
-Route::get('/', [ExploreController::class, 'explore'])->name('explore')->middleware([
+Route::delete('/accounts/signout/do', [SignoutController::class, 'destroy'])->name('accounts.signout.do')->middleware([
+    'just.authenticated',
+]);
+
+Route::get('/', [ExploreController::class, 'show'])->name('explore')->middleware([
     'just.authenticated',
 ]);

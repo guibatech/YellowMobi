@@ -8,9 +8,9 @@ use Illuminate\Support\Facades\Auth as Auth;
 
 class ExploreController extends Controller {
 
-    public function explore() {
+    public function show() {
 
-        dd('This is the explore.', Auth::user());
+        return response()->view('ExploreController.show', [], 200);
 
     }
 

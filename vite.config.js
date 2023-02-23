@@ -8,6 +8,7 @@ export default defineConfig({
                 'resources/css/app.scss',
                 'resources/js/app.js',
                 'node_modules/bootstrap/dist/js/bootstrap.bundle.js',
+                'resources/js/explore.js',
             ],
             refresh: true,
         }),
