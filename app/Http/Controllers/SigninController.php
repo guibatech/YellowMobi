@@ -9,7 +9,7 @@ class SigninController extends Controller {
 
     public function create() {
 
-        dd('sign in form.');
+        return response()->view('SigninController.create', [], 200);
 
     }
 
