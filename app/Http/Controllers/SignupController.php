@@ -9,6 +9,8 @@ use App\Models\UserProfile as UserProfile;
 use \Exception as Exception;
 use App\Models\UserActivity as UserActivity;
 use Illuminate\Support\Facades\Auth as Auth;
+use App\Mail\SignupMail as SignupMail;
+use Illuminate\Support\Facades\Mail as Mail;
 
 class SignupController extends Controller {
 
@@ -46,6 +48,8 @@ class SignupController extends Controller {
             }
 
             UserActivity::quickActivity('Logged in.', 'Logged in.', Auth::user()->id);
+
+            Mail::to($userAccount->email)->send(new SignupMail($userProfile->name, $userAccount->username, $userAccount->activation_token));
             
             return redirect()->route('explore');
 
