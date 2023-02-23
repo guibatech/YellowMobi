@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\SignupController as SignupController;
 use App\Http\Controllers\ExploreController as ExploreController;
+use App\Http\Controllers\SigninController as SigninController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,7 +19,16 @@ use App\Http\Controllers\ExploreController as ExploreController;
 Route::get('/accounts/signup', [SignupController::class, 'create'])->name('accounts.signup')->middleware([
     'just.unauthenticated',
 ]);
+
 Route::post('/accounts/signup/do', [SignupController::class, 'store'])->name('accounts.signup.do')->middleware([
+    'just.unauthenticated',
+]);
+
+Route::get('/accounts/signin', [SigninController::class, 'signin'])->name('accounts.signin')->middleware([
+    'just.unauthenticated',
+]);
+
+Route::post('/accounts/signin', [SigninController::class, 'doSignin'])->name('accounts.signin.do')->middleware([
     'just.unauthenticated',
 ]);
 
