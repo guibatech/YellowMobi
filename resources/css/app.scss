@@ -8,7 +8,6 @@ $input-bg: rgb(246, 246, 246);
 $input-border-color: white;
 $input-border-width: 2px;
 $form-text-color: rgb(200, 200, 200);
-$form-feedback-icon-invalid: none;
 $form-check-input-focus-box-shadow: none;
 $form-check-input-border: 1px solid yellow;
 $form-check-input-bg: white;
@@ -87,5 +86,17 @@ $dropdown-border-radius: 12px;
     
     width: 38px;
     height: 38px;
+
+}
+
+.has-error {
+
+    border: $input-border-width solid $danger;
+
+}
+
+.has-error:focus {
+
+    border: $input-border-width solid $danger;
 
 }
