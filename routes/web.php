@@ -5,6 +5,7 @@ use App\Http\Controllers\SignupController as SignupController;
 use App\Http\Controllers\ExploreController as ExploreController;
 use App\Http\Controllers\SigninController as SigninController;
 use App\Http\Controllers\SignoutController as SignoutController;
+use App\Http\Controllers\ActivateUserAccount as ActivateUserAccount;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,6 +24,18 @@ Route::get('/accounts/signup', [SignupController::class, 'create'])->name('accou
 
 Route::post('/accounts/signup/do', [SignupController::class, 'store'])->name('accounts.signup.do')->middleware([
     'just.unauthenticated',
+]);
+
+Route::get('/accounts/activate', [ActivateUserAccount::class, 'edit'])->name('accounts.activate')->middleware([
+    'just.authenticated',
+]);
+
+Route::put('/accounts/activate/do', [ActivateUserAccount::class, 'update'])->name('accounts.activate.do')->middleware([
+    'just.authenticated',
+]);
+
+Route::get('/accounts/activate/resend', [ActivateUserAccount::class, 'resendActivationToken'])->name('accounts.activate.resend')->middleware([
+    'just.authenticated',
 ]);
 
 Route::get('/accounts/signin', [SigninController::class, 'create'])->name('accounts.signin')->middleware([
