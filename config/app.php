@@ -16,6 +16,18 @@ return [
     */
 
     'name' => env('APP_NAME', 'Laravel'),
+
+    /*
+    |--------------------------------------------------------------------------
+    | Application fantasy name
+    |--------------------------------------------------------------------------
+    |
+    | This value represents the fantasy name of the application. This value is 
+    | used to display a custom name, variation or differentiation of 
+    | "APP_NAME".
+    |
+    */
+
     'fantasy_name' => env('APP_FANTASY_NAME', 'Laravel'),
 
     /*
