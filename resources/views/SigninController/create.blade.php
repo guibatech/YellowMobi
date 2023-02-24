@@ -24,7 +24,7 @@ Sign in
                 @method('POST')
 
                 <div class="form-floating mb-3">
-                    <input type="text" name="credential" id="credential" class="form-control @error('credential') has-error @enderror" placeholder=" ">
+                    <input type="text" name="credential" id="credential" class="form-control @error('credential') has-error @enderror" placeholder=" " value="{{old('credential')}}" @error('credential') autofocus @enderror>
                     <label for="credential" class="form-label">Email or username</label>
                     @error('credential')
                     <div class="form-text text-danger">{{$message}}</div>
@@ -32,7 +32,7 @@ Sign in
                 </div>
 
                 <div class="form-floating mb-3">
-                    <input type="password" name="password" id="password" class="form-control @error('password') has-error @enderror" placeholder=" ">
+                    <input type="password" name="password" id="password" class="form-control @error('password') has-error @enderror" placeholder=" " @error('password') autofocus @enderror>
                     <label for="password" class="form-label">Password</label>
                     @error('password')
                     <div class="form-text text-danger">{{$message}}</div>
