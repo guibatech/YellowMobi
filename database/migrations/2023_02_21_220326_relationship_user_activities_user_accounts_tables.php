@@ -6,7 +6,7 @@ use Illuminate\Database\Schema\Blueprint as Blueprint;
 
 return new class extends Migration {
 
-    public function up() {
+    public function up(): void {
 
         if (Schema::hasColumn('user_accounts', 'id') && Schema::hasTable('user_activities')) {
 
@@ -30,7 +30,7 @@ return new class extends Migration {
 
     }
 
-    public function down() {
+    public function down(): void {
 
         if (Schema::hasColumn('user_activities', 'user_id')) {
 

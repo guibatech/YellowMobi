@@ -6,10 +6,11 @@ use App\Http\Controllers\Controller as Controller;
 use Illuminate\Http\Request as Request;
 use Illuminate\Support\Facades\Auth as Auth;
 use App\Models\UserActivity as UserActivity;
+use App\Http\Response as Response;
 
 class SignoutController extends Controller {
 
-    public function destroy() {
+    public function destroy(): Response {
 
         $user = Auth::user()->id;
 
@@ -18,6 +19,7 @@ class SignoutController extends Controller {
         if (!Auth::check()) {
             
             UserActivity::quickActivity("Logged out.", "Logged out.", $user);
+            
             return response()->json(['status' => '1']);
 
         } else {

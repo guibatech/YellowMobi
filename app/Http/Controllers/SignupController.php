@@ -10,16 +10,18 @@ use \Exception as Exception;
 use App\Models\UserActivity as UserActivity;
 use Illuminate\Support\Facades\Auth as Auth;
 use App\Jobs\SendWelcomeEmail as SendWelcomeEmail;
+use Illuminate\Http\Response as Response;
+use Illuminate\Http\RedirectResponse as RedirectResponse;
 
 class SignupController extends Controller {
 
-    public function create() {
+    public function create(): Response {
 
         return response()->view('SignupController.create', [], 200);
 
     }
 
-    public function store(SignupRequest $request) {
+    public function store(SignupRequest $request): RedirectResponse {
 
         try {
             

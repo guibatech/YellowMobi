@@ -6,7 +6,7 @@ use Illuminate\Database\Schema\Blueprint as Blueprint;
 
 return new class extends Migration {
 
-    public function up() {
+    public function up(): void {
 
         Schema::create('user_activities', function(Blueprint $table) {
 
@@ -19,7 +19,7 @@ return new class extends Migration {
 
     }
 
-    public function down() {
+    public function down(): void {
 
         Schema::dropIfExists('user_activities');
 

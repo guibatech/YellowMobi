@@ -6,7 +6,7 @@ use Illuminate\Database\Schema\Blueprint as Blueprint;
 
 return new class extends Migration {
 
-    public function up() {
+    public function up(): void {
 
         if (Schema::hasTable('user_accounts')) {
 
@@ -21,7 +21,7 @@ return new class extends Migration {
 
     }
 
-    public function down() {
+    public function down(): void {
 
         if (Schema::hasColumn('user_accounts', 'activation_token')) {
 
