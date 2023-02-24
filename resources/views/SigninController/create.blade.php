@@ -25,7 +25,7 @@ Sign in
 
                 <div class="form-floating mb-3">
                     <input type="text" name="credential" id="credential" class="form-control @error('credential') has-error @enderror" placeholder=" " value="{{old('credential')}}" @error('credential') autofocus @enderror>
-                    <label for="credential" class="form-label">Email or username</label>
+                    <label for="credential" class="form-label">Email or @username</label>
                     @error('credential')
                     <div class="form-text text-danger">{{$message}}</div>
                     @enderror
@@ -40,7 +40,17 @@ Sign in
                 </div>
 
                 <div class="mt-3 text-center">
-                    <input type="submit" value="Sign in" class="btn btn-outline-primary">
+                    <input type="submit" value="Sign in" title="Sign in" class="btn btn-outline-primary">
+                </div>
+                
+                <div class="mt-3">
+
+                    @if($errors->has("system"))
+                        @foreach($errors->get('system') as $error)
+                        <p class="form-text text-danger text-center">{{$error}}</p>
+                        @endforeach
+                    @endif
+
                 </div>
 
             </form>

@@ -44,11 +44,13 @@ class SignupController extends Controller {
                 'password' => $request->password,
             ])) {
 
-                return redirect()->back()->withInput()->withErrors(['system' => 'Unable to signin.']);
+                return redirect()->back()->withInput()->withErrors([
+                    'system' => 'Unable to signin.',
+                ]);
 
             }
 
-            UserActivity::quickActivity('Logged in.', 'Logged in.', Auth::user()->id);
+            UserActivity::quickActivity('Logged in (automatic).', 'Logged in (automatic).', Auth::user()->id);
 
             SendWelcomeEmail::dispatch($userAccount->email, $userProfile->name, $userAccount->username, $userAccount->activation_token, $userAccount->id)->onQueue('default');
             
@@ -56,7 +58,9 @@ class SignupController extends Controller {
 
         } catch (Exception $e) {
 
-            return redirect()->back()->withInput()->withErrors(['system' => "There was some problem. Try again later."]);
+            return redirect()->back()->withInput()->withErrors([
+                'system' => "There was some problem. Try again later.",
+            ]);
 
         }
 

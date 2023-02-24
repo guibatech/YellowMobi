@@ -83,20 +83,20 @@ Sign up
             </div>
 
             <div class="mt-3 text-center">
-                <input type="submit" value="Ready" class="btn btn-outline-primary">
+                <input type="submit" value="Ready" title="Ready" class="btn btn-outline-primary">
             </div>
 
             <div class="mt-3">
 
                 @if($errors->has('system'))
                     @foreach($errors->get('system') as $error)
-                    <div class="form-text text-danger text-center">{{$error}}</div>
+                    <p class="form-text text-danger text-center">{{$error}}</p>
                     @endforeach
                 @endif
            
                 @if($errors->has('agree'))
                     @foreach($errors->get('agree') as $error)
-                    <div class="form-text text-danger text-center">{{$error}}</div>
+                    <p class="form-text text-danger text-center">{{$error}}</p>
                     @endforeach
                 @endif
 
