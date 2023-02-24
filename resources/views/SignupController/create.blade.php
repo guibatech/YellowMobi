@@ -88,12 +88,18 @@ Sign up
 
             <div class="mt-3">
 
-                @if($errors->has('system') || $errors->has('agree'))
-                    @foreach($errors->all() as $error)
+                @if($errors->has('system'))
+                    @foreach($errors->get('system') as $error)
                     <div class="form-text text-danger text-center">{{$error}}</div>
                     @endforeach
                 @endif
            
+                @if($errors->has('agree'))
+                    @foreach($errors->get('agree') as $error)
+                    <div class="form-text text-danger text-center">{{$error}}</div>
+                    @endforeach
+                @endif
+
             </div>
 
             <div class="form-check form-switch mb-5 mt-4">
