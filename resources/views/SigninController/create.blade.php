@@ -24,7 +24,7 @@ Sign in
                 @method('POST')
 
                 <div class="form-floating mb-3">
-                    <input type="text" name="credential" id="credential" class="form-control @error('credential') has-error @enderror" placeholder=" " value="{{old('credential')}}" @error('credential') autofocus @enderror>
+                    <input type="text" name="credential" id="credential" class="form-control @error('credential') has-error @enderror" placeholder=" " value="{{old('credential')}}" @error('credential') autofocus @enderror @error('system') autofocus @enderror>
                     <label for="credential" class="form-label">Email or @username</label>
                     @error('credential')
                     <div class="form-text text-danger">{{$message}}</div>
