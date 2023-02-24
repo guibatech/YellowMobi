@@ -8,19 +8,44 @@ Sign in
 
     @include('Components.navbar')
 
-    <form action="{{route('accounts.signin.do')}}" method="POST">
+    <div class="sign-container mt-4">
 
-        @csrf
-        @method('POST')
+        <div>
+            <hgroup class="mb-4 text-center">
+                <h1 class="display-3 fw-bold mb-2">Sign in</h1>
+                <h2 class="display-6 lh-14">Share yourself with the world.</h2>
+            </hgroup>
+        </div>
 
-        <label for="credential">Email or username</label>
-        <input type="text" name="credential" id="credential">
+        <div>
+            <form action="{{route('accounts.signin.do')}}" method="POST">
 
-        <label for="password">Password</label>
-        <input type="password" name="password" id="password">
+                @csrf
+                @method('POST')
 
-        <input type="submit" value="sign in">
+                <div class="form-floating mb-3">
+                    <input type="text" name="credential" id="credential" class="form-control @error('credential') has-error @enderror" placeholder=" ">
+                    <label for="credential" class="form-label">Email or username</label>
+                    @error('credential')
+                    <div class="form-text text-danger">{{$message}}</div>
+                    @enderror
+                </div>
 
-    </form>
+                <div class="form-floating mb-3">
+                    <input type="password" name="password" id="password" class="form-control @error('password') has-error @enderror" placeholder=" ">
+                    <label for="password" class="form-label">Password</label>
+                    @error('password')
+                    <div class="form-text text-danger">{{$message}}</div>
+                    @enderror
+                </div>
+
+                <div class="mt-3 text-center">
+                    <input type="submit" value="Sign in" class="btn btn-outline-primary">
+                </div>
+
+            </form>
+        </div>
+    
+    </div>
 
 @endsection

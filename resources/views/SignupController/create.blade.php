@@ -12,7 +12,7 @@ Sign up
 
     <div class="mb-4 text-center">
         <hgroup>
-            <h1 class="display-3 fw-bold mb-3">Sign up</h1>
+            <h1 class="display-3 fw-bold mb-2">Sign up</h1>
             <h2 class="display-6 lh-14">Get started by creating a <span class="fw-bold text-primary">{{config('app.name')}}</span> account.</h2>
         </hgroup>
     </div>
@@ -27,7 +27,7 @@ Sign up
                 <input type="text" class="form-control @error('name') has-error @enderror" name="name" id="name" value="{{old('name')}}" placeholder=" " @error('name') autofocus @enderror>
                 <label for="name" class="form-label">Name</label>
                 @error('name')
-                <div class="form-text text-danger">{{$message}}</div>
+                <p class="form-text text-danger">{{$message}}</p>
                 @enderror
             </div>
 
@@ -37,7 +37,7 @@ Sign up
                     <label for="dateOfBirth" class="form-label">Date of birth</label>
                 </div>
                 @error('dateOfBirth')
-                <div class="form-text text-danger">{{$message}}</div>
+                <p class="form-text text-danger">{{$message}}</p>
                 @enderror
                 <div class="form-text">You must be at least 18 years old.</div>
             </div>
@@ -48,7 +48,7 @@ Sign up
                     <label for="email" class="form-label">Email</label>
                 </div>
                 @error('email')
-                <div class="form-text text-danger">{{$message}}</div>
+                <p class="form-text text-danger">{{$message}}</p>
                 @enderror
                 <div class="form-text">We'll never share your email with anyone else.</div>
             </div>
@@ -62,7 +62,7 @@ Sign up
                     </div>
                 </div>
                 @error('username')
-                <div class="form-text text-danger">{{$message}}</div>
+                <p class="form-text text-danger">{{$message}}</p>
                 @enderror
             </div>
 
@@ -70,7 +70,7 @@ Sign up
                 <input type="password" class="form-control @error('password') has-error @enderror" name="password" id="password" placeholder=" " @error('password') autofocus @enderror>
                 <label for="password" class="form-label">Password</label>
                 @error('password')
-                <div class="form-text text-danger">{{$message}}</div>
+                <p class="form-text text-danger">{{$message}}</p>
                 @enderror
             </div>
 
@@ -78,7 +78,7 @@ Sign up
                 <input type="password" class="form-control @error('confirmPassword') has-error @enderror" name="confirmPassword" id="confirmPassword" placeholder=" " @error('confirmPassword') autofocus @enderror>
                 <label for="confirmPassword" class="form-label">Confirm password</label>
                 @error('confirmPassword')
-                <div class="form-text text-danger">{{$message}}</div>
+                <p class="form-text text-danger">{{$message}}</p>
                 @enderror
             </div>
 
