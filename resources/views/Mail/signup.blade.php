@@ -1,23 +1,31 @@
-<h1>Welcome to {{config('app.fantasy_name')}}!</h1>
+<div style="width: 500px; margin-top: 0px; margin-bottom: 0px; font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', 'Noto Sans', 'Liberation Sans', Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji'; text-align: justify;">
 
-<p>
-    Hi {{$name}} ({{'@'.$username}}), 
-</p>
+    <h1 style="font-weight: 700; font-size: 50px; margin-top: 0px; margin-bottom: 15px;">Welcome to <span style="color: yellow;">{{config('app.fantasy_name')}}</span>!</h1>
 
-<p>
-    You have created a {{config('app.name')}} account. To use it, sign in.
-</p>
+    <p style="font-size: 15px;">
+        Hi {{$name}} ({{'@'.$username}}), how are you?
+    </p>
 
-<p>
-    For security reasons, upon your first sign in, you will
-    likely need to activate your account so that we know
-    this email address is real and exists. If necessary,
-    use token <strong>{{$activationToken}}</strong>.
-</p>
+    <p style="font-size: 15px;">
+        You have recently created a {{config('app.name')}} account. 
+        Congratulations and welcome.
+    </p>
 
-<a href="{{route('accounts.signin')}}">Sign in</a>
+    <p style="font-size: 15px;">
+        For security reasons, when logging in to your account 
+        for first time, you will need to activate it so that 
+        we know that the email address you used when registering 
+        is real and belongs to you. Your activation token is 
+        <strong>{{$activationToken}}</strong>.
+    </p>
 
-<p>See you over there!</p>
+    <div style="margin: 45px 0px; text-align: center;">
+        <a href="{{route('accounts.signin')}}" style="background-color: white; padding: 10px 15px; border: 3px solid yellow; border-radius: 8px; text-decoration: none; color: yellow; font-weight: bold; font-size: 18px;">Activate my account</a>
+    </div>
 
-<p>Yours sincerely,</p>
-<p>{{config('app.name')}}.</p>
+    <p style="font-size: 15px;">See you over there!</p>
+
+    <p style="font-size: 15px;">Yours sincerely,</p>
+    <p style="font-size: 15px;">{{config('app.name')}}.</p>
+
+</div>
