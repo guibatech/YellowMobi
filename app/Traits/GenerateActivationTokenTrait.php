@@ -8,12 +8,12 @@ trait GenerateActivationTokenTrait {
 
         $newToken = 0;
         $secureToken = false;
-        $tries = 1;
-        $maximumTries = 20;
+        $attempts = 1;
+        $maximumAttempts = 20;
         
-        while (!$secureToken && $tries <= $maximumTries) {
+        while (!$secureToken && $attempts <= $maximumAttempts) {
 
-            $tries += 1;
+            $attempts += 1;
             $newToken = str_split(rand($minimum, $maximum), 1);
 
             foreach($newToken as $position => $digit) {
