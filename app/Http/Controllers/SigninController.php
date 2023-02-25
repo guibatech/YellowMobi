@@ -10,8 +10,11 @@ use App\Http\Requests\SigninRequest as SigninRequest;
 use Illuminate\Support\Facades\Auth as Auth;
 use App\Models\UserActivity as UserActivity;
 use \Exception as Exception;
+use App\Traits\GetCredentialTypeTrait as GetCredentialTypeTrait;
 
 class SigninController extends Controller {
+
+    use GetCredentialTypeTrait;
 
     public function create(): Response {
 
@@ -55,24 +58,6 @@ class SigninController extends Controller {
             ]);
 
         }
-
-    }
-
-    private function getCredentialType(string $value): string {
-
-        if (preg_match("/^[A-Za-z0-9_.]+([@][A-Za-z0-9]+){1}([.]{1}[A-Za-z0-9]{2,4})+$/", $value)) {
-
-            return "email";
-
-        }
-        
-        if (preg_match("/^[@]{1}[A-Za-z0-9_]+$/", $value)) {
-
-            return "username";
-
-        }
-
-        return "";
 
     }
 

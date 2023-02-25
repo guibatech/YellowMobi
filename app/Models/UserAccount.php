@@ -10,8 +10,11 @@ use App\Models\UserProfile as UserProfile;
 use Illuminate\Database\Eloquent\Relations\HasOne as HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany as HasMany;
 use App\Models\UserActivity as UserActivity;
+use App\Traits\GenerateActivationTokenTrait as GenerateActivationTokenTrait;
 
 class UserAccount extends Authenticatable {
+
+    use GenerateActivationTokenTrait;
 
     protected $table = "user_accounts";
     protected $primaryKey = "id";
@@ -20,38 +23,6 @@ class UserAccount extends Authenticatable {
     public function __construct() {
 
         $this->attributes['activation_token'] = $this->generateActivationToken(11111, 99999);
-
-    }
-
-    private function generateActivationToken(int $minimum, int $maximum): int {
-
-        $newToken = 0;
-        $secureToken = false;
-        $tries = 0;
-        
-        while (!$secureToken && $tries < 50) {
-
-            $tries += 1;    
-            $newToken = str_split(rand($minimum, $maximum), 1);
-
-            foreach($newToken as $position => $digit) {
-                
-                if ($position == 0) {
-                    continue;
-                }
-
-                if ($digit == $newToken[$position - 1]) {
-                    $secureToken = false;
-                } else {
-                    $secureToken = true;
-                    break;
-                }
-
-            }
-
-        }
-
-        return (int) implode("", $newToken);
 
     }
 
