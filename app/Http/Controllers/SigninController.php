@@ -60,19 +60,19 @@ class SigninController extends Controller {
 
     private function getCredentialType(string $value): string {
 
-        $credentialType = "";
-
         if (preg_match("/^[A-Za-z0-9_.]+([@][A-Za-z0-9]+){1}([.]{1}[A-Za-z0-9]{2,4})+$/", $value)) {
 
-            $credentialType = "email";
+            return "email";
 
-        } else if (preg_match("/^[@]{1}[A-Za-z0-9_]+$/", $value)) {
+        }
+        
+        if (preg_match("/^[@]{1}[A-Za-z0-9_]+$/", $value)) {
 
-            $credentialType = "username";
+            return "username";
 
         }
 
-        return $credentialType;
+        return "";
 
     }
 
