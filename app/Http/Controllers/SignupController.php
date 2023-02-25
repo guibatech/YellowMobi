@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth as Auth;
 use App\Jobs\SendWelcomeEmail as SendWelcomeEmail;
 use Illuminate\Http\Response as Response;
 use Illuminate\Http\RedirectResponse as RedirectResponse;
+use Illuminate\Support\Facades\Session as Session;
 
 class SignupController extends Controller {
 

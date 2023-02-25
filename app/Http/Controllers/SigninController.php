@@ -11,6 +11,8 @@ use Illuminate\Support\Facades\Auth as Auth;
 use App\Models\UserActivity as UserActivity;
 use \Exception as Exception;
 use App\Traits\GetCredentialTypeTrait as GetCredentialTypeTrait;
+use App\Models\UserAccount as UserAccount;
+use Illuminate\Support\Facades\Session as Session;
 
 class SigninController extends Controller {
 
@@ -32,6 +34,12 @@ class SigninController extends Controller {
 
                 $request->credential = trim($request->credential, '@');
 
+            }
+
+            $amountOfCredentials = UserAccount::where($credentialType, "=", $request->credential)->first();
+            if ($amountOfCredentials == null) {
+                Session::flash($credentialType, $request->credential);
+                return redirect()->route('accounts.signup');
             }
 
             if (!Auth::attempt([

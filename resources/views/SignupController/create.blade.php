@@ -44,7 +44,7 @@ Sign up
 
             <div class="mb-3">
                 <div class="form-floating">
-                    <input type="email" class="form-control @error('email') has-error @enderror" name="email" id="email" placeholder="example@example.com" value="{{old('email')}}" @error('email') autofocus @enderror>
+                    <input type="email" class="form-control @error('email') has-error @enderror" name="email" id="email" placeholder="example@example.com" @if(Session::has('email')) value="{{Session::get('email')}}" @else value="{{old('email')}}" @endif @error('email') autofocus @enderror>
                     <label for="email" class="form-label">Email</label>
                 </div>
                 @error('email')
@@ -57,7 +57,7 @@ Sign up
                 <div class="input-group">
                     <span class="input-group-text">@</span>
                     <div class="form-floating">
-                        <input type="text" class="form-control @error('username') has-error @enderror" name="username" id="username" value="{{old('username')}}" placeholder="@example" @error('username') autofocus @enderror>
+                        <input type="text" class="form-control @error('username') has-error @enderror" name="username" id="username" @if(Session::has('username')) value="{{Session::get('username')}}" @else value="{{old('username')}}" @endif placeholder="@example" @error('username') autofocus @enderror>
                         <label for="username" class="form-label">Username</label>
                     </div>
                 </div>
