@@ -8,7 +8,7 @@ Sign in
 
     @include('Components.header')
 
-    <main class="sign-container mt-4">
+    <main class="sign-container">
 
         <section>
 

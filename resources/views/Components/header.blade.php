@@ -1,4 +1,4 @@
-<header class="ps-4 pe-4 pt-3 d-flex align-items-center">
+<header class="ps-4 pe-4 pt-3 pb-3 d-flex align-items-center fixed-top bg-white">
 
     <div class="me-auto">
         <a href="{{route('explore')}}" class="fs-1 fw-bold text-decoration-none">{{config('app.fantasy_name')}}</a>
