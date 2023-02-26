@@ -15,8 +15,8 @@
             <ul class="dropdown-menu text-small shadow text-center">
                 <li><a class="dropdown-item cursor-pointer" href="#" target="_SELF" title="Access my profile ({{'@'.Auth::user()->username}}).">{{'@'.Auth::user()->username}}</a></li>
                 <li><a class="dropdown-item cursor-pointer" href="#" target="_SELF" title="Explore.">Explore</a></li>
-                <li><a class="dropdown-item cursor-pointer" href="#" target="_SELF" title="Notifications.">Notifications</a></li>
-                <li><a class="dropdown-item cursor-pointer" href="#" target="_SELF" title="Mentions to me.">Mentions</a></li>
+                <li><a class="dropdown-item cursor-pointer" href="#" target="_SELF" title="Notifications.">Notifications @if(true) <span class="badge text-bg-primary">999+</span> @endif</a></li>
+                <li><a class="dropdown-item cursor-pointer" href="#" target="_SELF" title="Mentions to me.">Mentions @if(true) <span class="badge text-bg-primary">999+</span> @endif</a></li>
                 <li></li>
                 <li><a class="dropdown-item cursor-pointer" href="#" target="_SELF" title="Configure my account.">Settings</a></li>
                 <li><hr class="dropdown-divider"></li>
