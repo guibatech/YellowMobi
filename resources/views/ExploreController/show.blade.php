@@ -6,7 +6,7 @@ Explore
 
 @section('body')
 
-    @include('Components.navbar')
+    @include('Components.header')
 
     @csrf
 

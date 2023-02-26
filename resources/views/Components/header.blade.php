@@ -1,10 +1,10 @@
-<nav class="ps-4 pe-4 pt-3 d-flex align-items-center">
+<header class="ps-4 pe-4 pt-3 d-flex align-items-center">
 
     <div class="me-auto">
         <a href="{{route('explore')}}" class="fs-1 fw-bold text-decoration-none">{{config('app.fantasy_name')}}</a>
     </div>
 
-    <div class="dropdown">
+    <nav class="dropdown">
 
         @if (Auth::check())
 
@@ -23,13 +23,13 @@
         @else
 
             @if (Route::currentRouteName() == 'accounts.signin')
-            <a href="{{route('accounts.signup')}}" target="_SELF" title="Sign up" class="btn btn-outline-primary">Sign up</a>
+                <a href="{{route('accounts.signup')}}" target="_SELF" title="Sign up" class="btn btn-outline-primary">Sign up</a>
             @else
                 <a href="{{route('accounts.signin')}}" target="_SELF" title="Sign in" class="btn btn-outline-primary">Sign in</a>
             @endif
 
         @endif
             
-    </div>
+    </nav>
 
-</nav>
+</header>
