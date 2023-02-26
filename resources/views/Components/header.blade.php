@@ -9,7 +9,7 @@
         @if (Auth::check())
 
             <a class="d-block text-decoration-none link-dark" data-bs-toggle="dropdown" aria-expanded="false">
-                <img src="https://avatars.githubusercontent.com/u/125931531?v=4" alt="mdo" class="photo-profile rounded-circle border border-2 border-primary">
+                <img src="https://avatars.githubusercontent.com/u/125931531?v=4" alt="mdo" class="photo-profile rounded-circle">
             </a>
                     
             <ul class="dropdown-menu text-small shadow" style="">
