@@ -11,7 +11,7 @@ class ActivateUserAccountController extends Controller {
 
     public function edit(): Response {
 
-        dd('show activate form.');
+        return response()->view('ActivateUserAccountController.edit', [], 200);
 
     }
 
