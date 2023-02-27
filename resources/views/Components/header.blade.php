@@ -10,7 +10,7 @@
 
             <nav class="dropdown">
 
-                <a class="d-block text-decoration-none link-dark" data-bs-toggle="dropdown" aria-expanded="false">
+                <a class="d-block text-decoration-none link-dark cursor-pointer" data-bs-toggle="dropdown" aria-expanded="false">
                     <img src="https://avatars.githubusercontent.com/u/125931531?v=4" alt="{{Auth::user()->profile->name}}" class="photo-profile rounded-circle">
                 </a>
                 
