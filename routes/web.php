@@ -5,7 +5,7 @@ use App\Http\Controllers\SignupController as SignupController;
 use App\Http\Controllers\ExploreController as ExploreController;
 use App\Http\Controllers\SigninController as SigninController;
 use App\Http\Controllers\SignoutController as SignoutController;
-use App\Http\Controllers\ActivateUserAccount as ActivateUserAccount;
+use App\Http\Controllers\ActivateUserAccountController as ActivateUserAccountController;
 
 /*
 |--------------------------------------------------------------------------
@@ -26,15 +26,15 @@ Route::post('/accounts/signup/do', [SignupController::class, 'store'])->name('ac
     'just.unauthenticated',
 ]);
 
-Route::get('/accounts/activate', [ActivateUserAccount::class, 'edit'])->name('accounts.activate')->middleware([
+Route::get('/accounts/activate', [ActivateUserAccountController::class, 'edit'])->name('accounts.activate')->middleware([
     'just.authenticated', 'only.non.activated.accounts',
 ]);
 
-Route::put('/accounts/activate/do', [ActivateUserAccount::class, 'update'])->name('accounts.activate.do')->middleware([
+Route::put('/accounts/activate/do', [ActivateUserAccountController::class, 'update'])->name('accounts.activate.do')->middleware([
     'just.authenticated', 'only.non.activated.accounts',
 ]);
 
-Route::get('/accounts/activate/resend', [ActivateUserAccount::class, 'resendActivationToken'])->name('accounts.activate.resend')->middleware([
+Route::get('/accounts/activate/resend', [ActivateUserAccountController::class, 'resendActivationToken'])->name('accounts.activate.resend')->middleware([
     'just.authenticated', 'only.non.activated.accounts',
 ]);
 

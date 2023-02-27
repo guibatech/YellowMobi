@@ -7,7 +7,7 @@ use Illuminate\Http\Request as Request;
 use Illuminate\Http\Response as Response;
 use Illuminate\Http\RedirectResponse as RedirectResponse;
 
-class ActivateUserAccount extends Controller {
+class ActivateUserAccountController extends Controller {
 
     public function edit(): Response {
 
