@@ -1,5 +1,7 @@
 <header id="globalHeader" class="bg-white">
 
+    @csrf
+
     <div class="d-flex align-items-center ps-4 pe-4 pt-3 pb-3">
 
         <div class="me-auto">
@@ -21,7 +23,7 @@
                     <li><a class="dropdown-item cursor-pointer" href="#" target="_SELF" title="Mentions to me.">Mentions @if(true) <span class="badge text-bg-danger">999+</span> @endif</a></li>
                     <li><a class="dropdown-item cursor-pointer" href="#" target="_SELF" title="Configure my account.">Settings</a></li>
                     <li><hr class="dropdown-divider"></li>
-                    <li><a class="dropdown-item cursor-pointer" target="_SELF" title="Sign out." id="btnSignin">Sign out</a></li>
+                    <li><a class="dropdown-item cursor-pointer" target="_SELF" title="Sign out." id="btnSignout">Sign out</a></li>
                 </ul>
         
             </nav>

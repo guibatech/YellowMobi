@@ -15,6 +15,5 @@ Explore
 @section('scripts')
 
     @vite('resources/js/header.js')
-    @vite('resources/js/explore.js')
 
 @endsection
