@@ -1,39 +1,50 @@
+
 $primary: yellow;
-$danger: rgb(240, 128, 128);
-$input-group-addon-bg: rgb(246, 246, 246);
-$input-group-addon-color: rgb(210, 210, 210);
-$input-focus-box-shadow: false;
-$form-label-color: rgb(210, 210, 210);
-$input-bg: rgb(246, 246, 246);
-$input-border-color: white;
-$input-border-width: 2px;
-$form-text-color: rgb(200, 200, 200);
-$form-check-input-focus-box-shadow: none;
-$form-check-input-border: 1px solid yellow;
+$danger: rgb(250, 128, 114);
+$input-bg-custom: rgb(245, 245, 245);
+$label-color-custom: rgb(200, 200, 200);
+$input-border-wide-thickness-custom: 3px;
+$input-border-narrow-thickness-custom: 1px;
+$input-shadow-custom: false;
+$input-border-radius-custom: 13px;
+$normal-font-color-custom: black;
+$btn-color-custom: white;
+
+$input-bg: $input-bg-custom;
+$input-border-width: $input-border-wide-thickness-custom;
+$input-border-color: $input-bg-custom;
+$input-focus-box-shadow: $input-shadow-custom;
+$input-border-radius: $input-border-radius-custom;
+
+$form-label-color: $label-color-custom;
+$form-text-color: $label-color-custom;
+
+$input-group-addon-bg: $input-bg-custom;
+$input-group-addon-color: $label-color-custom;
+
+$btn-border-width: $input-border-wide-thickness-custom;
+$btn-font-weight: bold;
+$btn-border-radius: $input-border-radius-custom;
+$link-hover-color: $primary;
+
+$form-check-input-focus-box-shadow: $input-shadow-custom;
+$form-check-input-border: $input-border-narrow-thickness-custom solid $primary;
+$form-check-input-focus-border: yellow;
 $form-check-input-bg: white;
 $form-switch-bg-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='yellow'/%3e%3c/svg%3e");
 $form-check-input-active-filter: brightness(100%);
-$input-border-radius: 12px;
-$btn-border-width: 2px;
-$btn-font-weight: bold;
-$link-hover-color: yellow;
-$dropdown-link-active-color: black;
-$dropdown-link-active-bg: yellow;
-$dropdown-link-hover-color: black;
-$dropdown-link-hover-bg: yellow;
-$dropdown-border-radius: 12px;
+
+$dropdown-link-active-color: $normal-font-color-custom;
+$dropdown-link-active-bg: $primary;
+$dropdown-link-hover-color: $normal-font-color-custom;
+$dropdown-link-hover-bg: $primary;
+$dropdown-border-radius: $input-border-radius-custom;
 
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";
 
 .lh-14 {
 
     line-height: 1.4;
-
-}
-
-.form-control.is-invalid:focus {
-
-    box-shadow: none;
 
 }
 
@@ -59,28 +70,23 @@ $dropdown-border-radius: 12px;
 
 }
 
-.btn-check:checked + .btn, :not(.btn-check) + .btn:active, .btn:first-child:active, .btn.active, .btn.show {
+.btn:hover {
 
-    color: white;
-    background-color: var(--bs-btn-active-bg);
-    border-color: var(--bs-btn-active-border-color);
+    color: $btn-color-custom;
 
 }
 
-.btn:hover {
-
-    color: white;
-    background-color: var(--bs-btn-active-bg);
-    border-color: var(--bs-btn-active-border-color);
+.btn-check:checked + .btn, :not(.btn-check) + .btn:active, .btn:first-child:active, .btn.active, .btn.show {
+    
+    color: $btn-color-custom;
 
 }
 
 .btn:focus-visible {
-    color: white;
-    background-color: var(--bs-btn-hover-bg);
-    border-color: var(--bs-btn-hover-border-color);
-    outline: 0;
+
+    color: $btn-color-custom;
     box-shadow: none;
+
 }
 
 .photo-profile {
@@ -92,13 +98,13 @@ $dropdown-border-radius: 12px;
 
 .has-error {
 
-    border: $input-border-width solid $danger;
+    border: $input-border-wide-thickness-custom solid $danger;
 
 }
 
 .has-error:focus {
 
-    border: $input-border-width solid $danger;
+    border: $input-border-wide-thickness-custom solid $danger;
 
 }
 
