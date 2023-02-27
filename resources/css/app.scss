@@ -186,3 +186,25 @@ $dropdown-border-radius: $input-border-radius-custom;
     top: -40%;
 
 }
+
+.input-activation-token {
+
+    color: $normal-font-color-custom;
+    font-size: 50px;
+    font-weight: bold;
+    width: 70px;
+    height: auto;
+    text-align: center;
+    background-color: $input-bg-custom;
+    border: $input-border-wide-thickness-custom solid $input-bg-custom;
+    border-radius: $input-border-radius-custom;
+    margin: 6px;
+
+}
+
+.input-activation-token:focus, .input-activation-token:active {
+
+    outline: none;
+    border-color: $primary;
+
+}
