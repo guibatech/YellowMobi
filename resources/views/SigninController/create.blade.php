@@ -79,3 +79,9 @@ Sign in
     </main>
 
 @endsection
+
+@section('scripts')
+
+    @vite('resources/js/header.js')
+
+@endsection

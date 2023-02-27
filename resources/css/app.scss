@@ -107,3 +107,76 @@ $dropdown-border-radius: 12px;
     cursor: pointer;
 
 }
+
+.showing-menu {
+
+    animation-name: showing-menu;
+    animation-duration: 0.8s;
+
+    @keyframes showing-menu {
+
+        from {
+            
+            position: fixed;
+            top: -40%;
+            
+        } to {
+            
+            height: 72px;
+            position: fixed;
+            top: 0%;
+            left: 0%;
+            width: 100%;
+            z-index: 99999;
+
+        }
+
+    }
+
+
+}
+
+.show-menu {
+
+    height: 72px;
+    position: fixed;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    z-index: 99999;
+
+}
+
+.hiding-menu {
+
+    animation-name: hiding-menu;
+    animation-duration: 0.8s;
+
+    @keyframes hiding-menu {
+
+        from {
+
+            height: 72px;
+            position: fixed;
+            top: 0%;
+            left: 0%;
+            width: 100%;
+            z-index: 99999;
+            
+        } to {
+
+            position: fixed;
+            top: -40%;
+
+        }
+
+    }
+        
+}
+
+.hide-menu {
+    
+    position: fixed;
+    top: -40%;
+
+}

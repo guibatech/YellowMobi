@@ -175,3 +175,9 @@ Sign up
     </main>
 
 @endsection
+
+@section('scripts')
+
+    @vite('resources/js/header.js')
+
+@endsection
