@@ -30,14 +30,14 @@ Activate your account
 
                     <div class="d-flex flex-wrap justify-content-center">
                             
-                        @foreach(str_split(Auth::user()->activation_token, 1) as $digitPosition => $digit)
-                            <input type="text" id="digit_{{$digitPosition}}" name="digit_{{$digitPosition}}" class="input-activation-token" maxlength="1" @if($digitPosition == 0) autofocus @endif>
+                        @foreach(str_split(Auth::user()->activation_token, 1) as $position => $digit)
+                            <input type="text" id="_{{$position}}" name="_{{$position}}" class="input-activation-token" maxlength="1" @if($position == 0) autofocus @endif>
                         @endforeach
                         
                     </div>
 
                     <div class="mt-3 text-center">
-                        <input type="submit" value="Ready" title="Ready" class="btn btn-outline-primary">
+                        <input type="submit" value="Ready" title="Ready" id="btnReady" class="btn btn-outline-primary" hidden>
                     </div>
 
                     <div class="mt-3 text-center">
@@ -69,5 +69,6 @@ Activate your account
 @section('scripts')
 
     @vite('resources/js/header.js')
+    @vite('resources/js/activate.js')
 
 @endsection
