@@ -1,14 +1,14 @@
 let position = 0;
-let digit = 0;
+let digit;
 const btnReady = document.querySelector("#btnReady");
 
-while ((digit = document.querySelector(`#_${position}`)) != null) {
+while ((digit = document.querySelector(`#digit_${position}`)) != null) {
 
     digit.addEventListener('keyup', function(event) {
 
         if (event.key.match("^[0-9]$") != null) {
         
-            let nextDigit = document.querySelector(`#_${parseInt(event.target.id.replace('_', '')) + 1}`);
+            let nextDigit = document.querySelector(`#digit_${parseInt(event.target.id.replace('digit_', '')) + 1}`);
             if (nextDigit != null) {
                 nextDigit.focus();
                 nextDigit.select();
@@ -18,7 +18,7 @@ while ((digit = document.querySelector(`#_${position}`)) != null) {
 
         } else if (event.key == "Backspace") {
 
-            let previousDigit = document.querySelector(`#_${parseInt(event.target.id.replace('_', '')) - 1}`);
+            let previousDigit = document.querySelector(`#digit_${parseInt(event.target.id.replace('digit_', '')) - 1}`);
             if (previousDigit != null) {
                 previousDigit.focus();
                 previousDigit.select();

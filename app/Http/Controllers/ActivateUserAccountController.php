@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller as Controller;
 use Illuminate\Http\Request as Request;
 use Illuminate\Http\Response as Response;
 use Illuminate\Http\RedirectResponse as RedirectResponse;
+use App\Http\Requests\ActivationRequest as ActivationRequest;
 
 class ActivateUserAccountController extends Controller {
 
@@ -15,7 +16,7 @@ class ActivateUserAccountController extends Controller {
 
     }
 
-    public function update(Request $request): RedirectResponse {
+    public function update(ActivationRequest $request): RedirectResponse {
 
         dd('activate account of authenticated user', $request);
 

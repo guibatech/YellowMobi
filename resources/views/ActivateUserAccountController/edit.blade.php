@@ -31,7 +31,7 @@ Activate your account
                     <div class="d-flex flex-wrap justify-content-center">
                             
                         @foreach(str_split(Auth::user()->activation_token, 1) as $position => $digit)
-                            <input type="text" id="_{{$position}}" name="_{{$position}}" class="input-activation-token" maxlength="1" @if($position == 0) autofocus @endif>
+                            <input type="text" id="digit_{{$position}}" name="digit_{{$position}}" class='input-activation-token @error("digit_{$position}") has-error @enderror' maxlength="1" value='{{old("digit_{$position}")}}' @error("digit_{$position}") autofocus @enderror>
                         @endforeach
                         
                     </div>

@@ -98,13 +98,13 @@ $dropdown-border-radius: $input-border-radius-custom;
 
 .has-error {
 
-    border: $input-border-wide-thickness-custom solid $danger;
+    border: $input-border-wide-thickness-custom solid $danger !important;
 
 }
 
 .has-error:focus {
 
-    border: $input-border-wide-thickness-custom solid $danger;
+    border: $input-border-wide-thickness-custom solid $danger !important;
 
 }
 
