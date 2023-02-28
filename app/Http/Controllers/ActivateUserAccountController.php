@@ -25,23 +25,21 @@ class ActivateUserAccountController extends Controller {
 
         try {
             
-            $digits = [];
+            $reconstructedToken = "";
         
             foreach ($request->input() as $inputName => $inputValue) {
 
                 if (preg_match("/^(digit_){1}[0-9]+$/", $inputName)) {
 
-                    $digits[$inputName] = $inputValue;
+                    $reconstructedToken .= $inputValue;
 
                 }
 
             }
 
-            $digits = implode("", $digits);
+            if ($reconstructedToken != Auth::user()->activation_token) {
 
-            if ($digits != Auth::user()->activation_token) {
-
-                UserActivity::quickActivity("Invalid activation attempt.", "Activation attempt with invalid token. Token: {$digits}.", Auth::user()->id);
+                UserActivity::quickActivity("Invalid activation attempt.", "Activation attempt with invalid token. Token: {$reconstructedToken}.", Auth::user()->id);
 
                 return redirect()->back()->withInput()->withErrors([
                     'system' => "Invalid activation token.",
@@ -52,8 +50,7 @@ class ActivateUserAccountController extends Controller {
             Auth::user()->activation_at = new DateTime('now');
             Auth::user()->save();
 
-            $activationToken = Auth::user()->activation_token;
-            UserActivity::quickActivity('Account activated.', "Account was activated with token {$activationToken}.", Auth::user()->id);
+            UserActivity::quickActivity('Account activated.', "Account was activated with token {$reconstructedToken}.", Auth::user()->id);
 
             Session::flash("activated-account", "Congratulations! Your account has been activated.");
         
