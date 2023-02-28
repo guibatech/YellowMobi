@@ -10,13 +10,28 @@ Sign up
 
     <main class="sign-container">
 
-        <section class="mb-4 text-center">
+        <section class="mb-4">
 
-            <hgroup>
+            <hgroup class="text-center">
                 <h1 class="display-3 fw-bold mb-2">Sign up</h1>
                 <h2 class="display-6 lh-14">Get started by creating a <span class="fw-bold text-primary">{{config('app.name')}}</span> account.</h2>
             </hgroup>
         
+        </section>
+
+        <section class="mb-4">
+
+            @if($errors->has('system'))
+                
+                @foreach($errors->get('system') as $error)
+                <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                    <div>{{$error}}</div>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                @endforeach
+
+            @endif
+
         </section>
 
         <section>
@@ -135,24 +150,15 @@ Sign up
                     <input type="submit" value="Ready" title="Ready" class="btn btn-outline-primary">
                 </div>
 
-                <div class="mt-3 text-center">
-
-                    <div>
-                        @if($errors->has('system'))
-                            @foreach($errors->get('system') as $error)
-                            <div>
-                                <p class="form-text text-danger">{{$error}}</p>
-                            </div>    
-                            @endforeach
-                        @endif
-                    </div>
+                <div class="mt-3">
 
                     <div>
                         @if($errors->has('agree'))
                             @foreach($errors->get('agree') as $error)
-                            <div>
-                                <p class="form-text text-danger">{{$error}}</p>
-                            </div>    
+                            <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                                <div>{{$error}}</div>
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>   
                             @endforeach
                         @endif
                     </div>

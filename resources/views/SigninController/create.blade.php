@@ -10,13 +10,28 @@ Sign in
 
     <main class="sign-container">
 
-        <section>
+        <section class="mb-4">
 
-            <hgroup class="mb-4 text-center">
+            <hgroup class="text-center">
                 <h1 class="display-3 fw-bold mb-2">Sign in</h1>
                 <h2 class="display-6 lh-14">Share yourself with the world.</h2>
             </hgroup>
         
+        </section>
+
+        <section class="mb-4">
+
+            @if($errors->has('system'))
+
+                @foreach($errors->get('system') as $error)
+                <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                    <div>{{$error}}</div>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+                @endforeach
+            
+            @endif
+
         </section>
 
         <section>
@@ -60,16 +75,6 @@ Sign in
 
                 <div class="mt-3 text-center">
                     <input type="submit" value="Sign in" title="Sign in" class="btn btn-outline-primary">
-                </div>
-                
-                <div class="mt-3 text-center">
-                    @if($errors->has('system'))
-                        @foreach($errors->get('system') as $error)
-                        <div>
-                            <p class="form-text text-danger">{{$error}}</p>
-                        </div>    
-                        @endforeach
-                    @endif
                 </div>
 
             </form>

@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\Auth as Auth;
 use \DateTime as DateTime;
 use App\Models\UserActivity as UserActivity;
 use Illuminate\Support\Facades\Session as Session;
+use \Exception as Exception;
 
 class ActivateUserAccountController extends Controller {
 
@@ -22,39 +23,49 @@ class ActivateUserAccountController extends Controller {
 
     public function update(ActivationRequest $request): RedirectResponse {
 
-        $digits = [];
+        try {
+            
+            $digits = [];
         
-        foreach ($request->input() as $inputName => $inputValue) {
+            foreach ($request->input() as $inputName => $inputValue) {
 
-            if (preg_match("/^(digit_){1}[0-9]+$/", $inputName)) {
+                if (preg_match("/^(digit_){1}[0-9]+$/", $inputName)) {
 
-                $digits[$inputName] = $inputValue;
+                    $digits[$inputName] = $inputValue;
+
+                }
 
             }
 
-        }
+            $digits = implode("", $digits);
 
-        $digits = implode("", $digits);
+            if ($digits != Auth::user()->activation_token) {
 
-        if ($digits != Auth::user()->activation_token) {
+                UserActivity::quickActivity("Invalid activation attempt.", "Activation attempt with invalid token. Token: {$digits}.", Auth::user()->id);
 
-            UserActivity::quickActivity("Invalid activation attempt.", "Activation attempt with invalid token. Token: {$digits}.", Auth::user()->id);
+                return redirect()->back()->withInput()->withErrors([
+                    'system' => "Invalid activation token.",
+                ]);
+
+            }
+
+            Auth::user()->activation_at = new DateTime('now');
+            Auth::user()->save();
+
+            $activationToken = Auth::user()->activation_token;
+            UserActivity::quickActivity('Account activated.', "Account was activated with token {$activationToken}.", Auth::user()->id);
+
+            Session::flash("activated-account", "Congratulations! Your account has been activated.");
+        
+            return redirect()->route('explore');
+
+        } catch (Exception $e) {
 
             return redirect()->back()->withInput()->withErrors([
-                'system' => "Invalid activation token.",
+                'system' => 'Unable to activate your account.',
             ]);
 
-        }
-
-        Auth::user()->activation_at = new DateTime('now');
-        Auth::user()->save();
-
-        $activationToken = Auth::user()->activation_token;
-        UserActivity::quickActivity('Account activated.', "Account was activated with token {$activationToken}.", Auth::user()->id);
-
-        Session::flash("activated-account", "Congratulations! Your account has been activated.");
-        
-        return redirect()->route('explore');
+        }   
 
     }
 
