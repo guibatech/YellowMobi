@@ -10,6 +10,7 @@ use App\Http\Requests\ActivationRequest as ActivationRequest;
 use Illuminate\Support\Facades\Auth as Auth;
 use \DateTime as DateTime;
 use App\Models\UserActivity as UserActivity;
+use Illuminate\Support\Facades\Session as Session;
 
 class ActivateUserAccountController extends Controller {
 
@@ -51,6 +52,8 @@ class ActivateUserAccountController extends Controller {
         $activationToken = Auth::user()->activation_token;
         UserActivity::quickActivity('Account activated.', "Account was activated with token {$activationToken}.", Auth::user()->id);
 
+        Session::flash("activated-account", "Congratulations! Your account has been activated.");
+        
         return redirect()->route('explore');
 
     }
