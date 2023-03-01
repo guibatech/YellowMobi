@@ -13,11 +13,11 @@ use App\Models\UserActivity as UserActivity;
 use Illuminate\Support\Facades\Session as Session;
 use \Exception as Exception;
 
-class ActivateUserAccountController extends Controller {
+class ActivateController extends Controller {
 
     public function edit(): Response {
 
-        return response()->view('ActivateUserAccountController.edit', [], 200);
+        return response()->view('ActivateController.edit', [], 200);
 
     }
 
