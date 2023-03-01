@@ -8,6 +8,7 @@ use Illuminate\Bus\Queueable as Queueable;
 use Illuminate\Support\Facades\Mail as Mail;
 use App\Mail\SignupMail as SignupMail;
 use App\Models\UserActivity as UserActivity;
+use \Throwable as Throwable;
 
 class SendWelcomeEmail implements ShouldQueue {
 
@@ -35,7 +36,13 @@ class SendWelcomeEmail implements ShouldQueue {
 
         Mail::to($this->email)->send(new SignupMail($this->name, $this->username, $this->activationToken));
         
-        UserActivity::quickActivity("Sending account activation token.", "The token {$this->activationToken} was sent to the email {$this->email}.", $this->userId);
+        UserActivity::quickActivity("The activation token {$this->activationToken} was sent to the email {$this->email}.", "The activation token {$this->activationToken} was sent to the email {$this->email}.", $this->userId);
+
+    }
+
+    public function failed(Throwable $exception): void {
+
+        UserActivity::quickActivity("Sending activation token {$this->activationToken} to email {$this->email} failed.", "Sending activation token {$this->activationToken} to email {$this->email} failed.", $this->userId);
 
     }
 

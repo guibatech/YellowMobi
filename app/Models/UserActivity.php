@@ -12,6 +12,8 @@ class UserActivity extends Model {
     protected $primaryKey = "id";
     public $timestamps = true;
 
+    public function __construct() {}
+
     public static function quickActivity(string $activity, ?string $details, int $userId): void {
 
         $userActivity = new UserActivity();

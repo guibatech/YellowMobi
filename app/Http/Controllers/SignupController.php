@@ -13,8 +13,12 @@ use App\Jobs\SendWelcomeEmail as SendWelcomeEmail;
 use Illuminate\Http\Response as Response;
 use Illuminate\Http\RedirectResponse as RedirectResponse;
 use Illuminate\Support\Facades\Session as Session;
+use App\Traits\GenerateActivationTokenTrait as GenerateActivationTokenTrait;
+use \DateTime as DateTime;
 
 class SignupController extends Controller {
+
+    use GenerateActivationTokenTrait;
 
     public function create(): Response {
 
@@ -30,6 +34,8 @@ class SignupController extends Controller {
             $userAccount->email = $request->email;
             $userAccount->username = $request->username;
             $userAccount->password = $request->password;
+            $userAccount->activation_token = $this->generateActivationToken(11111, 99999);
+            $userAccount->activation_token_requested_at = new DateTime("now");
             $userAccount->save();
 
             $userProfile = new UserProfile();
@@ -38,7 +44,8 @@ class SignupController extends Controller {
             $userProfile->name = $request->name;
             $userProfile->save();
 
-            UserActivity::quickActivity("Created.", "Created.", $userAccount->id);
+            UserActivity::quickActivity("Account created.", "Account created.", $userAccount->id);
+            UserActivity::quickActivity("A activation token was requested. Token: {$userAccount->activation_token}.", "A activation token was requested. Token: {$userAccount->activation_token}.", $userAccount->id);
 
             if (!Auth::attempt([
                 'username' => $request->username,

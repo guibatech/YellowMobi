@@ -12,6 +12,8 @@ class UserProfile extends Model {
     protected $primaryKey = 'id';
     public $timestamps = false;
 
+    public function construct() {}
+
     public function user(): BelongsTo {
 
         return $this->belongsTo(UserAccount::class, 'user_id', 'id');

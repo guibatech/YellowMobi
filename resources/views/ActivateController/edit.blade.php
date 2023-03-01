@@ -32,6 +32,15 @@ Activate your account
             
             @endif
 
+            @if(Session::has('resend'))
+
+                <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                    <div>{{Session::get('resend')}}</div>
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            
+            @endif
+
         </section>
 
         <section>
@@ -52,7 +61,7 @@ Activate your account
                     </div>
 
                     <div class="mt-3 text-center">
-                        <input type="submit" value="Ready" title="Ready" id="btnReady" class="btn btn-outline-primary" hidden>
+                        <input type="submit" value="Ready" title="Ready" id="btnReady" class="btn btn-outline-primary">
                     </div>
 
                 </form>

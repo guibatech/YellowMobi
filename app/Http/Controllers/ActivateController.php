@@ -12,8 +12,12 @@ use \DateTime as DateTime;
 use App\Models\UserActivity as UserActivity;
 use Illuminate\Support\Facades\Session as Session;
 use \Exception as Exception;
+use App\Traits\GenerateActivationTokenTrait as GenerateActivationTokenTrait;
+use App\Jobs\SendWelcomeEmail as SendWelcomeEmail;
 
 class ActivateController extends Controller {
+
+    use GenerateActivationTokenTrait;
 
     public function edit(): Response {
 
@@ -68,8 +72,40 @@ class ActivateController extends Controller {
 
     public function resendActivationToken(): RedirectResponse {
 
-        dd('create and resend a new activation token to authenticated user..');
+        try {
+            
+            $lastRequest = strtotime("now") - strtotime(Auth::user()->activation_token_requested_at);
+            $secondsToWait = 180;
 
+            if ($lastRequest < $secondsToWait) {
+
+                $timeLeft = date("i:s", ($secondsToWait - $lastRequest));
+                return redirect()->back()->withInput()->withErrors([
+                    'system' => "Wait {$timeLeft} to request a new activation token.",
+                ]);
+
+            }
+
+            $newToken = $this->generateActivationToken(11111, 99999);
+            Auth::user()->activation_token = $newToken;
+            Auth::user()->activation_token_requested_at = new DateTime("now");
+            Auth::user()->save();
+
+            UserActivity::quickActivity("Resend: a activation token was requested. Token: {$newToken}.", "Resend: a activation token was requested. Token: {$newToken}.", Auth::user()->id);
+
+            SendWelcomeEmail::dispatch(Auth::user()->email, Auth::user()->profile->name, Auth::user()->username, $newToken, Auth::user()->id);
+            Session::flash('resend', 'A new activation token has been sent to your email.');
+
+            return redirect()->back()->withInput();
+
+        } catch(Exception $e) {
+
+            return redirect()->back()->withInput()->withErrors([
+                'system' => 'Unable to generate a new activation token. Try again later.',
+            ]);
+
+        }
+        
     }
 
 }

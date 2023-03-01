@@ -10,21 +10,14 @@ use App\Models\UserProfile as UserProfile;
 use Illuminate\Database\Eloquent\Relations\HasOne as HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany as HasMany;
 use App\Models\UserActivity as UserActivity;
-use App\Traits\GenerateActivationTokenTrait as GenerateActivationTokenTrait;
 
 class UserAccount extends Authenticatable {
-
-    use GenerateActivationTokenTrait;
 
     protected $table = "user_accounts";
     protected $primaryKey = "id";
     public $timestamps = true;
 
-    public function __construct() {
-
-        $this->attributes['activation_token'] = $this->generateActivationToken(11111, 99999);
-
-    }
+    public function __construct() {}
 
     public function password(): Attribute {
 
