@@ -47,6 +47,8 @@ class SignupController extends Controller {
             UserActivity::quickActivity("Account created.", "Account created.", $userAccount->id);
             UserActivity::quickActivity("A activation token was requested. Token: {$userAccount->activation_token}.", "A activation token was requested. Token: {$userAccount->activation_token}.", $userAccount->id);
 
+            SendWelcomeEmail::dispatch($userAccount->email, $userProfile->name, $userAccount->username, $userAccount->activation_token, $userAccount->id)->onQueue('default');
+            
             if (!Auth::attempt([
                 'username' => $request->username,
                 'password' => $request->password,
@@ -59,8 +61,6 @@ class SignupController extends Controller {
             }
 
             UserActivity::quickActivity('Logged in (automatic).', 'Logged in (automatic).', Auth::user()->id);
-
-            SendWelcomeEmail::dispatch($userAccount->email, $userProfile->name, $userAccount->username, $userAccount->activation_token, $userAccount->id)->onQueue('default');
             
             return redirect()->route('explore');
 
