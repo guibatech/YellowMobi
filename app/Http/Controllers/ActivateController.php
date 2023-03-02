@@ -93,7 +93,7 @@ class ActivateController extends Controller {
 
             UserActivity::quickActivity("Resend: a activation token was requested. Token: {$newToken}.", "Resend: a activation token was requested. Token: {$newToken}.", Auth::user()->id);
 
-            SendWelcomeEmail::dispatch(Auth::user()->email, Auth::user()->profile->name, Auth::user()->username, $newToken, Auth::user()->id);
+            SendWelcomeEmail::dispatch(Auth::user()->email, Auth::user()->profile->name, Auth::user()->username, $newToken, Auth::user()->id)->onQueue('default');
             Session::flash('resend', 'A new activation token has been sent to your email.');
 
             return redirect()->back()->withInput();
