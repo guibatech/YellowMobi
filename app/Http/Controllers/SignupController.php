@@ -15,10 +15,11 @@ use Illuminate\Http\RedirectResponse as RedirectResponse;
 use Illuminate\Support\Facades\Session as Session;
 use App\Traits\GenerateActivationTokenTrait as GenerateActivationTokenTrait;
 use \DateTime as DateTime;
+use App\Traits\SigninTrait as SigninTrait;
 
 class SignupController extends Controller {
 
-    use GenerateActivationTokenTrait;
+    use GenerateActivationTokenTrait, SigninTrait;
 
     public function create(): Response {
 
@@ -27,7 +28,7 @@ class SignupController extends Controller {
     }
 
     public function store(SignupRequest $request): RedirectResponse {
-
+        
         try {
             
             $userAccount = new UserAccount();
@@ -37,39 +38,26 @@ class SignupController extends Controller {
             $userAccount->activation_token = $this->generateActivationToken(11111, 99999);
             $userAccount->activation_token_requested_at = new DateTime("now");
             $userAccount->save();
-
+            
             $userProfile = new UserProfile();
             $userProfile->date_of_birth = $request->dateOfBirth;
             $userProfile->user_id = $userAccount->id;
             $userProfile->name = $request->name;
             $userProfile->save();
-
+            
             UserActivity::quickActivity("Account created.", "Account created.", $userAccount->id);
             UserActivity::quickActivity("A activation token was requested. Token: {$userAccount->activation_token}.", "A activation token was requested. Token: {$userAccount->activation_token}.", $userAccount->id);
-
+            
             SendWelcomeEmail::dispatch($userAccount->email, $userProfile->name, $userAccount->username, $userAccount->activation_token, $userAccount->id)->onQueue('default');
             
-            if (!Auth::attempt([
-                'username' => $request->username,
-                'password' => $request->password,
-            ])) {
-
-                return redirect()->back()->withInput()->withErrors([
-                    'system' => 'Unable to signin.',
-                ]);
-
-            }
-
-            UserActivity::quickActivity('Logged in (automatic).', 'Logged in (automatic).', Auth::user()->id);
+            return $this->signinAttempt('@'.$userAccount->username, $request->password, "explore", "Unable to signin.", "Logged in (automatic).", "Logged in (automatic).");
             
-            return redirect()->route('explore');
-
         } catch (Exception $e) {
-
+            
             return redirect()->back()->withInput()->withErrors([
                 'system' => "There was some problem. Try again later.",
             ]);
-
+        
         }
 
     }

@@ -13,10 +13,12 @@ use \Exception as Exception;
 use App\Traits\GetCredentialTypeTrait as GetCredentialTypeTrait;
 use App\Models\UserAccount as UserAccount;
 use Illuminate\Support\Facades\Session as Session;
+use App\Traits\SigninTrait as SigninTrait;
+use App\Traits\ClearUsernameTrait as ClearUsernameTrait;
 
 class SigninController extends Controller {
 
-    use GetCredentialTypeTrait;
+    use GetCredentialTypeTrait, SigninTrait, ClearUsernameTrait;
 
     public function create(): Response {
 
@@ -29,44 +31,33 @@ class SigninController extends Controller {
         try {
             
             $credentialType = $this->getCredentialType($request->credential);
-
+            
             if ($credentialType == 'username') {
-
-                $request->credential = trim($request->credential, '@');
-
+                
+                $request->credential = $this->clearUsername($request->credential);
+                
             }
-
+            
             $amountOfCredentials = UserAccount::where($credentialType, "=", $request->credential)->first();
+            
             if ($amountOfCredentials == null) {
+                
                 Session::flash($credentialType, $request->credential);
+                
                 return redirect()->route('accounts.signup');
+                
             }
-
-            if (!Auth::attempt([
-                $credentialType => $request->credential,
-                'password' => $request->password,
-            ])) {
-
-                return redirect()->back()->withInput()->withErrors([
-                    "system" => "Invalid {$credentialType} or password.",
-                ]);
-
-            } else {
-
-                UserActivity::quickActivity('Logged in (manual).', 'Logged in (manual).', Auth::user()->id);
-
-                return redirect()->route('explore');
-
-            }
-
+            
+            return $this->signinAttempt($request->input('credential'), $request->password, 'explore', "Invalid {$credentialType} or password.", "Logged in (manual).", "Logged in (manual).");
+            
         } catch (Exception $e) {
-
+                
             return redirect()->back()->withInput()->withErrors([
                 "system" => "There was some problem. Try again later.",
             ]);
-
+                    
         }
-
+                    
     }
 
 }
