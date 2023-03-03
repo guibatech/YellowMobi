@@ -43,7 +43,7 @@ Activate your account
 
         </section>
 
-        <section>
+        <section class="mb-5">
 
             <div>
 
@@ -68,7 +68,7 @@ Activate your account
 
             </div>
 
-            <div class="mt-3 text-center mb-5">
+            <div class="mt-3 text-center">
 
                 <a href="{{route('accounts.activate.resend')}}" title="Resend token">Resend token</a>
 

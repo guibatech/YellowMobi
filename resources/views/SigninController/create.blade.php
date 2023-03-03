@@ -34,7 +34,7 @@ Sign in
 
         </section>
 
-        <section>
+        <section class="mb-4">
 
             <form action="{{route('accounts.signin.do')}}" method="POST">
 
@@ -79,6 +79,10 @@ Sign in
 
             </form>
 
+        </section>
+
+        <section class="mb-4 text-center">
+            <a href="{{route('accounts.forgot')}}" title="Forgot your password?">Forgot your password?</a>
         </section>
     
     </main>

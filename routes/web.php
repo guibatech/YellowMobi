@@ -6,6 +6,8 @@ use App\Http\Controllers\ExploreController as ExploreController;
 use App\Http\Controllers\SigninController as SigninController;
 use App\Http\Controllers\SignoutController as SignoutController;
 use App\Http\Controllers\ActivateController as ActivateController;
+use App\Http\Controllers\ForgotController as ForgotController;
+use App\Http\Controllers\PasswordController as PasswordController;
 
 /*
 |--------------------------------------------------------------------------
@@ -52,4 +54,20 @@ Route::delete('/accounts/signout/do', [SignoutController::class, 'destroy'])->na
 
 Route::get('/', [ExploreController::class, 'show'])->name('explore')->middleware([
     'just.authenticated', 'only.activated.accounts',
+]);
+
+Route::get("/accounts/forgot", [ForgotController::class, 'create'])->name('accounts.forgot')->middleware([
+    'just.unauthenticated',
+]);
+
+Route::post("/accounts/forgot/do", [ForgotController::class, 'store'])->name('accounts.forgot.do')->middleware([
+    'just.unauthenticated',
+]);
+
+Route::get("/accounts/password/{token}", [PasswordController::class, "edit"])->name('accounts.password')->middleware([
+    'just.unauthenticated',
+]);
+
+Route::put("/accounts/password/{token}/do", [PasswordController::class, "update"])->name('accounts.password.do')->middleware([
+    'just.unauthenticated',
 ]);
