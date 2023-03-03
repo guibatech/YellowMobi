@@ -34,7 +34,7 @@ Sign in
 
         </section>
 
-        <section class="mb-4">
+        <section class="mb-4 text-center">
 
             <form action="{{route('accounts.signin.do')}}" method="POST">
 
@@ -73,7 +73,7 @@ Sign in
                     </div>
                 </div>
 
-                <div class="mt-3 text-center">
+                <div class="mt-3">
                     <input type="submit" value="Sign in" title="Sign in" class="btn btn-outline-primary">
                 </div>
 
