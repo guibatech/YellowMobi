@@ -40,7 +40,7 @@ Recover
                 @method('POST')
 
                 <div class="form-floating">
-                    <input type="text" name="credential" id="credential" class="form-control" placeholder=" ">
+                    <input type="text" name="credential" id="credential" class="form-control @error('credential') has-error @enderror" placeholder=" " @error('credential') autofocus @enderror value="{{old('credential')}}">
                     <label for="credential" class="form-label">Email or @username</label>
                 </div>
                 <div>
