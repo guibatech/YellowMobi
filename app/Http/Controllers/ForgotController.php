@@ -7,8 +7,12 @@ use Illuminate\Http\Response as Response;
 use Illuminate\Http\RedirectResponse as RedirectResponse;
 use Illuminate\Http\Request as Request;
 use App\Http\Requests\ForgotRequest as ForgotRequest;
+use App\Traits\GetCredentialTypeTrait as GetCredentialTypeTrait;
+use App\Traits\ClearUsernameTrait as ClearUsernameTrait;
 
 class ForgotController extends Controller {
+
+    use GetCredentialTypeTrait, ClearUsernameTrait;
 
     public function create(): Response {
 
@@ -18,9 +22,12 @@ class ForgotController extends Controller {
 
     public function store(ForgotRequest $request): RedirectResponse {
 
-        // Checar se o campo da credencial está preenchido e é válido
-        // Checar se a credencial é email ou username
-        // Se for username, retirar o @
+        if ($this->getCredentialType($request->credential) == "username") {
+
+            $request->credential = $this->clearUsername($request->credential);
+
+        }
+
         // Checar se a credencial existe
         // Gerar um token seguro de redefinição de senha com validade
         // Guardar o token gerado no banco de dados
