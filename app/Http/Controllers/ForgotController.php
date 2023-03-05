@@ -9,10 +9,19 @@ use Illuminate\Http\Request as Request;
 use App\Http\Requests\ForgotRequest as ForgotRequest;
 use App\Traits\GetCredentialTypeTrait as GetCredentialTypeTrait;
 use App\Traits\ClearUsernameTrait as ClearUsernameTrait;
+use App\Models\UserAccount as UserAccount;
 
 class ForgotController extends Controller {
 
     use GetCredentialTypeTrait, ClearUsernameTrait;
+
+    private string $appName;
+
+    public function __construct() {
+
+        $this->appName = config('app.name');
+
+    }
 
     public function create(): Response {
 
@@ -22,13 +31,24 @@ class ForgotController extends Controller {
 
     public function store(ForgotRequest $request): RedirectResponse {
 
-        if ($this->getCredentialType($request->credential) == "username") {
+        $credentialType = $this->getCredentialType($request->credential); 
+
+        if ($credentialType == "username") {
 
             $request->credential = $this->clearUsername($request->credential);
 
         }
 
-        // Checar se a credencial existe
+        $userFound = UserAccount::where($credentialType, "=", $request->credential)->first();
+
+        if ($userFound == null) {
+
+            return redirect()->back()->withInput()->withErrors([
+                'system' => "The {$credentialType} provided is not a {$this->appName} account.",
+            ]);
+
+        }
+
         // Gerar um token seguro de redefinição de senha com validade
         // Guardar o token gerado no banco de dados
         // enviar o token por email para o endereço de email vinculado à conta do usuário
