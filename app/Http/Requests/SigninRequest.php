@@ -28,7 +28,7 @@ class SigninRequest extends FormRequest {
     public function messages(): array {
 
         return [
-            'credential.required' => 'Enter your email or username.',
+            'credential.required' => 'Enter your email or @username.',
             'password.required' => 'Enter your password.',
         ];
 
