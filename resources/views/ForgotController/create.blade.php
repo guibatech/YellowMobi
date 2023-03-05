@@ -32,7 +32,7 @@ Recover
 
         </section>
 
-        <section class="mb-4 text-center">
+        <section class="mb-4">
 
             <form action="{{route('accounts.forgot.do')}}" method="POST">
 
@@ -53,7 +53,7 @@ Recover
                     @endif
                 </div>
 
-                <div class="mt-3">
+                <div class="mt-3 text-center">
                     <input type="submit" value="Ready" title="Ready" class="btn btn-outline-primary">
                 </div>
 
