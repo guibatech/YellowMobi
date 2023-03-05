@@ -23,11 +23,11 @@ class DatabaseSizeExplosionProtection implements ValidationRule {
 
             if ($this->fantasyName != null) {
 
-                $fail("The {$this->fantasyName} field value can only have a maximum of {$this->fieldSize} characters.");
+                $fail("The {$this->fantasyName} can only have a maximum of {$this->fieldSize} characters.");
 
             } else {
 
-                $fail("The {$attribute} field value can only have a maximum of {$this->fieldSize} characters.");
+                $fail("The {$attribute} can only have a maximum of {$this->fieldSize} characters.");
 
             }
 
