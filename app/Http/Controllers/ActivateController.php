@@ -34,7 +34,7 @@ class ActivateController extends Controller {
 
             if ($reconstructedToken != Auth::user()->activation_token) {
 
-                UserActivity::quickActivity("Invalid activation attempt.", "Activation attempt with invalid token. Token: {$reconstructedToken}.", Auth::user()->id);
+                UserActivity::quickActivity("Account activation attempt with invalid token. Token: {$reconstructedToken}.", "Account activation attempt with invalid token. Token: {$reconstructedToken}.", Auth::user()->id);
 
                 return redirect()->back()->withInput()->withErrors([
                     'system' => "Invalid activation token.",
@@ -45,7 +45,7 @@ class ActivateController extends Controller {
             Auth::user()->activation_at = new DateTime('now');
             Auth::user()->save();
 
-            UserActivity::quickActivity('Account activated.', "Account was activated with token {$reconstructedToken}.", Auth::user()->id);
+            UserActivity::quickActivity("Account was activated with token {$reconstructedToken}.", "Account was activated with token {$reconstructedToken}.", Auth::user()->id);
 
             Session::flash("activated-account", "Congratulations! Your account has been activated.");
         
