@@ -20,7 +20,7 @@ Welcome to <span style="color: yellow;">{{config('app.fantasy_name')}}</span>!
 </p>
 
 <div style="margin: 45px 0px; text-align: center;">
-    <a href="{{route('accounts.activate')}}" style="background-color: white; padding: 10px 15px; border: 3px solid yellow; border-radius: 8px; text-decoration: none; color: yellow; font-weight: bold; font-size: 18px;">Activate my account</a>
+    <a href="{{route('accounts.activate')}}" style="background-color: white; padding: 10px 15px; border: 3px solid yellow; border-radius: 8px; text-decoration: none; color: yellow; font-weight: bold; font-size: 18px;" target="_BLANK">Activate my account</a>
 </div>
 
 @endsection

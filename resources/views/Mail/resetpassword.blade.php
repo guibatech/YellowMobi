@@ -25,7 +25,7 @@ Shall we reset your password?
 </p>
 
 <div style="margin: 45px 0px; text-align: center;">
-    <a href="{{route('accounts.password', ['token' => $passwordResetToken])}}" style="background-color: white; padding: 10px 15px; border: 3px solid yellow; border-radius: 8px; text-decoration: none; color: yellow; font-weight: bold; font-size: 18px;">Reset my password</a>
+    <a href="{{route('accounts.password', ['token' => $passwordResetToken])}}" style="background-color: white; padding: 10px 15px; border: 3px solid yellow; border-radius: 8px; text-decoration: none; color: yellow; font-weight: bold; font-size: 18px;" target="_BLANK">Reset my password</a>
 </div>
 
 @endsection
