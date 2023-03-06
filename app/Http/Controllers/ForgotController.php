@@ -14,10 +14,11 @@ use App\Traits\TokenTrait as TokenTrait;
 use \DateTime as DateTime;
 use App\Models\UserActivity as UserActivity;
 use App\Jobs\SendResetPasswordEmail as SendResetPasswordEmail;
+use App\Traits\TimeTrait as TimeTrait;
 
 class ForgotController extends Controller {
 
-    use GetCredentialTypeTrait, ClearUsernameTrait, TokenTrait;
+    use GetCredentialTypeTrait, ClearUsernameTrait, TokenTrait, TimeTrait;
 
     private string $appName;
 
@@ -34,7 +35,7 @@ class ForgotController extends Controller {
     }
     
     public function store(ForgotRequest $request): RedirectResponse {
-        
+
         $credentialType = $this->getCredentialType($request->credential); 
         
         if ($credentialType == "username") {
@@ -53,6 +54,16 @@ class ForgotController extends Controller {
             
         }
         
+        $remainingTime = $this->remainingTime($userFound->forgot_token_requested_at, 180);
+
+        if ($remainingTime != null) {
+
+            return redirect()->back()->withInput()->withErrors([
+                'system' => $remainingTime,
+            ]);
+
+        }
+
         $newToken = $this->generateToken(60);
         
         $userFound->forgot_token = $newToken;
@@ -63,8 +74,8 @@ class ForgotController extends Controller {
         
         SendResetPasswordEmail::dispatch($userFound->profile->name, $userFound->username, $newToken, $userFound->email, $userFound->id)->onQueue("default");
 
-        // Evitar SPAM de geração de token.
         // protect with try catch.
+        // redirecionar o usuário para login.
 
         dd("Generate reset token.", $request);
 
