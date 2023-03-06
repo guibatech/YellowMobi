@@ -9,7 +9,7 @@ export default defineConfig({
                 'resources/js/app.js',
                 'node_modules/bootstrap/dist/js/bootstrap.bundle.js',
                 'resources/js/header.js',
-                'resources/js/activate.js',
+                'resources/js/token.js',
             ],
             refresh: true,
         }),

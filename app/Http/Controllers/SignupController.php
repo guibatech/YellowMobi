@@ -13,13 +13,13 @@ use App\Jobs\SendWelcomeEmail as SendWelcomeEmail;
 use Illuminate\Http\Response as Response;
 use Illuminate\Http\RedirectResponse as RedirectResponse;
 use Illuminate\Support\Facades\Session as Session;
-use App\Traits\GenerateActivationTokenTrait as GenerateActivationTokenTrait;
+use App\Traits\TokenTrait as TokenTrait;
 use \DateTime as DateTime;
 use App\Traits\SigninTrait as SigninTrait;
 
 class SignupController extends Controller {
 
-    use GenerateActivationTokenTrait, SigninTrait;
+    use TokenTrait, SigninTrait;
 
     public function create(): Response {
 
@@ -35,7 +35,7 @@ class SignupController extends Controller {
             $userAccount->email = $request->email;
             $userAccount->username = $request->username;
             $userAccount->password = $request->password;
-            $userAccount->activation_token = $this->generateActivationToken(11111, 99999);
+            $userAccount->activation_token = $this->generateToken(5);
             $userAccount->activation_token_requested_at = new DateTime("now");
             $userAccount->save();
             

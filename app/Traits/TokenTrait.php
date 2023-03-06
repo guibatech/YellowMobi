@@ -2,6 +2,9 @@
 
 namespace App\Traits;
 
+use App\Rules\DatabaseSizeExplosionProtection as DatabaseSizeExplosionProtection;
+use App\Rules\ValidateTokenDigit as ValidateTokenDigit;
+
 trait TokenTrait {
 
     public function generateToken(int $size): string {
@@ -24,6 +27,42 @@ trait TokenTrait {
         }
 
         return $token;
+
+    }
+
+    public function tokenValidations(array $parameters): array {
+
+        $rules = [];
+
+        foreach ($parameters as $key => $value) {
+            
+            if (preg_match("/^(d_){1}[0-9]+$/", $key)) {
+                
+                $rules[$key] = [new ValidateTokenDigit(), 'bail', new DatabaseSizeExplosionProtection(1, null), 'bail',];
+    
+            }
+            
+        }
+
+        return $rules;
+
+    }
+
+    public function rebuildToken(array $digits): string {
+
+        $reconstructedToken = "";
+
+        foreach($digits as $key => $value) {
+
+            if (preg_match("/^(d_){1}[0-9]+$/", $key)) {
+
+                $reconstructedToken .= $value;
+
+            }
+
+        }
+
+        return $reconstructedToken;
 
     }
 

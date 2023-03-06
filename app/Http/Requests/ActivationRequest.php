@@ -3,10 +3,11 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest as FormRequest;
-use App\Rules\DatabaseSizeExplosionProtection as DatabaseSizeExplosionProtection;
-use App\Rules\JustNumbers as JustNumbers;
+use App\Traits\TokenTrait as TokenTrait;
 
 class ActivationRequest extends FormRequest {
+
+    use TokenTrait;
 
     protected $stopOnFirstFailure = true;
 
@@ -17,20 +18,8 @@ class ActivationRequest extends FormRequest {
     }
 
     public function rules(): array {
-
-        $rules = [];
         
-        foreach ($this->request as $inputName => $inputValue) {
-
-            if (preg_match("/^(digit_){1}[0-9]+$/", $inputName)) {
-
-                $rules[$inputName] = ['required', 'bail', new DatabaseSizeExplosionProtection(1, null), 'bail', new JustNumbers()];
-
-            }
-
-        }
-
-        return $rules;
+        return $this->tokenValidations($this->all());
 
     }
 

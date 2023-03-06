@@ -45,28 +45,11 @@ Activate your account
 
         <section class="mb-5">
 
-            <div>
-
-                <form action="{{route('accounts.activate.do')}}" method="POST">
-
-                    @csrf
-                    @method('PUT')
-
-                    <div class="d-flex flex-wrap justify-content-center">
-                            
-                        @foreach(str_split(Auth::user()->activation_token, 1) as $position => $digit)
-                            <input type="text" id="digit_{{$position}}" name="digit_{{$position}}" class='input-activation-token @error("digit_{$position}") has-error @enderror' maxlength="1" value='{{old("digit_{$position}")}}' @error("digit_{$position}") autofocus @enderror>
-                        @endforeach
-                        
-                    </div>
-
-                    <div class="mt-3 text-center">
-                        <input type="submit" value="Ready" title="Ready" id="btnReady" class="btn btn-outline-primary">
-                    </div>
-
-                </form>
-
-            </div>
+            @include('Components.token', [
+                'destinationRoute' => "accounts.activate.do",
+                'destinationMethod' => "PUT",
+                'token' => Auth::user()->activation_token,
+            ])
 
             <div class="mt-3 text-center">
 
@@ -83,6 +66,6 @@ Activate your account
 @section('scripts')
 
     @vite('resources/js/header.js')
-    @vite('resources/js/activate.js')
+    @vite('resources/js/token.js')
 
 @endsection

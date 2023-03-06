@@ -12,12 +12,12 @@ use \DateTime as DateTime;
 use App\Models\UserActivity as UserActivity;
 use Illuminate\Support\Facades\Session as Session;
 use \Exception as Exception;
-use App\Traits\GenerateActivationTokenTrait as GenerateActivationTokenTrait;
+use App\Traits\TokenTrait as TokenTrait;
 use App\Jobs\SendWelcomeEmail as SendWelcomeEmail;
 
 class ActivateController extends Controller {
 
-    use GenerateActivationTokenTrait;
+    use TokenTrait;
 
     public function edit(): Response {
 
@@ -29,17 +29,7 @@ class ActivateController extends Controller {
 
         try {
             
-            $reconstructedToken = "";
-        
-            foreach ($request->input() as $inputName => $inputValue) {
-
-                if (preg_match("/^(digit_){1}[0-9]+$/", $inputName)) {
-
-                    $reconstructedToken .= $inputValue;
-
-                }
-
-            }
+            $reconstructedToken = $this->rebuildToken($request->all());
 
             if ($reconstructedToken != Auth::user()->activation_token) {
 
@@ -86,7 +76,7 @@ class ActivateController extends Controller {
 
             }
 
-            $newToken = $this->generateActivationToken(11111, 99999);
+            $newToken = $this->generateToken(5);
             Auth::user()->activation_token = $newToken;
             Auth::user()->activation_token_requested_at = new DateTime("now");
             Auth::user()->save();
