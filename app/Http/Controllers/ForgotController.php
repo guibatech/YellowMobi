@@ -13,6 +13,7 @@ use App\Models\UserAccount as UserAccount;
 use App\Traits\TokenTrait as TokenTrait;
 use \DateTime as DateTime;
 use App\Models\UserActivity as UserActivity;
+use App\Mail\ResetPasswordMail as ResetPasswordMail;
 
 class ForgotController extends Controller {
 
@@ -52,7 +53,7 @@ class ForgotController extends Controller {
             
         }
         
-        $newToken = $this->generateToken(5);
+        $newToken = $this->generateToken(60);
         
         $userFound->forgot_token = $newToken;
         $userFound->forgot_token_requested_at = new DateTime("now");
@@ -60,10 +61,12 @@ class ForgotController extends Controller {
         
         UserActivity::quickActivity("A password reset token was requested. Token: {$newToken}.", "A password reset token was requested. Token: {$newToken}.", $userFound->id);
         
+        return new ResetPasswordMail($userFound->profile->name, $userFound->username, $newToken);
         // enviar o token por email para o endereço de email vinculado à conta do usuário
         // Registrar o envio do e-mail
 
         // Evitar SPAM de geração de token.
+        // protect with try catch.
 
         dd("Generate reset token.", $request);
 
