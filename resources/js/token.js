@@ -3,6 +3,16 @@ let digit;
 
 while ((digit = document.querySelector(`#d_${position}`)) != null) {
 
+    digit.addEventListener('keydown', function(event) {
+
+        if (!event.key.match("^[A-Za-z0-9]{1}$") && event.key != 'Backspace') {
+
+            event.preventDefault();
+            
+        }         
+    
+    });
+
     digit.addEventListener("keyup", function(event) {
 
         if (event.key.match("^[A-Za-z0-9]{1}$")) {
@@ -13,6 +23,7 @@ while ((digit = document.querySelector(`#d_${position}`)) != null) {
             if (nextDigit != null) {
 
                 nextDigit.focus();
+                nextDigit.select();
 
             } else {
                 
@@ -32,16 +43,19 @@ while ((digit = document.querySelector(`#d_${position}`)) != null) {
             if (previousDigit != null) {
 
                 previousDigit.focus();
-                previousDigit.value = "";
+                previousDigit.select();
 
             }
 
             return;
 
-        } 
-        
-        this.value = "";
-        return;
+        }
+
+    });
+
+    digit.addEventListener('click', function(event) {
+
+        this.select();
 
     });
 
