@@ -61,8 +61,7 @@ class ForgotController extends Controller {
         
         UserActivity::quickActivity("A password reset token was requested. Token: {$newToken}.", "A password reset token was requested. Token: {$newToken}.", $userFound->id);
         
-        SendResetPasswordEmail::dispatch($userFound->profile->name, $userFound->username, $newToken, $userFound->email)->onQueue("default");
-        // Registrar o envio do e-mail
+        SendResetPasswordEmail::dispatch($userFound->profile->name, $userFound->username, $newToken, $userFound->email, $userFound->id)->onQueue("default");
 
         // Evitar SPAM de geração de token.
         // protect with try catch.
