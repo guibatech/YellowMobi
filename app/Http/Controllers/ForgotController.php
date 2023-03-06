@@ -10,10 +10,11 @@ use App\Http\Requests\ForgotRequest as ForgotRequest;
 use App\Traits\GetCredentialTypeTrait as GetCredentialTypeTrait;
 use App\Traits\ClearUsernameTrait as ClearUsernameTrait;
 use App\Models\UserAccount as UserAccount;
+use App\Traits\TokenTrait as TokenTrait;
 
 class ForgotController extends Controller {
 
-    use GetCredentialTypeTrait, ClearUsernameTrait;
+    use GetCredentialTypeTrait, ClearUsernameTrait, TokenTrait;
 
     private string $appName;
 
@@ -49,9 +50,12 @@ class ForgotController extends Controller {
 
         }
 
-        // Gerar um token seguro de redefinição de senha com validade
+        $newToken = $this->generateToken(6);
+
+        // Registrar a geração do token.
         // Guardar o token gerado no banco de dados
         // enviar o token por email para o endereço de email vinculado à conta do usuário
+        // Registrar o envio do e-mail
 
         // Evitar SPAM de geração de token.
 
