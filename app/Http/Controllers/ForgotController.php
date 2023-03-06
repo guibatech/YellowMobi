@@ -16,6 +16,7 @@ use App\Models\UserActivity as UserActivity;
 use App\Jobs\SendResetPasswordEmail as SendResetPasswordEmail;
 use App\Traits\TimeTrait as TimeTrait;
 use \Exception as Exception;
+use Illuminate\Support\Facades\Session as Session;
 
 class ForgotController extends Controller {
 
@@ -39,7 +40,7 @@ class ForgotController extends Controller {
 
         try {
             
-            $cyredentialType = $this->getCredentialType($request->credential);
+            $credentialType = $this->getCredentialType($request->credential);
 
             if ($credentialType == "username") {
             
@@ -77,9 +78,9 @@ class ForgotController extends Controller {
             
             SendResetPasswordEmail::dispatch($userFound->profile->name, $userFound->username, $newToken, $userFound->email, $userFound->id)->onQueue("default");
             
-            // redirecionar o usuário para login.
-    
-            dd("Generate reset token.", $request);    
+            Session::flash('success', 'A new password reset token has been sent to your email.');
+
+            return redirect()->back()->withInput();
 
         } catch (Exception $e) {
 
