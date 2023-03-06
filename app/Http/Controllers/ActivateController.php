@@ -90,7 +90,7 @@ class ActivateController extends Controller {
         } catch(Exception $e) {
 
             return redirect()->back()->withInput()->withErrors([
-                'system' => 'Unable to generate a new activation token. Try again later.',
+                'system' => 'Unable to generate a new account activation token. Try again later.',
             ]);
 
         }
