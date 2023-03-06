@@ -14,10 +14,11 @@ use Illuminate\Support\Facades\Session as Session;
 use \Exception as Exception;
 use App\Traits\TokenTrait as TokenTrait;
 use App\Jobs\SendWelcomeEmail as SendWelcomeEmail;
+use App\Traits\TimeTrait as TimeTrait;
 
 class ActivateController extends Controller {
 
-    use TokenTrait;
+    use TokenTrait, TimeTrait;
 
     public function edit(): Response {
 
@@ -64,14 +65,12 @@ class ActivateController extends Controller {
 
         try {
             
-            $lastRequest = strtotime("now") - strtotime(Auth::user()->activation_token_requested_at);
-            $secondsToWait = 180;
+            $remainingTime = $this->remainingTime(Auth::user()->activation_token_requested_at, 180);
 
-            if ($lastRequest < $secondsToWait) {
+            if ($remainingTime != null) {
 
-                $timeLeft = date("i:s", ($secondsToWait - $lastRequest));
                 return redirect()->back()->withInput()->withErrors([
-                    'system' => "Wait {$timeLeft} to request a new activation token.",
+                    'system' => $remainingTime,
                 ]);
 
             }
