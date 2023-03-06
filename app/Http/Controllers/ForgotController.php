@@ -15,6 +15,7 @@ use \DateTime as DateTime;
 use App\Models\UserActivity as UserActivity;
 use App\Jobs\SendResetPasswordEmail as SendResetPasswordEmail;
 use App\Traits\TimeTrait as TimeTrait;
+use \Exception as Exception;
 
 class ForgotController extends Controller {
 
@@ -36,49 +37,58 @@ class ForgotController extends Controller {
     
     public function store(ForgotRequest $request): RedirectResponse {
 
-        $credentialType = $this->getCredentialType($request->credential); 
-        
-        if ($credentialType == "username") {
+        try {
             
-            $request->credential = $this->clearUsername($request->credential);
+            $cyredentialType = $this->getCredentialType($request->credential);
+
+            if ($credentialType == "username") {
             
-        }
-        
-        $userFound = UserAccount::where($credentialType, "=", $request->credential)->first();
-        
-        if ($userFound == null) {
+                $request->credential = $this->clearUsername($request->credential);
+                
+            }
             
+            $userFound = UserAccount::where($credentialType, "=", $request->credential)->first();
+            
+            if ($userFound == null) {
+                
+                return redirect()->back()->withInput()->withErrors([
+                    'system' => "The {$credentialType} provided is not a {$this->appName} account.",
+                ]);
+                
+            }
+            
+            $remainingTime = $this->remainingTime($userFound->forgot_token_requested_at, 180);
+    
+            if ($remainingTime != null) {
+    
+                return redirect()->back()->withInput()->withErrors([
+                    'system' => $remainingTime,
+                ]);
+    
+            }
+    
+            $newToken = $this->generateToken(60);
+            
+            $userFound->forgot_token = $newToken;
+            $userFound->forgot_token_requested_at = new DateTime("now");
+            $userFound->save();
+            
+            UserActivity::quickActivity("A password reset token was requested. Token: {$newToken}.", "A password reset token was requested. Token: {$newToken}.", $userFound->id);
+            
+            SendResetPasswordEmail::dispatch($userFound->profile->name, $userFound->username, $newToken, $userFound->email, $userFound->id)->onQueue("default");
+            
+            // redirecionar o usuário para login.
+    
+            dd("Generate reset token.", $request);    
+
+        } catch (Exception $e) {
+
             return redirect()->back()->withInput()->withErrors([
-                'system' => "The {$credentialType} provided is not a {$this->appName} account.",
-            ]);
-            
-        }
-        
-        $remainingTime = $this->remainingTime($userFound->forgot_token_requested_at, 180);
-
-        if ($remainingTime != null) {
-
-            return redirect()->back()->withInput()->withErrors([
-                'system' => $remainingTime,
+                'system' => 'Unable to generate a new password reset token. Try again later.',
             ]);
 
-        }
-
-        $newToken = $this->generateToken(60);
+        } 
         
-        $userFound->forgot_token = $newToken;
-        $userFound->forgot_token_requested_at = new DateTime("now");
-        $userFound->save();
-        
-        UserActivity::quickActivity("A password reset token was requested. Token: {$newToken}.", "A password reset token was requested. Token: {$newToken}.", $userFound->id);
-        
-        SendResetPasswordEmail::dispatch($userFound->profile->name, $userFound->username, $newToken, $userFound->email, $userFound->id)->onQueue("default");
-
-        // protect with try catch.
-        // redirecionar o usuário para login.
-
-        dd("Generate reset token.", $request);
-
     }
 
 }
