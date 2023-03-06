@@ -36,13 +36,13 @@ class SendWelcomeEmail implements ShouldQueue {
 
         Mail::to($this->email)->send(new SignupMail($this->name, $this->username, $this->activationToken));
         
-        UserActivity::quickActivity("The activation token {$this->activationToken} was sent to the email {$this->email}.", "The activation token {$this->activationToken} was sent to the email {$this->email}.", $this->userId);
+        UserActivity::quickActivity("Account activation token {$this->activationToken} has been successfully sent to {$this->email} email.", "Account activation token {$this->activationToken} has been successfully sent to {$this->email} email.", $this->userId);
 
     }
 
     public function failed(Throwable $exception): void {
 
-        UserActivity::quickActivity("Sending activation token {$this->activationToken} to email {$this->email} failed.", "Sending activation token {$this->activationToken} to email {$this->email} failed.", $this->userId);
+        UserActivity::quickActivity("Sending account activation token {$this->activationToken} to {$this->email} email failed.", "Sending account activation token {$this->activationToken} to {$this->email} email failed.", $this->userId);
 
     }
 
