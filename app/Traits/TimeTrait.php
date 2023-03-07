@@ -23,14 +23,26 @@ trait TimeTrait {
         }
 
         return null;
-
+        
     }
-
-    public function pastTime(string $lastRequest): ?DateTime {
-
+    
+    public function elapsedTime(?string $lastRequest, int $maximumSeconds): bool {
+        
+        if ($lastRequest == null) {
+            
+            return true;
+            
+        }
+        
         $pastTimeInSeconds = strtotime("now") - strtotime($lastRequest);
 
-        dd($lastRequest, $pastTimeInSeconds, strtotime("now"), strtotime($lastRequest));
+        if ($pastTimeInSeconds > $maximumSeconds) {
+
+            return false;
+
+        }
+
+        return true;
 
     }
 
