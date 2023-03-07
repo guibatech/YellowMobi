@@ -7,8 +7,13 @@ use Illuminate\Http\Response as Response;
 use Illuminate\Http\RedirectResponse as RedirectResponse;
 use Illuminate\Http\Request as Request;
 use App\Models\UserAccount as UserAccount;
+use App\Traits\TimeTrait as TimeTrait;
+use App\Models\UserActivity as UserActivity;
+use Illuminate\Support\Facades\Session as Session;
 
 class PasswordController extends Controller {
+
+    use TimeTrait;
 
     public function edit(string $token, Request $request): Response {
 
@@ -21,17 +26,48 @@ class PasswordController extends Controller {
 
     public function update(Request $request, string $token): RedirectResponse {
 
-        $userFound = UserAccount::where("forgot_token", "=", $token)->first();
+        try {
 
-        if ($userFound == null) {
+            $userFound = UserAccount::where("forgot_token", "=", $token)->first();
+
+            if ($userFound == null) {
+
+                return redirect()->back()->withInput()->withErrors([
+                    'system' => 'Invalid password reset token.',
+                ]);
+
+            }
+
+            $elapsedTime = $this->elapsedTime($userFound->forgot_token_requested_at, 3600);
+
+            if (!$elapsedTime) {
+
+                return redirect()->back()->withInput()->withErrors([
+                    'system' => 'This password reset token is expired. Please, generate a new one.',
+                ]);
+
+            }
+
+            $userFound->password = $request->password;
+            $userFound->save();
+
+            UserActivity::quickActivity("The account access password has been reset. Password: {$userFound->password}.", "The account access password has been reset. Password: {$userFound->password}.", $userFound->id);
+
+            $userFound->forgot_token = null;
+            $userFound->forgot_token_requested_at = null;
+            $userFound->save();
+
+            Session::flash("success", "The account access password has been reset.");
+            
+            return redirect()->route('accounts.signin')->withInput();
+
+        } catch(Exception $e) {
 
             return redirect()->back()->withInput()->withErrors([
-                'system' => 'Invalid password reset token.',
+                'system' => 'Unable to reset your password.',
             ]);
 
         }
-
-        dd($userFound, $token, $request);
 
     }
 
