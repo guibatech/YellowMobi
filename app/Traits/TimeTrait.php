@@ -9,9 +9,8 @@ trait TimeTrait {
         $pastTimeInSeconds = strtotime("now") - strtotime($lastRequest);
 
         if ($pastTimeInSeconds < $secondsToWait) {
-
-            $timeLeft = date("i:s", ($secondsToWait - $pastTimeInSeconds));
-            return "Wait {$timeLeft} to request a new token.";
+            
+            return date("i:s", ($secondsToWait - $pastTimeInSeconds));
 
         }
 

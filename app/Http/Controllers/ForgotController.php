@@ -63,7 +63,7 @@ class ForgotController extends Controller {
             if ($remainingTime != null) {
     
                 return redirect()->back()->withInput()->withErrors([
-                    'system' => $remainingTime,
+                    'system' => "Wait {$remainingTime} to request a new password reset token.",
                 ]);
     
             }
