@@ -17,11 +17,43 @@ class PasswordController extends Controller {
     use TimeTrait;
 
     public function edit(string $token, Request $request): Response {
+        
+        try {
 
-        return response()->view('PasswordController.edit', [
-            'token' => $token,
-            'validToken' => true,
-        ], 200);
+            $userFound = UserAccount::where('forgot_token', '=', $token)->first();
+
+            if ($userFound == null) {            
+                
+                return response()->view('PasswordController.edit', [
+                    'token' => $token,
+                    'errorBag' => "Invalid password reset token.",
+                ], 200);
+            
+            }
+            
+            $elapsedTime = $this->elapsedTime($userFound->forgot_token_requested_at, 3600);
+            
+            if (!$elapsedTime) {
+
+                return response()->view('PasswordController.edit', [
+                    'token' => $token,
+                    'errorBag' => "This password reset token is expired. Please, generate a new one.",
+                ], 200);
+
+            }
+
+            return response()->view('PasswordController.edit', [
+                'token' => $token,
+            ], 200);
+
+        } catch (Exception $e) {
+
+            return response()->view('PasswordController.edit', [
+                'token' => $token,
+                'errorBag' => "Unable to reset your password.",
+            ], 200);
+
+        }
 
     }
 

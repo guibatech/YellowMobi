@@ -24,65 +24,72 @@ Password
             @if($errors->has('system'))
 
                 @foreach($errors->get('system') as $error)
+                    <div class="alert alert-primary alert-dismissible fade show" role="alert">
+                        <div>{{$error}}</div>
+                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                    </div>
+                @endforeach
+
+            @elseif(isset($errorBag))
 
                 <div class="alert alert-primary alert-dismissible fade show" role="alert">
-                    <div>{{$error}}</div>
+                    <div>{{$errorBag}}</div>
                     <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
                 </div>
-
-                @endforeach
 
             @endif
 
         </section>
 
-        @if($validToken)
-        <section class="mb-4">
+        @if(!isset($errorBag))
 
-            <form action="{{route('accounts.password.do', ['token' => $token])}}" method="POST">
+            <section class="mb-4">
 
-                @csrf
-                @method('PUT')
+                <form action="{{route('accounts.password.do', ['token' => $token])}}" method="POST">
 
-                <div class="mb-3">
-                    <div class="form-floating">
-                        <input type="password" name="password" id="password" class="form-control @error('password') has-error @enderror" placeholder=" " value="{{old('password')}}" @error('password') autofocus @enderror>
-                        <label for="password" class="form-label">Password</label>
+                    @csrf
+                    @method('PUT')
+
+                    <div class="mb-3">
+                        <div class="form-floating">
+                            <input type="password" name="password" id="password" class="form-control @error('password') has-error @enderror" placeholder=" " value="{{old('password')}}" @error('password') autofocus @enderror>
+                            <label for="password" class="form-label">Password</label>
+                        </div>
+                        <div>
+                            @if($errors->has('password'))
+                                @foreach($errors->get('password') as $error)
+                                    <div>
+                                        <p class="form-text text-danger">{{$error}}</p>
+                                    </div>
+                                @endforeach
+                            @endif
+                        </div>
                     </div>
-                    <div>
-                        @if($errors->has('password'))
-                            @foreach($errors->get('password') as $error)
-                            <div>
-                                <p class="form-text text-danger">{{$error}}</p>
-                            </div>
-                            @endforeach
-                        @endif
+
+                    <div class="mb-3">
+                        <div class="form-floating">
+                            <input type="password" name="confirmPassword" id="confirmPassword" class="form-control @error('confirmPassword') has-error @enderror" placeholder=" " value="{{old('confirmPassword')}}" @error('confirmPassword') autofocus @enderror>
+                            <label for="confirmPassword" class="form-label">Confirm password</label>
+                        </div>
+                        <div>
+                            @if($errors->has('confirmPassword'))
+                                @foreach($errors->get('confirmPassword') as $error)
+                                    <div>
+                                        <p class="form-text text-danger">{{$error}}</p>
+                                    </div>
+                                @endforeach
+                            @endif
+                        </div>
                     </div>
-                </div>
 
-                <div class="mb-3">
-                    <div class="form-floating">
-                        <input type="password" name="confirmPassword" id="confirmPassword" class="form-control @error('confirmPassword') has-error @enderror" placeholder=" " value="{{old('confirmPassword')}}" @error('confirmPassword') autofocus @enderror>
-                        <label for="confirmPassword" class="form-label">Confirm password</label>
+                    <div class="text-center mt-3">
+                        <input type="submit" value="Reset password" title="Reset password" class="btn btn-outline-primary">
                     </div>
-                    <div>
-                        @if($errors->has('confirmPassword'))
-                            @foreach($errors->get('confirmPassword') as $error)
-                            <div>
-                                <p class="form-text text-danger">{{$error}}</p>
-                            </div>
-                            @endforeach
-                        @endif
-                    </div>
-                </div>
 
-                <div class="text-center mt-3">
-                    <input type="submit" value="Reset password" title="Reset password" class="btn btn-outline-primary">
-                </div>
+                </form>
 
-            </form>
-
-        </section>
+            </section>
+        
         @endif
 
     </main>
