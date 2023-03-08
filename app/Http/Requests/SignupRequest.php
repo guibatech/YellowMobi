@@ -37,7 +37,7 @@ class SignupRequest extends FormRequest {
             'email' => ['required', 'bail', new DatabaseSizeExplosionProtection(255, null), 'bail', new ValidateEmailFormat(), 'bail', new EmailAlreadyRegistered(), 'bail', ],
             'username' => ['required', 'bail', new MinimumNumberCharacters(3, null), 'bail', new DatabaseSizeExplosionProtection(255, null), 'bail', new ValidateUsernameFormat(), 'bail', new UsernameAlreadyRegistered(), 'bail', ],
             'password' => ['required', 'bail', new MinimumNumberCharacters(8, null), 'bail', new DatabaseSizeExplosionProtection(255, null), 'bail', new PasswordHasUppercaseLetters(), 'bail', new PasswordHasLowercaseLetters(), 'bail', new PasswordHasSpecialCharacters(), 'bail', new PasswordHasNumbers(), 'bail', ],
-            'confirmPassword' => ['required', 'bail', new DatabaseSizeExplosionProtection(255, null), 'bail', new ConfirmPassword($this->password), 'bail', ],
+            'confirmPassword' => ['required', 'bail', new DatabaseSizeExplosionProtection(255, 'password confirmation'), 'bail', new ConfirmPassword($this->password), 'bail', ],
             'agree' => ['required', 'bail', ],
         ];
 
