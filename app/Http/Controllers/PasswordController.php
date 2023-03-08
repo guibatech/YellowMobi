@@ -49,15 +49,14 @@ class PasswordController extends Controller {
             }
 
             $previousPassword = $userFound->password;
+
             $userFound->password = $request->password;
-            $userFound->save();
-
-            UserActivity::quickActivity("The account access password has been reset. Previous password: {$previousPassword}. New password: {$userFound->password}. Token used: {$token}.", "The account access password has been reset. Previous password: {$previousPassword}. New password: {$userFound->password}. Token used: {$token}.", $userFound->id);
-
             $userFound->forgot_token = null;
             $userFound->forgot_token_requested_at = null;
             $userFound->save();
 
+            UserActivity::quickActivity("The account access password has been reset. Previous password: {$previousPassword}. New password: {$userFound->password}. Token used: {$token}.", "The account access password has been reset. Previous password: {$previousPassword}. New password: {$userFound->password}. Token used: {$token}.", $userFound->id);
+            
             Session::flash("success", "The account access password has been reset.");
             
             return redirect()->route('accounts.signin')->withInput();
