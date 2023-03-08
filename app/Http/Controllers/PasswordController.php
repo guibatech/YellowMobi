@@ -10,6 +10,7 @@ use App\Models\UserAccount as UserAccount;
 use App\Traits\TimeTrait as TimeTrait;
 use App\Models\UserActivity as UserActivity;
 use Illuminate\Support\Facades\Session as Session;
+use \Exception as Exception;
 
 class PasswordController extends Controller {
 
