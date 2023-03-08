@@ -11,6 +11,7 @@ use App\Traits\TimeTrait as TimeTrait;
 use App\Models\UserActivity as UserActivity;
 use Illuminate\Support\Facades\Session as Session;
 use \Exception as Exception;
+use App\Http\Requests\PasswordRequest as PasswordRequest;
 
 class PasswordController extends Controller {
 
@@ -57,7 +58,7 @@ class PasswordController extends Controller {
 
     }
 
-    public function update(Request $request, string $token): RedirectResponse {
+    public function update(PasswordRequest $request, string $token): RedirectResponse {
 
         try {
 

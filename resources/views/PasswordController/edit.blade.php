@@ -52,7 +52,7 @@ Password
 
                     <div class="mb-3">
                         <div class="form-floating">
-                            <input type="password" name="password" id="password" class="form-control @error('password') has-error @enderror" placeholder=" " value="{{old('password')}}" @error('password') autofocus @enderror>
+                            <input type="password" name="password" id="password" class="form-control @error('password') has-error @enderror" placeholder=" " @error('password') autofocus @enderror>
                             <label for="password" class="form-label">Password</label>
                         </div>
                         <div>
@@ -68,7 +68,7 @@ Password
 
                     <div class="mb-3">
                         <div class="form-floating">
-                            <input type="password" name="confirmPassword" id="confirmPassword" class="form-control @error('confirmPassword') has-error @enderror" placeholder=" " value="{{old('confirmPassword')}}" @error('confirmPassword') autofocus @enderror>
+                            <input type="password" name="confirmPassword" id="confirmPassword" class="form-control @error('confirmPassword') has-error @enderror" placeholder=" " @error('confirmPassword') autofocus @enderror>
                             <label for="confirmPassword" class="form-label">Confirm password</label>
                         </div>
                         <div>
