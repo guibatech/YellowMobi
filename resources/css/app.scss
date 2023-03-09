@@ -39,7 +39,7 @@ $dropdown-link-hover-color: $normal-font-color-custom;
 $dropdown-link-hover-bg: $primary;
 $dropdown-border-radius: $input-border-radius-custom;
 
-$headerSize: 81px;
+$headerSize: 80px;
 
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";
 
@@ -54,6 +54,7 @@ $headerSize: 81px;
     width: 100%;
     padding: 0px 20px;
     word-wrap: break-word;
+    margin-top: 5px;
 
 }
 
@@ -122,13 +123,40 @@ $headerSize: 81px;
     position: fixed;
     left: 0%;
     z-index: 99999;
+    padding: 1rem 1.5rem;
+    display: flex;
+    align-items: center;
 
+}
+
+@media(max-width: 250px) {
+
+    .headerLogo {
+
+        display: none;
+
+    }
+
+    .headerDivision {
+
+        width: 100%;
+        display: flex;
+        justify-content: center;
+
+    }
+    
 }
 
 .header-clearfix {
 
     position: static;
     height: $headerSize;
+
+}
+
+.headerLogo {
+
+    margin-right: auto;
 
 }
 
