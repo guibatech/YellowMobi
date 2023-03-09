@@ -24,18 +24,18 @@ Password
             @if($errors->has('system'))
 
                 @foreach($errors->get('system') as $error)
-                    <div class="alert alert-primary alert-dismissible fade show" role="alert">
-                        <div>{{$error}}</div>
-                        <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                    </div>
+                
+                    @include('Components.alert', [
+                        'message' => $error
+                        ])
+                
                 @endforeach
 
             @elseif(isset($errorBag))
-
-                <div class="alert alert-primary alert-dismissible fade show" role="alert">
-                    <div>{{$errorBag}}</div>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
+            
+                @include('Components.alert', [
+                    'message' => $errorBag
+                    ])
 
             @endif
 

@@ -24,10 +24,11 @@ Sign up
             @if($errors->has('system'))
                 
                 @foreach($errors->get('system') as $error)
-                <div class="alert alert-primary alert-dismissible fade show" role="alert">
-                    <div>{{$error}}</div>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
+                
+                    @include('Components.alert', [
+                        'message' => $error
+                        ])
+
                 @endforeach
 
             @endif
@@ -154,12 +155,15 @@ Sign up
 
                     <div>
                         @if($errors->has('agree'))
+                            
                             @foreach($errors->get('agree') as $error)
-                            <div class="alert alert-primary alert-dismissible fade show" role="alert">
-                                <div>{{$error}}</div>
-                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                            </div>   
+                                
+                                @include('Components.alert', [
+                                    'message' => $error
+                                    ])
+                            
                             @endforeach
+                        
                         @endif
                     </div>
 

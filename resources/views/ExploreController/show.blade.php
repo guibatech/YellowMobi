@@ -13,10 +13,11 @@ Explore
         <section class="mb-4">
             
             @if (Session::has('activated-account'))
-                <div class="alert alert-primary alert-dismissible fade show" role="alert">
-                    <div>{{Session::get('activated-account')}}</div>
-                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
-                </div>
+
+                @include('Components.alert', [
+                    'message' => Session::get('activated-account')
+                    ])
+            
             @endif
         
         </section>
