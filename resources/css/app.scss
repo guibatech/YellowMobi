@@ -39,6 +39,8 @@ $dropdown-link-hover-color: $normal-font-color-custom;
 $dropdown-link-hover-bg: $primary;
 $dropdown-border-radius: $input-border-radius-custom;
 
+$headerSize: 81px;
+
 @import "../../node_modules/bootstrap/scss/bootstrap.scss";
 
 .lh-14 {
@@ -112,81 +114,80 @@ $dropdown-border-radius: $input-border-radius-custom;
 
 }
 
-.showing-menu {
+.header {
 
-    animation-name: showing-menu;
-    animation-duration: 0.8s;
-
-    @keyframes showing-menu {
-
-        from {
-            
-            position: fixed;
-            top: -40%;
-            
-        } to {
-            
-            height: 72px;
-            position: fixed;
-            top: 0%;
-            left: 0%;
-            width: 100%;
-            z-index: 99999;
-
-        }
-
-    }
-
-
-}
-
-.show-menu {
-
-    height: 72px;
-    position: fixed;
-    top: 0%;
-    left: 0%;
+    background-color: white;
     width: 100%;
+    height: $headerSize;
+    position: fixed;
+    left: 0%;
     z-index: 99999;
 
 }
 
-.hiding-menu {
+.header-clearfix {
 
-    animation-name: hiding-menu;
-    animation-duration: 0.8s;
+    position: static;
+    height: $headerSize;
 
-    @keyframes hiding-menu {
+}
+
+.showing-header {
+
+    animation-name: showing-header;
+    animation-duration: 0.7s;
+
+    @keyframes showing-header {
 
         from {
 
-            height: 72px;
-            position: fixed;
-            top: 0%;
-            left: 0%;
-            width: 100%;
-            z-index: 99999;
-            
+            top: -100%;
+        
         } to {
-
-            position: fixed;
-            top: -40%;
-
+        
+            top: 0%;
+        
         }
 
     }
-        
+
 }
 
-.hide-menu {
-    
-    position: fixed;
-    top: -40%;
+.hiding-header {
 
+    animation-name: hiding-header;
+    animation-duration: 2.0s;
+    
+    @keyframes hiding-header {
+
+        from {
+
+            top: 0%;
+        
+        } to {
+        
+            top: -100%;
+        
+        }
+        
+    }
+    
+}
+
+.show-header {
+
+    top: 0%;
+
+}
+
+.hide-header {
+    
+    top: -100%;
+    
 }
 
 .input-activation-token {
-
+    
     color: $normal-font-color-custom;
     font-size: 50px;
     font-weight: bold;

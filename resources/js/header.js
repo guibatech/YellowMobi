@@ -1,5 +1,5 @@
 
-// Menu animation.
+// Header animation.
 
 const globalHeader = document.querySelector("#globalHeader");
 let oldPosition = window.pageYOffset;
@@ -11,19 +11,19 @@ document.addEventListener('scroll', function(event) {
 
     if (scrollDirection == "going down") {
 
-        globalHeader.classList.add('hiding-menu');
-        globalHeader.classList.add('hide-menu');
+        globalHeader.classList.add('hiding-header');
+        globalHeader.classList.add('hide-header');
 
-        globalHeader.classList.remove('showing-menu');
-        globalHeader.classList.remove('show-menu');
+        globalHeader.classList.remove('showing-header');
+        globalHeader.classList.remove('show-header');
 
     } else if (scrollDirection == "going up") {
 
-        globalHeader.classList.add('showing-menu');
-        globalHeader.classList.add('show-menu');
+        globalHeader.classList.add('showing-header');
+        globalHeader.classList.add('show-header');
         
-        globalHeader.classList.remove('hiding-menu');
-        globalHeader.classList.remove('hide-menu');
+        globalHeader.classList.remove('hiding-header');
+        globalHeader.classList.remove('hide-header');
 
     }
 
