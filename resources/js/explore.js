@@ -1,15 +1,27 @@
 const contentToShare = document.querySelector("#contentToShare");
 const currentContentSize = document.querySelector("#currentContentSize");
 
-currentContentSize.innerText = calculateAvailableSize(parseInt(contentToShare.maxLength), parseInt(contentToShare.value.length));
+// Post character count algorithm. 
 
+currentContentSize.innerText = calculateAvailableSize(parseInt(contentToShare.maxLength), parseInt(contentToShare.value.length));
 textAlert(currentContentSize, sizeForAlert(parseInt(currentContentSize.innerHTML), parseInt(contentToShare.maxLength)));
 
 contentToShare.addEventListener('input', function(event) {
 
     currentContentSize.innerText = calculateAvailableSize(parseInt(contentToShare.maxLength), parseInt(contentToShare.value.length));
-
     textAlert(currentContentSize, sizeForAlert(parseInt(currentContentSize.innerHTML), parseInt(contentToShare.maxLength)));
+
+});
+
+// Resize post text area.
+
+contentToShare.addEventListener('input', function(event) {
+
+    if (event.target.scrollHeight > event.target.clientHeight) {
+
+        contentToShare.rows++;
+
+    }
 
 });
 
