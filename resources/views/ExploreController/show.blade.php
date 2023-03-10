@@ -38,7 +38,7 @@ Explore
                 @method('POST')
 
                 <div class="mb-2">
-                    <textarea id="contentToShare" name="contentToShare" class="custom-text-area" placeholder="Write something awesome!" rows='1' maxlength="281"></textarea>
+                    <textarea id="contentToShare" name="contentToShare" class="custom-text-area" placeholder="Write something awesome!" rows='1' maxlength="281" spellcheck="false"></textarea>
                 </div>
                     
                 <div class="d-flex justify-content-end align-items-center">
