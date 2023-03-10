@@ -8,7 +8,7 @@ Explore
 
     @include('Components.header')
 
-    <main class="sign-container">
+    <main class="custom-container">
 
         <section class="mb-4">
             
