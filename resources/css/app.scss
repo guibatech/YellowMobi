@@ -268,3 +268,15 @@ $headerSize: 80px;
     outline: none;
 
 }
+
+.number-images-flag {
+
+    cursor: pointer;
+    background-color: $input-bg-custom;
+    border: $input-border-wide-thickness-custom solid $input-bg-custom;
+    border-radius: $input-border-radius-custom;
+    width: auto;
+    height: auto;
+    padding: 6px 10px 6px 10px;
+
+}
