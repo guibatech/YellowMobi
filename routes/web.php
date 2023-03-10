@@ -8,6 +8,7 @@ use App\Http\Controllers\SignoutController as SignoutController;
 use App\Http\Controllers\ActivateController as ActivateController;
 use App\Http\Controllers\ForgotController as ForgotController;
 use App\Http\Controllers\PasswordController as PasswordController;
+use App\Http\Controllers\PostController as PostController;
 
 /*
 |--------------------------------------------------------------------------
@@ -70,4 +71,8 @@ Route::get("/accounts/password/{token}", [PasswordController::class, "edit"])->n
 
 Route::put("/accounts/password/{token}/do", [PasswordController::class, "update"])->name('accounts.password.do')->middleware([
     'just.unauthenticated',
+]);
+
+Route::post('/post/do', [PostController::class, 'store'])->name('post.do')->middleware([
+    'just.authenticated', 'only.activated.accounts',
 ]);

@@ -235,3 +235,36 @@ $headerSize: 80px;
     border-color: $primary;
 
 }
+
+.custom-text-area {
+
+    width: 100%;
+    color: $normal-font-color-custom;
+    font-size: 1rem;
+    background-color: $input-bg-custom;
+    border: $input-border-wide-thickness-custom solid $input-bg-custom;
+    border-radius: $input-border-radius-custom;
+    resize: none;
+    padding: 20px 15px;
+    overflow: hidden;
+    line-height: 20px;
+
+}
+
+.custom-text-area:focus {
+
+    border-color: $primary;
+
+}
+
+.custom-text-area:active {
+
+    border-color: $primary;
+
+}
+
+.custom-text-area:focus-visible {
+
+    outline: none;
+
+}
