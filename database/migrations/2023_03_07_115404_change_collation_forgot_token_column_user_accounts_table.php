@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Schema as Schema;
 
 return new class extends Migration {
 
-    public function up() {
+    public function up(): void {
 
         if (Schema::hasTable('user_accounts') && Schema::hasColumn('user_accounts', 'forgot_token')) {
 
@@ -20,7 +20,7 @@ return new class extends Migration {
 
     }
 
-    public function down() {
+    public function down(): void {
 
         if (Schema::hasTable('user_accounts') && Schema::hasColumn('user_accounts', 'forgot_token')) {
 
