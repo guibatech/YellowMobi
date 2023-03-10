@@ -43,7 +43,7 @@ Explore
                     
                 <div class="d-flex justify-content-end align-items-center">
                     
-                    <div class="form-text me-2" id="contentCount">0/281</div>
+                    <div class="form-text me-2 fw-bold" id="currentContentSize"></div>
                     
                     <input type="submit" id="btnShare" class="btn btn-outline-primary" value="Share" title="Share">
                 
@@ -62,5 +62,6 @@ Explore
 @section('scripts')
 
     @vite('resources/js/header.js')
+    @vite('resources/js/explore.js')
 
 @endsection

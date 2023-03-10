@@ -10,6 +10,7 @@ export default defineConfig({
                 'node_modules/bootstrap/dist/js/bootstrap.bundle.js',
                 'resources/js/header.js',
                 'resources/js/token.js',
+                'resources/js/explore.js',
             ],
             refresh: true,
         }),
