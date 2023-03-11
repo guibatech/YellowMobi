@@ -37,33 +37,30 @@ Explore
                 @csrf
                 @method('POST')
 
-                <div class="mb-2">
-                    <textarea id="contentToShare" name="contentToShare" class="custom-text-area" placeholder="Write something awesome!" rows='1' maxlength="281" spellcheck="false"></textarea>
+                <div class="post-content-container">
+
+                    <div class="post-textarea-container">
+                        <textarea id="postText" name="postText" class="form-control post-textarea" placeholder="Post something awesome!" spellcheck="false" rows="3" maxLength="320"></textarea>
+                    </div>
+
                 </div>
 
-                <div class="d-flex align-items-center">
+                <div class="post-actions-container mt-2 d-flex">
 
-                    <div class="me-auto">
+                    <label for="postImage" class="post-image-label me-auto d-flex align-items-center">
+                        + add a photo
+                    </label>
+                    <input type="file" name="postImage" id="postImage" class="post-image-input" accept="image/png, image/jpeg, image/gif">
                         
-                        <label for="contentImages" class="number-images-flag d-flex align-items-center">
-                            <svg xmlns="http://www.w3.org/2000/svg" width="23" height="23" fill="rgb(215, 215, 215)" class="bi bi-image" viewBox="0 0 16 16">
-                                <path d="M6.002 5.5a1.5 1.5 0 1 1-3 0 1.5 1.5 0 0 1 3 0z"/>
-                                <path d="M2.002 1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12zm12 1a1 1 0 0 1 1 1v6.5l-3.777-1.947a.5.5 0 0 0-.577.093l-3.71 3.71-2.66-1.772a.5.5 0 0 0-.63.062L1.002 12V3a1 1 0 0 1 1-1h12z"/>
-                            </svg>
-                            <input type="file" name="contentImages" id="contentImages" hidden multiple></input>
-                            <span id="amountImages" class="form-text ms-2 mt-0 fw-bold"></span>
-                        </label>
-                    
-                    </div>
+                    <div class="post-details-container d-flex align-items-center">
 
-                    <div class="d-flex justify-content-end align-items-center">
+                        <span class="form-text me-2 mt-0" id="postCharacterCount">0</span>
+                        <input type="submit" value="Post" id="btnPost" class="btn btn-outline-primary" title="Post">
 
-                        <div class="form-text me-2 mt-0 fw-bold" id="currentContentSize"></div>
-                        <input type="submit" id="btnShare" class="btn btn-outline-primary" value="Share" title="Share">
-                    
                     </div>
 
                 </div>
+
 
             </form>
 

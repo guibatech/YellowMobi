@@ -236,47 +236,72 @@ $headerSize: 80px;
 
 }
 
-.custom-text-area {
+.post-content-container {
 
     width: 100%;
-    color: $normal-font-color-custom;
-    font-size: 1rem;
     background-color: $input-bg-custom;
-    border: $input-border-wide-thickness-custom solid $input-bg-custom;
-    border-radius: $input-border-radius-custom;
+    border-radius: 18px;
+
+}
+
+.post-textarea-container {
+
+    width: 100%;
+    background-color: $input-bg-custom;
+    padding: 12px 10px;
+    border-radius: 13px;
+
+}
+
+.post-textarea {
+
     resize: none;
-    padding: 20px 15px;
-    overflow: hidden;
     line-height: 20px;
+    font-size: 0.9rem;
 
 }
 
-.custom-text-area:focus {
+.post-textarea:focus {
 
-    border-color: $primary;
-
-}
-
-.custom-text-area:active {
-
-    border-color: $primary;
+    border-color: $input-bg-custom;
 
 }
 
-.custom-text-area:focus-visible {
+.post-textarea:focus-visible {
 
     outline: none;
 
 }
 
-.number-images-flag {
+.post-actions-container {
 
-    cursor: pointer;
-    background-color: $input-bg-custom;
-    border: $input-border-wide-thickness-custom solid $input-bg-custom;
-    border-radius: $input-border-radius-custom;
+    width: 100%;
+
+}
+
+.post-image-label {
+    
+    background-color: white;
+    border: 1px solid rgb(220, 220, 220);
+    border-radius: 25px;
     width: auto;
-    height: auto;
-    padding: 6px 10px 6px 10px;
+    padding: 8px 15px;
+    font-size: 12px;
+    display: inline-block;
+    cursor: pointer;
+    color:rgb(220, 220, 220);
+    
+}
+
+.post-image-label:hover {
+
+    border-color: rgb(200, 200, 200);
+    color: rgb(200, 200, 200);
+
+}
+
+.post-image-input {
+
+    display: none;
 
 }
