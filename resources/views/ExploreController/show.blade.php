@@ -10,7 +10,7 @@ Explore
 
     <main class="custom-container">
 
-        <section class="mb-4">
+        <section class="mb-2">
             
             @if (Session::has('activated-account'))
 
@@ -54,7 +54,7 @@ Explore
                         
                     <div class="post-details-container d-flex align-items-center">
 
-                        <span class="form-text me-2 mt-0" id="postCharacterCount">0</span>
+                        <span class="form-text me-2 mt-0" id="postCharacterCount"></span>
                         <input type="submit" value="Post" id="btnPost" class="btn btn-outline-primary" title="Post">
 
                     </div>
