@@ -14,7 +14,7 @@ class PostController extends Controller {
     public function store(Request $request): RedirectResponse {
 
         $newPost = new Post();
-        $newPost->content = $request->contentToShare;
+        $newPost->content = $request->postText;
         $newPost->user_id = Auth::user()->id;
         $newPost->save();
 
