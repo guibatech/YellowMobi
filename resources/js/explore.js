@@ -1,7 +1,12 @@
+// Declaration of global variables.
+
 const postText = document.querySelector("#postText");
 const postCharacterCount = document.querySelector("#postCharacterCount");
 const postImage = document.querySelector("#postImage");
 const postImageLabel = document.querySelector("#postImageLabel");
+const postTextareaContainer = document.querySelector("#postTextareaContainer");
+
+// Startup events.
 
 postCharacterCount.innerText = (postText.maxLength - postText.value.length);
 
@@ -18,6 +23,14 @@ if (postImage.files.length == 1) {
     postImageLabel.classList.remove('text-success');
 
 }
+
+// Events resulting from actions.
+
+postTextareaContainer.addEventListener('click', function(event) {
+
+    postText.focus();
+
+});
 
 postText.addEventListener('input', function(event) {
 

@@ -249,7 +249,14 @@ $headerSize: 80px;
     width: 100%;
     background-color: $input-bg-custom;
     padding: 12px 10px;
+    border: $input-border-wide-thickness-custom solid $input-bg-custom;
     border-radius: 13px;
+
+}
+
+.post-textarea-container:focus-within {
+
+    border: $input-border-wide-thickness-custom solid $primary;
 
 }
 

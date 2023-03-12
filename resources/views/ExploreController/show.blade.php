@@ -39,7 +39,7 @@ Explore
 
                 <div class="post-content-container">
 
-                    <div class="post-textarea-container">
+                    <div id="postTextareaContainer" class="post-textarea-container">
                         <textarea id="postText" name="postText" class="form-control post-textarea" placeholder="Post something awesome!" spellcheck="false" rows="3" maxLength="320"></textarea>
                     </div>
 
