@@ -9,35 +9,17 @@ const btnPost = document.querySelector("#btnPost");
 
 // Startup events.
 
-if (postText.value.length == 0) {
+disablePostButton(postText, btnPost);
+autoSizePostTextArea(postText);
+countPostCharacters(postCharacterCount, postText);
 
-    btnPost.disabled = true;
-
-} else {
-
-    btnPost.disabled = false;
-
-}
-
-while (postText.scrollHeight > postText.clientHeight) {
-
-    postText.rows += 1;
-
-}
-
-postCharacterCount.innerText = (postText.maxLength - postText.value.length);
-
-if (postImage.files.length == 1) {
-
-    postImageLabel.innerText = postImage.files[0].name;
-    postImageLabel.classList.add("border-success");
-    postImageLabel.classList.add("text-success");
-
-} else {
+if (postImage.files.length >= 1) {
+        
+    putPostImage(postImageLabel, postImage);
     
-    postImageLabel.innerText = "+ add a photo";
-    postImageLabel.classList.remove('border-success');
-    postImageLabel.classList.remove('text-success');
+} else {
+
+    clearPostImage(postImageLabel, postImage);
 
 }
 
@@ -48,6 +30,7 @@ postText.addEventListener('keydown', function(event) {
     if (event.key == "Enter") {
 
         event.preventDefault();
+
         btnPost.click();
 
     }
@@ -56,31 +39,9 @@ postText.addEventListener('keydown', function(event) {
 
 postText.addEventListener('input', function(event) {
 
-    // Expand post text area.
-
-    event.target.rows = 1;
-
-    while (event.target.scrollHeight > event.target.clientHeight) {
-
-        event.target.rows += 1;
-
-    }
-
-    // Disable "post" button when post text area is empty.
-
-    if (postText.value.length == 0) {
-
-        btnPost.disabled = true;
-
-    } else {
-
-        btnPost.disabled = false;
-
-    }
-
-    // Sets the amount of unused characters in the post.
-
-    postCharacterCount.innerText = (postText.maxLength - postText.value.length);
+    autoSizePostTextArea(postText);
+    disablePostButton(postText, btnPost);
+    countPostCharacters(postCharacterCount, postText);
 
 });
 
@@ -91,14 +52,8 @@ postTextareaContainer.addEventListener('click', function(event) {
 });
 
 postImage.addEventListener('input', function(event) {
-
-    if (postImage.files.length == 1) {
-
-        postImageLabel.innerText = postImage.files[0].name;
-        postImageLabel.classList.add("border-success");
-        postImageLabel.classList.add("text-success");
-
-    }
+    
+    putPostImage(postImageLabel, postImage);
 
 });
 
@@ -108,11 +63,79 @@ postImageLabel.addEventListener('click', function(event) {
 
         event.preventDefault();
 
-        postImage.value = null;
-        postImageLabel.innerText = "+ add a photo";
-        postImageLabel.classList.remove('border-success');
-        postImageLabel.classList.remove('text-success');
+        clearPostImage(postImageLabel, postImage);
 
     }
 
 });
+
+// Helper functions
+
+function fileName(name) {
+
+    if (name.length <= 10) {
+
+        return name;
+
+    }
+
+    let finalName = "";
+
+    for (let c = 0; c < 10; c++) {
+
+        finalName += (name.split(""))[c];
+
+    }
+
+    return finalName += "...";
+
+}
+
+function putPostImage(postImageLabel, postImage) {
+    
+    postImageLabel.innerText = fileName(postImage.files[0].name);
+    postImageLabel.classList.add("border-success");
+    postImageLabel.classList.add("text-success");
+
+}
+
+function clearPostImage(postImageLabel, postImage) {
+    
+    postImage.value = null;
+    postImageLabel.innerText = "+ photo";
+    postImageLabel.classList.remove('border-success');
+    postImageLabel.classList.remove('text-success');
+
+}
+
+function disablePostButton(postText, btnPost) {
+    
+    if (postText.value.length == 0) {
+
+        btnPost.disabled = true;
+
+    } else {
+
+        btnPost.disabled = false;
+
+    }
+
+}
+
+function autoSizePostTextArea(postText) {
+
+    postText.rows = 1;
+
+    while (postText.scrollHeight > postText.clientHeight) {
+
+        postText.rows += 1;
+
+    }
+
+}
+
+function countPostCharacters(postCharacterCount, postText) {
+    
+    postCharacterCount.innerText = (postText.maxLength - postText.value.length);
+
+}
