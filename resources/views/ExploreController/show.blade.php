@@ -10,7 +10,7 @@ Explore
 
     <main class="custom-container">
 
-        <section class="mb-4">
+        <section class="mb-2">
             
             @if (Session::has('activated-account'))
 
