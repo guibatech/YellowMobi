@@ -8,6 +8,12 @@ const postTextareaContainer = document.querySelector("#postTextareaContainer");
 
 // Startup events.
 
+while (postText.scrollHeight > postText.clientHeight && postText.rows < 5) {
+
+    postText.rows += 1;
+
+}
+
 postCharacterCount.innerText = (postText.maxLength - postText.value.length);
 
 if (postImage.files.length == 1) {
