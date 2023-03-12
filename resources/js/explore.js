@@ -43,20 +43,6 @@ if (postImage.files.length == 1) {
 
 // Events resulting from actions.
 
-postText.addEventListener('input', function(event) {
-
-    if (postText.value.length == 0) {
-
-        btnPost.disabled = true;
-
-    } else {
-
-        btnPost.disabled = false;
-
-    }
-
-});
-
 postText.addEventListener('keydown', function(event) {
 
     if (event.key == "Enter") {
@@ -69,6 +55,8 @@ postText.addEventListener('keydown', function(event) {
 
 postText.addEventListener('input', function(event) {
 
+    // Expand post text area.
+
     event.target.rows = 1;
 
     while (event.target.scrollHeight > event.target.clientHeight) {
@@ -77,17 +65,27 @@ postText.addEventListener('input', function(event) {
 
     }
 
+    // Disable "post" button when post text area is empty.
+
+    if (postText.value.length == 0) {
+
+        btnPost.disabled = true;
+
+    } else {
+
+        btnPost.disabled = false;
+
+    }
+
+    // Sets the amount of unused characters in the post.
+
+    postCharacterCount.innerText = (postText.maxLength - postText.value.length);
+
 });
 
 postTextareaContainer.addEventListener('click', function(event) {
 
     postText.focus();
-
-});
-
-postText.addEventListener('input', function(event) {
-
-    postCharacterCount.innerText = (postText.maxLength - postText.value.length);
 
 });
 
