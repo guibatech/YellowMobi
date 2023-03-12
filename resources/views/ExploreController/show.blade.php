@@ -32,7 +32,7 @@ Explore
 
         <section class="mb-4">
 
-            <form action="{{route('post.do')}}" method="POST">
+            <form action="{{route('post.do')}}" method="POST" enctype="multipart/form-data">
 
                 @csrf
                 @method('POST')
@@ -47,10 +47,8 @@ Explore
 
                 <div class="post-actions-container mt-2 d-flex">
 
-                    <label for="postImage" class="post-image-label me-auto d-flex align-items-center">
-                        + add a photo
-                    </label>
-                    <input type="file" name="postImage" id="postImage" class="post-image-input" accept="image/png, image/jpeg, image/gif">
+                    <label for="postImage" id="postImageLabel" class="post-image-label me-auto d-flex align-items-center"></label>
+                    <input type="file" name="postImage" id="postImage" class="post-image-input" accept="image/png, image/jpeg, image/gif" value="{{old('postImage')}}">
                         
                     <div class="post-details-container d-flex align-items-center">
 
@@ -60,7 +58,6 @@ Explore
                     </div>
 
                 </div>
-
 
             </form>
 
