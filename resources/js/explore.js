@@ -26,6 +26,26 @@ if (postImage.files.length == 1) {
 
 // Events resulting from actions.
 
+postText.addEventListener('keydown', function(event) {
+
+    if (event.key == "Enter") {
+
+        event.preventDefault();
+
+    }
+
+});
+
+postText.addEventListener('input', function(event) {
+
+    if (event.target.scrollHeight > event.target.clientHeight && event.target.rows < 5) {
+
+        event.target.rows += 1;
+
+    }
+
+});
+
 postTextareaContainer.addEventListener('click', function(event) {
 
     postText.focus();
