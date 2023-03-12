@@ -5,8 +5,19 @@ const postCharacterCount = document.querySelector("#postCharacterCount");
 const postImage = document.querySelector("#postImage");
 const postImageLabel = document.querySelector("#postImageLabel");
 const postTextareaContainer = document.querySelector("#postTextareaContainer");
+const btnPost = document.querySelector("#btnPost");
 
 // Startup events.
+
+if (postText.value.length == 0) {
+
+    btnPost.disabled = true;
+
+} else {
+
+    btnPost.disabled = false;
+
+}
 
 while (postText.scrollHeight > postText.clientHeight) {
 
@@ -31,6 +42,20 @@ if (postImage.files.length == 1) {
 }
 
 // Events resulting from actions.
+
+postText.addEventListener('input', function(event) {
+
+    if (postText.value.length == 0) {
+
+        btnPost.disabled = true;
+
+    } else {
+
+        btnPost.disabled = false;
+
+    }
+
+});
 
 postText.addEventListener('keydown', function(event) {
 
