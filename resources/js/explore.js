@@ -8,7 +8,7 @@ const postTextareaContainer = document.querySelector("#postTextareaContainer");
 
 // Startup events.
 
-while (postText.scrollHeight > postText.clientHeight && postText.rows < 5) {
+while (postText.scrollHeight > postText.clientHeight) {
 
     postText.rows += 1;
 
@@ -44,7 +44,9 @@ postText.addEventListener('keydown', function(event) {
 
 postText.addEventListener('input', function(event) {
 
-    if (event.target.scrollHeight > event.target.clientHeight && event.target.rows < 5) {
+    event.target.rows = 1;
+
+    while (event.target.scrollHeight > event.target.clientHeight) {
 
         event.target.rows += 1;
 
