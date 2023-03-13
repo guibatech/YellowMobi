@@ -19,27 +19,10 @@ Explore
                     ])
             
             @endif
-
-            @if (Session::has('post-created')) 
-
-                @include('Components.alert', [
-                    'message' => Session::get('post-created')
-                    ])
-
-            @endif
-
-            @if ($errors->has('system')) 
-
-                @foreach($errors->get('system') as $error)
-                    
-                    @include('Components.alert', [
-                        'message' => $error
-                        ])
-                
-                @endforeach
-
-            @endif
         
+        </section>
+
+        <section class="mb-2" id="postMessageBox">
         </section>
 
         <section class="mb-4">

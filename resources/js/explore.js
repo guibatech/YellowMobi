@@ -4,6 +4,9 @@ const postImage = document.querySelector("#postImage");
 const postImageLabel = document.querySelector("#postImageLabel");
 const postTextareaContainer = document.querySelector("#postTextareaContainer");
 const btnPost = document.querySelector("#btnPost");
+const baseUrl = window.location.origin;
+const csrfToken = document.querySelector("input[name='_token']").value;
+const postMessageBox = document.querySelector("#postMessageBox");
 
 window.addEventListener('load', function(event) {
 
@@ -20,6 +23,54 @@ window.addEventListener('load', function(event) {
         clearPostImage();
 
     }
+
+});
+
+btnPost.addEventListener('click', function(event) {
+
+    event.preventDefault();
+
+    let formData = new FormData();
+    formData.append('postText', postText.value);
+
+    if (postImage.files.length == 1) {
+        
+        formData.append('postImage', postImage.files[0]);
+
+    }
+
+    fetch(`${baseUrl}/post/do`, {
+        method: 'POST',
+        headers: {
+            'X-CSRF-TOKEN': csrfToken,
+        },
+        body: formData
+    }).then(function(metaDataResponse) {
+
+        return metaDataResponse.json();
+
+    }).then(function(data) {
+
+        if (data.status == "success") {
+
+            clearPostText();
+            disableBtnPost();
+            clearPostImage();
+            showAlert("We're sure the world will love to read what you have to say!");
+
+            return;
+
+        }
+
+        if (data.status == "error") {
+
+            showAlert(data.system);
+
+            return;
+
+        }
+
+    });
 
 });
 
@@ -131,5 +182,26 @@ function resizePostText() {
 function countPostCharacters() {
     
     postCharacterCount.innerText = (postText.maxLength - postText.value.length);
+
+}
+
+function clearPostText() {
+
+    postText.value = "";
+    resizePostText();
+
+}
+
+function showAlert(message) {
+
+    let messageContainer = `
+    <div class="alert alert-primary fade show cursor-pointer text-center" role="alert" data-bs-dismiss="alert">
+        <div>
+            ${message}
+        </div>
+    </div>
+    `;
+
+    postMessageBox.innerHTML = messageContainer;
 
 }

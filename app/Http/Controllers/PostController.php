@@ -4,17 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller as Controller;
 use Illuminate\Http\Request as Request;
-use Illuminate\Http\RedirectResponse as RedirectResponse;
 use App\Models\Post as Post;
 use Illuminate\Support\Facades\Auth as Auth;
 use Illuminate\Support\Facades\Session as Session;
 use App\Models\PostImage as PostImage;
 use \Exception as Exception;
 use App\Models\UserActivity as UserActivity;
+use Illuminate\Http\JsonResponse as JsonResponse;
 
 class PostController extends Controller {
 
-    public function store(Request $request): RedirectResponse {
+    public function store(Request $request): JsonResponse {
 
         try {
 
@@ -45,12 +45,15 @@ class PostController extends Controller {
 
             Session::flash('post-created', "We're sure the world will love to read what you have to say!");
             
-            return redirect()->route('explore');
+            return response()->json([
+                'status' => 'success',
+            ]);
         
         } catch (Exception $e) {
 
-            return redirect()->back()->withInput()->withErrors([
-                'system' => 'Unable to post at the moment. Try again later.'
+            return response()->json([
+                'status' => 'error',
+                'system' => 'Unable to post at the moment. Try again later.',
             ]);
 
         }
