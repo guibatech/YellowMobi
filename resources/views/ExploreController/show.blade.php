@@ -10,57 +10,59 @@ Explore
 
     <main class="custom-container">
 
-        <section class="mb-2">
-            
-            @if (Session::has('activated-account'))
+        <div class="fast-slide-animation">
 
-                @include('Components.alert', [
-                    'message' => Session::get('activated-account')
-                    ])
+            <section class="mb-2">
             
-            @endif
+                @if (Session::has('activated-account'))
+
+                    @include('Components.alert', [
+                        'message' => Session::get('activated-account')
+                        ])
+            
+                @endif
         
-        </section>
+            </section>
 
-        <section class="mb-2" id="postMessageBox">
-        </section>
+            <section class="mb-2" id="postMessageBox">
+            </section>
 
-        <section class="mb-4">
+            <section class="mb-4">
 
-            <form action="{{route('post.do')}}" method="POST" enctype="multipart/form-data">
+                <form action="{{route('post.do')}}" method="POST" enctype="multipart/form-data">
 
-                @csrf
-                @method('POST')
+                    @csrf
+                    @method('POST')
 
-                <div class="post-content-container">
+                    <div class="post-content-container">
 
-                    <div id="postTextareaContainer" class="post-textarea-container">
-                        <textarea id="postText" name="postText" class="form-control post-textarea mt-0" placeholder="Post something awesome!" spellcheck="false" maxLength="300" rows="1">{{old('postText')}}</textarea>
+                        <div id="postTextareaContainer" class="post-textarea-container">
+                            <textarea id="postText" name="postText" class="form-control post-textarea mt-0" placeholder="Post something awesome!" spellcheck="false" maxLength="300" rows="1">{{old('postText')}}</textarea>
+                        </div>
+
                     </div>
 
-                </div>
+                    <div class="post-actions-container mt-2 d-flex">
 
-                <div class="post-actions-container mt-2 d-flex">
-
-                    <label for="postImage" id="postImageLabel" class="post-image-label me-auto d-flex align-items-center"></label>
-                    <input type="file" name="postImage" id="postImage" class="post-image-input" accept="image/png, image/jpeg, image/jpg, image/gif" value="{{old('postImage')}}">
+                        <label for="postImage" id="postImageLabel" class="post-image-label me-auto d-flex align-items-center"></label>
+                        <input type="file" name="postImage" id="postImage" class="post-image-input" accept="image/png, image/jpeg, image/jpg, image/gif" value="{{old('postImage')}}">
                         
-                    <div class="post-details-container d-flex align-items-center">
+                        <div class="post-details-container d-flex align-items-center">
 
-                        <span class="form-text me-2 mt-0" id="postCharacterCount"></span>
-                        <input type="submit" value="Post" id="btnPost" class="btn btn-outline-primary" title="Post (Enter)">
+                            <span class="form-text me-2 mt-0" id="postCharacterCount"></span>
+                            <input type="submit" value="Post" id="btnPost" class="btn btn-outline-primary" title="Post (Enter)">
+
+                        </div>
 
                     </div>
 
-                </div>
+                </form>
 
-            </form>
+            </section>
 
-        </section>
+        </div>
 
     </main>
-
-    @csrf
 
 @endsection
 

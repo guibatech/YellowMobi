@@ -314,3 +314,33 @@ $headerSize: 80px;
     display: none;
 
 }
+
+.post-box {
+
+    position: relative;
+    left: 0%;
+
+}
+
+.fast-slide-animation {
+
+    animation-name: fast-slide-animation;
+    animation-duration: 0.4s;
+
+    @keyframes fast-slide-animation {
+
+        from {
+
+            position: relative;
+            left: -120%;
+
+        } to {
+
+            position: relative;
+            left: 0%;
+
+        }
+
+    }
+
+}

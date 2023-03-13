@@ -8,7 +8,7 @@ Sign up
 
     @include('Components.header')
 
-    <main class="custom-container">
+    <main class="custom-container fast-slide-animation">
 
         <section class="mb-4">
 
