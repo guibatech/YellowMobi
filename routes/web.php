@@ -9,6 +9,7 @@ use App\Http\Controllers\ActivateController as ActivateController;
 use App\Http\Controllers\ForgotController as ForgotController;
 use App\Http\Controllers\PasswordController as PasswordController;
 use App\Http\Controllers\PostController as PostController;
+use App\Http\Controllers\UserProfileController as UserProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +21,12 @@ use App\Http\Controllers\PostController as PostController;
 | be assigned to the "web" middleware group. Make something great!
 |
 */
+
+Route::get('/', [ExploreController::class, 'show'])->name('explore')->middleware([
+    'just.authenticated', 'only.activated.accounts',
+]);
+
+Route::get('/{username}', [UserProfileController::class, 'show'])->name('user.profile');
 
 Route::get('/accounts/signup', [SignupController::class, 'create'])->name('accounts.signup')->middleware([
     'just.unauthenticated',
@@ -51,10 +58,6 @@ Route::post('/accounts/signin/do', [SigninController::class, 'store'])->name('ac
 
 Route::delete('/accounts/signout/do', [SignoutController::class, 'destroy'])->name('accounts.signout.do')->middleware([
     'just.authenticated',
-]);
-
-Route::get('/', [ExploreController::class, 'show'])->name('explore')->middleware([
-    'just.authenticated', 'only.activated.accounts',
 ]);
 
 Route::get("/accounts/forgot", [ForgotController::class, 'create'])->name('accounts.forgot')->middleware([
