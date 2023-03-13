@@ -11,10 +11,11 @@ use App\Models\PostImage as PostImage;
 use \Exception as Exception;
 use App\Models\UserActivity as UserActivity;
 use Illuminate\Http\JsonResponse as JsonResponse;
+use App\Http\Requests\PostRequest as PostRequest;
 
 class PostController extends Controller {
 
-    public function store(Request $request): JsonResponse {
+    public function store(PostRequest $request): JsonResponse {
 
         try {
 

@@ -43,7 +43,7 @@ Explore
                 <div class="post-actions-container mt-2 d-flex">
 
                     <label for="postImage" id="postImageLabel" class="post-image-label me-auto d-flex align-items-center"></label>
-                    <input type="file" name="postImage" id="postImage" class="post-image-input" accept="image/png, image/jpeg, image/gif" value="{{old('postImage')}}">
+                    <input type="file" name="postImage" id="postImage" class="post-image-input" accept="image/png, image/jpeg, image/jpg, image/gif" value="{{old('postImage')}}">
                         
                     <div class="post-details-container d-flex align-items-center">
 

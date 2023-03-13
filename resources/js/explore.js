@@ -43,6 +43,7 @@ btnPost.addEventListener('click', function(event) {
         method: 'POST',
         headers: {
             'X-CSRF-TOKEN': csrfToken,
+            'Accept': 'application/json',
         },
         body: formData
     }).then(function(metaDataResponse) {
@@ -65,6 +66,14 @@ btnPost.addEventListener('click', function(event) {
         if (data.status == "error") {
 
             showAlert(data.system);
+
+            return;
+
+        }
+
+        if (data.message != null) {
+
+            showAlert(data.message);
 
             return;
 
