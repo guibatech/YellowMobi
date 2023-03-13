@@ -1,5 +1,3 @@
-// Declaration of global variables.
-
 const postText = document.querySelector("#postText");
 const postCharacterCount = document.querySelector("#postCharacterCount");
 const postImage = document.querySelector("#postImage");
@@ -7,30 +5,29 @@ const postImageLabel = document.querySelector("#postImageLabel");
 const postTextareaContainer = document.querySelector("#postTextareaContainer");
 const btnPost = document.querySelector("#btnPost");
 
-// Startup events.
+window.addEventListener('load', function(event) {
 
-disablePostButton(postText, btnPost);
-autoSizePostTextArea(postText);
-countPostCharacters(postCharacterCount, postText);
+    disableBtnPost();
+    resizePostText();
+    countPostCharacters();
 
-if (postImage.files.length >= 1) {
-        
-    putPostImage(postImageLabel, postImage);
-    
-} else {
+    if (postImage.files.length == 1) {
 
-    clearPostImage(postImageLabel, postImage);
+        flagImage();
 
-}
+    } else {
 
-// Events resulting from actions.
+        clearPostImage();
+
+    }
+
+});
 
 postText.addEventListener('keydown', function(event) {
 
     if (event.key == "Enter") {
 
         event.preventDefault();
-
         btnPost.click();
 
     }
@@ -39,9 +36,9 @@ postText.addEventListener('keydown', function(event) {
 
 postText.addEventListener('input', function(event) {
 
-    autoSizePostTextArea(postText);
-    disablePostButton(postText, btnPost);
-    countPostCharacters(postCharacterCount, postText);
+    resizePostText();
+    disableBtnPost();
+    countPostCharacters();
 
 });
 
@@ -53,7 +50,7 @@ postTextareaContainer.addEventListener('click', function(event) {
 
 postImage.addEventListener('input', function(event) {
     
-    putPostImage(postImageLabel, postImage);
+    flagImage();
 
 });
 
@@ -62,14 +59,11 @@ postImageLabel.addEventListener('click', function(event) {
     if (postImage.files.length == 1) {
 
         event.preventDefault();
-
-        clearPostImage(postImageLabel, postImage);
+        clearPostImage();
 
     }
 
 });
-
-// Helper functions
 
 function fileName(name) {
 
@@ -91,7 +85,7 @@ function fileName(name) {
 
 }
 
-function putPostImage(postImageLabel, postImage) {
+function flagImage() {
     
     postImageLabel.innerText = fileName(postImage.files[0].name);
     postImageLabel.classList.add("border-success");
@@ -99,7 +93,7 @@ function putPostImage(postImageLabel, postImage) {
 
 }
 
-function clearPostImage(postImageLabel, postImage) {
+function clearPostImage() {
     
     postImage.value = null;
     postImageLabel.innerText = "+ photo";
@@ -108,7 +102,7 @@ function clearPostImage(postImageLabel, postImage) {
 
 }
 
-function disablePostButton(postText, btnPost) {
+function disableBtnPost() {
     
     if (postText.value.length == 0) {
 
@@ -122,7 +116,7 @@ function disablePostButton(postText, btnPost) {
 
 }
 
-function autoSizePostTextArea(postText) {
+function resizePostText() {
 
     postText.rows = 1;
 
@@ -134,7 +128,7 @@ function autoSizePostTextArea(postText) {
 
 }
 
-function countPostCharacters(postCharacterCount, postText) {
+function countPostCharacters() {
     
     postCharacterCount.innerText = (postText.maxLength - postText.value.length);
 
