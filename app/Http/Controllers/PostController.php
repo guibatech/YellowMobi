@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth as Auth;
 use Illuminate\Support\Facades\Session as Session;
 use App\Models\PostImage as PostImage;
 use \Exception as Exception;
+use App\Models\UserActivity as UserActivity;
 
 class PostController extends Controller {
 
@@ -22,15 +23,26 @@ class PostController extends Controller {
             $newPost->user_id = Auth::user()->id;
             $newPost->save();
 
+            $newPostImage = new PostImage();
+            
             if ($request->hasFile('postImage') && $newPost->id != null) {
                 
-                $newPostImage = new PostImage();
                 $newPostImage->post_id = $newPost->id;
                 $newPostImage->path = $request->postImage->store('post_images');
                 $newPostImage->save();
                 
             }
             
+            if ($newPostImage->id != null) {
+
+                UserActivity::quickActivity("New post published: ({$newPost->id}) '{$newPost->content}'. Post image: {$newPostImage->path}.", "New post published: ({$newPost->id}) '{$newPost->content}'. Post image: {$newPostImage->path}.", Auth::user()->id);
+            
+            } else {
+
+                UserActivity::quickActivity("New post published: ({$newPost->id}) '{$newPost->content}'.", "New post published: ({$newPost->id}) '{$newPost->content}'.", Auth::user()->id);
+                
+            }
+
             Session::flash('post-created', "We're sure the world will love to read what you have to say!");
             
             return redirect()->route('explore');
