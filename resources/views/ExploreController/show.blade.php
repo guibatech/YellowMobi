@@ -27,6 +27,18 @@ Explore
                     ])
 
             @endif
+
+            @if ($errors->has('system')) 
+
+                @foreach($errors->get('system') as $error)
+                    
+                    @include('Components.alert', [
+                        'message' => $error
+                        ])
+                
+                @endforeach
+
+            @endif
         
         </section>
 
@@ -40,7 +52,7 @@ Explore
                 <div class="post-content-container">
 
                     <div id="postTextareaContainer" class="post-textarea-container">
-                        <textarea id="postText" name="postText" class="form-control post-textarea mt-0" placeholder="Post something awesome!" spellcheck="false" maxLength="300" rows="1"></textarea>
+                        <textarea id="postText" name="postText" class="form-control post-textarea mt-0" placeholder="Post something awesome!" spellcheck="false" maxLength="300" rows="1">{{old('postText')}}</textarea>
                     </div>
 
                 </div>
