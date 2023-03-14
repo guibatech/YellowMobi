@@ -10,24 +10,23 @@ Explore
 
     <main class="custom-container">
 
-        <div class="fast-slide-animation">
-
-            <section class="mb-2">
+        <section class="mb-2">
             
-                @if (Session::has('activated-account'))
+            @if (Session::has('activated-account'))
 
-                    @include('Components.alert', [
-                        'message' => Session::get('activated-account')
-                        ])
+                @include('Components.alert', [
+                    'message' => Session::get('activated-account')
+                ])
             
-                @endif
+            @endif
         
-            </section>
+        </section>
 
-            <section class="mb-2" id="postMessageBox">
-            </section>
+        <section class="fast-slide-animation">
 
-            <section class="mb-4">
+            <div class="mb-2" id="postMessageBox"></div>
+
+            <div class="mb-4">
 
                 <form action="{{route('post.do')}}" method="POST" enctype="multipart/form-data">
 
@@ -58,9 +57,9 @@ Explore
 
                 </form>
 
-            </section>
+            </div>
 
-        </div>
+        </section>
 
     </main>
 
