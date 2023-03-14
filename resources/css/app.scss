@@ -332,12 +332,13 @@ $headerSize: 80px;
         from {
 
             position: relative;
-            left: -120%;
+            left: -300%;
 
         } to {
 
             position: relative;
-            left: 0%;
+            left: 50%;
+            transform: translateX(-50%);
 
         }
 
