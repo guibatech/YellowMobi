@@ -16,10 +16,11 @@ use Illuminate\Support\Facades\Session as Session;
 use App\Traits\TokenTrait as TokenTrait;
 use \DateTime as DateTime;
 use App\Traits\SigninTrait as SigninTrait;
+use App\Traits\UserColorTrait as UserColorTrait;
 
 class SignupController extends Controller {
 
-    use TokenTrait, SigninTrait;
+    use TokenTrait, SigninTrait, UserColorTrait;
 
     public function create(): Response {
 
@@ -43,6 +44,7 @@ class SignupController extends Controller {
             $userProfile->date_of_birth = $request->dateOfBirth;
             $userProfile->user_id = $userAccount->id;
             $userProfile->name = $request->name;
+            $userProfile->color = $this->chooseUserColor();
             $userProfile->save();
             
             UserActivity::quickActivity("Account created.", "Account created.", $userAccount->id);

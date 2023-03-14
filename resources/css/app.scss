@@ -92,10 +92,34 @@ $headerSize: 80px;
 
 }
 
-.photo-profile {
+.profile-photo {
     
     width: 38px;
     height: 38px;
+    cursor: pointer;
+
+}
+
+.without-profile-photo-animation {
+
+    animation-name: without-profile-photo-animation;
+    animation-duration: 3.8s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
+
+    @keyframes without-profile-photo-animation {
+
+        from {
+
+            transform: rotate(0deg);
+
+        } to {
+
+            transform: rotate(360deg);
+
+        }
+
+    }
 
 }
 
