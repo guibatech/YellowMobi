@@ -22,11 +22,11 @@ Explore
         
         </section>
 
-        <section class="fast-slide-animation">
+        <section class="fast-slide-animation mb-4">
 
             <div class="mb-2" id="postMessageBox"></div>
 
-            <div class="mb-4">
+            <div>
 
                 <form action="{{route('post.do')}}" method="POST" enctype="multipart/form-data">
 
