@@ -13,7 +13,8 @@
             <nav class="dropdown">
 
                 @include('Components.photo', [
-                    'type' => 'header'
+                    'type' => 'header',
+                    'user' => Auth::user(),
                     ])
                         
                 <ul class="dropdown-menu text-small shadow text-center">
