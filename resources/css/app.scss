@@ -92,17 +92,24 @@ $headerSize: 80px;
 
 }
 
-.header-user-photo-size {
+.header-user-photo-size-container {
     
     width: 38px;
     height: 38px;
 
 }
 
-.profile-user-photo-size {
+.profile-user-photo-size-container {
 
     width: 60px;
     height: 60px;
+
+}
+
+.inherit-size {
+
+    width: inherit;
+    height: inherit;
 
 }
 

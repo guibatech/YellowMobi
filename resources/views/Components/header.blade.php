@@ -12,10 +12,13 @@
 
             <nav class="dropdown">
 
-                @include('Components.photo', [
-                    'type' => 'header',
-                    'user' => Auth::user(),
-                    ])
+                <div data-bs-toggle="dropdown" aria-expanded="false" class="cursor-pointer header-user-photo-size-container">
+
+                    @include('Components.photo', [
+                        'user' => Auth::user(),
+                        ])
+
+                </div>
                         
                 <ul class="dropdown-menu text-small shadow text-center">
                     <li><a class="dropdown-item cursor-pointer" href="{{route('user.profile', ['username' => Auth::user()->username])}}" target="_SELF" title="Access my profile ({{'@'.Auth::user()->username}}).">{{'@'.Auth::user()->username}}</a></li>

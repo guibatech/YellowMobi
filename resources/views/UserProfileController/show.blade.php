@@ -30,9 +30,8 @@
 
             <section class="mb-4">
 
-                <div>
+                <div class="profile-user-photo-size-container">
                     @include('Components.photo', [
-                        'type' => 'profile',
                         'user' => $user,
                         ])
                 </div>
