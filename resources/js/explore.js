@@ -148,8 +148,7 @@ function fileName(name) {
 function flagImage() {
     
     postImageLabel.innerText = fileName(postImage.files[0].name);
-    postImageLabel.classList.add("border-success");
-    postImageLabel.classList.add("text-success");
+    postImageLabel.classList.add("post-image-label-selected");
 
 }
 
@@ -157,8 +156,7 @@ function clearPostImage() {
     
     postImage.value = null;
     postImageLabel.innerText = "+ photo";
-    postImageLabel.classList.remove('border-success');
-    postImageLabel.classList.remove('text-success');
+    postImageLabel.classList.remove('post-image-label-selected');
 
 }
 

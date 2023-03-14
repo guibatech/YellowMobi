@@ -309,6 +309,20 @@ $headerSize: 80px;
 
 }
 
+.post-image-label-selected {
+    
+    border-color: rgb(56, 197, 56);
+    color: rgb(56, 197, 56);
+    
+}
+
+.post-image-label-selected:hover {
+    
+    border-color: rgb(26, 167, 26);
+    color: rgb(26, 167, 26);
+    
+}
+
 .post-image-input {
 
     display: none;
