@@ -22,11 +22,23 @@
 
         @if ($user == null)
 
-            @include('Components.alert', [
-                'message' => 'This profile does not exist.'
-                ])
+            <section class="mb-3">
+
+                @include('Components.alert', [
+                    'message' => 'This profile does not exist.'
+                    ])
+            
+            </section>
 
         @else
+
+            @if(Auth::check() && Auth::user()->id == $user->id)
+                
+                <section class="mb-3 d-flex">
+                    <button class="ms-auto btn btn-outline-primary">Edit</button>
+                </section>
+            
+            @endif
 
             <section class="mb-3 d-flex align-items-center">
 
@@ -91,19 +103,31 @@
 
             </section>
 
-            <section class="mb-4">
+            @if(Auth::check() && Auth::user()->id != $user->id)
 
-                <div class="d-none">
-                    <button class="btn btn-outline-primary w-100">Follow</button>
-                </div>
+                <section class="mb-4">
 
-                <div>
-                    <button class="btn btn-outline-danger w-100">Unfollow</button>
-                </div>
+                    <div class="d-none">
+                        <button class="btn btn-outline-primary w-100">Follow</button>
+                    </div>
 
-            </section>
+                    <div>
+                        <button class="btn btn-outline-danger w-100">Unfollow</button>
+                    </div>
+
+                </section>
+            
+            @endif
 
             <section class="mb-5">
+
+                @if (count ($user->posts) <= 0)
+
+                    @include('Components.alert', [
+                        'message' => "{$user->profile->name} has no posts yet.",
+                        ])
+
+                @endif
 
                 @foreach($user->posts as $post) 
 
