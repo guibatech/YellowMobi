@@ -8,7 +8,7 @@ Recover
 
     @include('Components.header')
 
-    <main class="custom-container fast-slide-animation">
+    <main class="custom-container left-to-right-animation">
 
         <section class="mb-4">
             <hgroup class="text-center">

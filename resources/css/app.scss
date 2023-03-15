@@ -380,12 +380,12 @@ $headerSize: 80px;
 
 }
 
-.fast-slide-animation {
+.left-to-right-animation {
 
-    animation-name: fast-slide-animation;
+    animation-name: left-to-right-animation;
     animation-duration: 0.4s;
 
-    @keyframes fast-slide-animation {
+    @keyframes left-to-right-animation {
 
         from {
 

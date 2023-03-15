@@ -22,7 +22,7 @@ Explore
         
         </section>
 
-        <section class="fast-slide-animation mb-4">
+        <section class="left-to-right-animation mb-4">
 
             <div class="mb-2" id="postMessageBox"></div>
 

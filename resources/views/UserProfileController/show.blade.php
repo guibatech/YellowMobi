@@ -18,7 +18,7 @@
 
     @include('Components.header')
 
-    <main class="custom-container fast-slide-animation">
+    <main class="custom-container left-to-right-animation">
 
         @if ($user == null)
 
