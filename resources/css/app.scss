@@ -404,6 +404,30 @@ $headerSize: 80px;
 
 }
 
+.right-to-left-animation {
+
+    animation-name: right-to-left-animation;
+    animation-duration: 0.4s;
+
+    @keyframes right-to-left-animation {
+
+        from {
+
+            position: relative;
+            left: 350%;
+
+        } to {
+
+            position: relative;
+            left: -50%;
+            transform: translateX(50%);
+
+        }
+
+    }
+
+}
+
 .alert {
 
     font-size: 13px;

@@ -18,11 +18,11 @@
 
     @include('Components.header')
 
-    <main class="custom-container left-to-right-animation">
+    <main class="custom-container">
 
         @if ($user == null)
 
-            <section class="mb-3">
+            <section class="mb-3 left-to-right-animation">
 
                 @include('Components.alert', [
                     'message' => 'This profile does not exist.'
@@ -34,13 +34,13 @@
 
             @if(Auth::check() && Auth::user()->id == $user->id)
                 
-                <section class="mb-3 d-flex">
+                <section class="mb-3 d-flex left-to-right-animation">
                     <button class="ms-auto btn btn-outline-primary">Edit</button>
                 </section>
             
             @endif
 
-            <section class="mb-3 d-flex align-items-center">
+            <section class="mb-3 d-flex align-items-center left-to-right-animation">
 
                 <div class="profile-user-photo-size-container">
                     @include('Components.photo', [
@@ -68,13 +68,13 @@
 
             </section>
 
-            <section class="mb-4">
+            <section class="mb-4 left-to-right-animation">
 
                 <p class="mb-0 text-justify lh-14 fs-14">{{$user->profile->bio}}</p>
 
             </section>
 
-            <section class="mb-4">
+            <section class="mb-4 left-to-right-animation">
 
                 <div class="d-flex justify-content-evenly">
 
@@ -105,7 +105,7 @@
 
             @if(Auth::check() && Auth::user()->id != $user->id)
 
-                <section class="mb-4">
+                <section class="mb-4 left-to-right-animation">
 
                     <div class="d-none">
                         <button class="btn btn-outline-primary w-100">Follow</button>
@@ -119,7 +119,7 @@
             
             @endif
 
-            <section class="mb-5">
+            <section class="mb-5 right-to-left-animation">
 
                 @if (count ($user->posts) <= 0)
 
