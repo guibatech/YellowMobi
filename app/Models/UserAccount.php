@@ -10,6 +10,7 @@ use App\Models\UserProfile as UserProfile;
 use Illuminate\Database\Eloquent\Relations\HasOne as HasOne;
 use Illuminate\Database\Eloquent\Relations\HasMany as HasMany;
 use App\Models\UserActivity as UserActivity;
+use App\Models\Post as Post;
 
 class UserAccount extends Authenticatable {
 
@@ -42,6 +43,12 @@ class UserAccount extends Authenticatable {
     public function activities(): HasMany {
 
         return $this->hasMany(UserActivity::class, 'user_id', 'id');
+
+    }
+
+    public function posts(): HasMany {
+
+        return $this->hasMany(Post::class, 'user_id', 'id')->orderBy('id', 'desc');
 
     }
 
